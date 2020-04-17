@@ -20,8 +20,13 @@ public class SignInWithPhoneNumberActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right,
                 R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right)
-                .replace(R.id.container, nameFragment)
-                .addToBackStack("nameFragment")
+                .add(R.id.containerFragment, nameFragment)
                 .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }
