@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context="com.artisans.qwikhomeservices.activities.home.about.JobTypesActivity">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="@style/ToolBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:title="Add what you can do" />
+
+            <TextView
+                android:id="@+id/txtDes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="@string/dummyText"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar7" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgStylePhoto"
+                android:layout_width="@dimen/eightyDp"
+                android:layout_height="@dimen/eightyDp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/defaultavatar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtDes"
+                tools:ignore="VectorDrawableCompat" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtInputLayoutStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgStylePhoto">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/style_name"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/txtInputLayoutStyle"
+                app:layout_constraintStart_toStartOf="@+id/txtInputLayoutStyle"
+                app:layout_constraintTop_toBottomOf="@+id/txtInputLayoutStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/add_a_price"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="@dimen/eightyDp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/curvebotton"
+                android:text="@string/add"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnFinish"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayoutPrice"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPrice" />
+
+            <Button
+                android:id="@+id/btnFinish"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/eightyDp"
+                android:layout_marginLeft="@dimen/eightyDp"
+                android:background="@drawable/curvebotton"
+                android:text="@string/finish"
+                android:textColor="@color/white"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/btnAdd"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayoutPrice"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnAdd"
+                app:layout_constraintTop_toTopOf="@+id/btnAdd" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabAddIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:backgroundTint="@color/purple"
+                app:fabSize="mini"
+                app:layout_constraintBottom_toBottomOf="@+id/imgStylePhoto"
+                app:layout_constraintEnd_toEndOf="@+id/imgStylePhoto"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/imgStylePhoto"
+                app:layout_constraintTop_toTopOf="@+id/imgStylePhoto"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/ic_camera" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

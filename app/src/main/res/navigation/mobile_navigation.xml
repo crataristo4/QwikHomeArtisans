@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.artisans.qwikhomeservices.activities.home.fragments.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_activities"
+            app:destination="@id/navigation_activities"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_home" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_profile"
+            app:destination="@id/navigation_styles"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_right"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_activities" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_styles"
+        android:name="com.artisans.qwikhomeservices.activities.home.fragments.AccountFragment"
+        android:label="Your styles"
+        tools:layout="@layout/fragment_account">
+
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_activities"
+        android:name="com.artisans.qwikhomeservices.activities.home.fragments.ActivitiesFragment"
+        android:label="Activities"
+        tools:layout="@layout/fragment_activities">
+
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_request"
+        android:name="com.artisans.qwikhomeservices.activities.home.fragments.RequestFragment"
+        android:label="Requests"
+        tools:layout="@layout/fragment_request" />
+</navigation>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context="com.artisans.qwikhomeservices.activities.auth.signup.SignupActivity">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_horizontal"
+            android:includeFontPadding="true"
+            android:padding="@dimen/eightDp"
+            android:text="@string/sign_up_today_and_enjoy"
+            android:textAlignment="center"
+            android:textColor="@color/purple"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:clipToPadding="false"
+            android:dividerPadding="@dimen/eightDp"
+            android:textColorHint="#7B1FA2"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="@dimen/twentyFourDp"
+            app:boxCornerRadiusBottomStart="@dimen/twentyFourDp"
+            app:boxCornerRadiusTopEnd="@dimen/twentyFourDp"
+            app:boxCornerRadiusTopStart="@dimen/twentyFourDp"
+            app:boxStrokeColor="#7B1FA2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="username"
+                android:drawableStart="@drawable/ic_person_ash"
+                android:drawableLeft="@drawable/ic_person_ash"
+                android:drawablePadding="@dimen/eightDp"
+                android:hint="@string/firstname"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="yes"
+                android:inputType="textCapWords"
+                android:paddingStart="@dimen/eightDp"
+                android:paddingEnd="@dimen/eightDp"
+                android:singleLine="true"
+                android:textColor="@color/purple"
+                android:textColorHint="@color/purple"
+                tools:targetApi="o" />
+
+            <requestFocus />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:clipToPadding="false"
+            android:dividerPadding="@dimen/eightDp"
+            android:textColorHint="#7B1FA2"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="@dimen/twentyFourDp"
+            app:boxCornerRadiusBottomStart="@dimen/twentyFourDp"
+            app:boxCornerRadiusTopEnd="@dimen/twentyFourDp"
+            app:boxCornerRadiusTopStart="@dimen/twentyFourDp"
+            app:boxStrokeColor="#7B1FA2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtFirstName">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="email"
+                android:drawableStart="@drawable/ic_person_ash"
+                android:drawableLeft="@drawable/ic_person_ash"
+                android:drawablePadding="@dimen/eightDp"
+                android:hint="@string/last_name"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="yes"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/eightDp"
+                android:paddingEnd="@dimen/eightDp"
+                android:singleLine="true"
+                android:textColor="@color/purple"
+                tools:targetApi="o" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/eightyDp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="@dimen/eightyDp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/curvebotton"
+            android:drawableEnd="@drawable/ic_right"
+            android:drawableRight="@drawable/ic_right"
+            android:includeFontPadding="false"
+            android:onClick="gotoNext"
+            android:padding="@dimen/eightDp"
+            android:text="@string/next"
+            android:textAlignment="inherit"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtLastName" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

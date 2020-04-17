@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.artisans.qwikhomeservices.activities.home.fragments.AccountFragment">
+
+    <!--  <ScrollView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+          <androidx.constraintlayout.widget.ConstraintLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+
+              <de.hdodenhof.circleimageview.CircleImageView
+                  android:id="@+id/imgProfilePhoto"
+                  android:layout_width="120dp"
+                  android:layout_height="120dp"
+                  android:layout_marginStart="16dp"
+                  android:layout_marginLeft="16dp"
+                  android:layout_marginTop="16dp"
+                  android:src="@drawable/photoe"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toTopOf="parent" />
+
+              <TextView
+                  android:id="@+id/txtName"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="16dp"
+                  android:layout_marginTop="16dp"
+                  android:layout_marginEnd="16dp"
+                  android:text="@string/dummy_name"
+                  android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintStart_toEndOf="@+id/imgProfilePhoto"
+                  app:layout_constraintTop_toTopOf="@+id/imgProfilePhoto" />
+
+              <TextView
+                  android:id="@+id/txtAccountType"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="@string/dummy_location"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintHorizontal_bias="0.0"
+                  app:layout_constraintStart_toStartOf="@+id/txtName"
+                  app:layout_constraintTop_toBottomOf="@+id/txtName" />
+
+              <androidx.core.widget.NestedScrollView
+                  android:id="@+id/scrollView2"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="16dp"
+                  android:layout_marginEnd="16dp"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toBottomOf="@+id/txtAbout">
+
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+
+                      <TextView
+                          android:id="@+id/txtAboutPerson"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:ellipsize="end"
+                          android:fitsSystemWindows="true"
+                          android:focusableInTouchMode="true"
+                          android:fontFamily="sans-serif"
+                          android:gravity="start"
+                          android:includeFontPadding="true"
+                          android:isScrollContainer="false"
+                          android:lineSpacingExtra="6sp"
+                          android:padding="@dimen/eightDp"
+                          android:text="@string/profileDetails"
+                          android:textAlignment="viewStart"
+                          android:textSize="18sp" />
+                  </LinearLayout>
+              </androidx.core.widget.NestedScrollView>
+
+              <com.google.android.material.floatingactionbutton.FloatingActionButton
+                  android:id="@+id/btnCall"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="16dp"
+                  app:backgroundTint="@color/white"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintEnd_toStartOf="@+id/btnMsg"
+                  app:layout_constraintHorizontal_bias="1.0"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+                  app:srcCompat="@drawable/ic_call" />
+
+              <com.google.android.material.floatingactionbutton.FloatingActionButton
+                  android:id="@+id/btnMsg"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginBottom="32dp"
+                  app:backgroundTint="@color/amber"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintHorizontal_bias="0.5"
+                  app:layout_constraintStart_toEndOf="@+id/btnCall"
+                  app:layout_constraintTop_toTopOf="@+id/btnCall"
+                  app:srcCompat="@drawable/ic_messageblue" />
+
+              <RatingBar
+                  android:id="@+id/ratedResults"
+                  style="@style/Widget.AppCompat.RatingBar.Small"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginEnd="8dp"
+                  android:layout_marginRight="8dp"
+                  android:numStars="5"
+                  android:saveEnabled="true"
+                  android:stepSize="1.5"
+                  android:theme="@style/CustomRatingBar"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintHorizontal_bias="0.0"
+                  app:layout_constraintStart_toStartOf="@+id/txtAccountType"
+                  app:layout_constraintTop_toBottomOf="@+id/txtAccountType" />
+
+              <TextView
+                  android:id="@+id/txtAbout"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="16dp"
+                  android:layout_marginLeft="16dp"
+                  android:layout_marginTop="16dp"
+                  android:fontFamily="sans-serif"
+                  android:text="@string/about"
+                  android:textAlignment="center"
+                  android:textSize="18sp"
+                  android:textStyle="bold"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintHorizontal_bias="0.0"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toBottomOf="@+id/imgProfilePhoto" />
+
+
+              <View
+                  android:id="@+id/divider"
+                  android:layout_width="0dp"
+                  android:layout_height="3dp"
+                  android:background="?android:attr/listDivider"
+                  app:layout_constraintBottom_toTopOf="@+id/txtName"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintStart_toEndOf="@+id/imgProfilePhoto"
+                  app:layout_constraintTop_toTopOf="parent"
+                  app:layout_constraintVertical_bias="1.0" />
+
+              <View
+                  android:id="@+id/divider2"
+                  android:layout_width="0dp"
+                  android:layout_height="3dp"
+                  android:layout_marginTop="8dp"
+                  android:background="?android:attr/listDivider"
+                  app:layout_constraintBottom_toBottomOf="@+id/imgProfilePhoto"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintHorizontal_bias="1.0"
+                  app:layout_constraintStart_toEndOf="@+id/imgProfilePhoto"
+                  app:layout_constraintTop_toBottomOf="@+id/ratedResults"
+                  app:layout_constraintVertical_bias="0.0" />
+          </androidx.constraintlayout.widget.ConstraintLayout>
+
+      </ScrollView>-->
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvbb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

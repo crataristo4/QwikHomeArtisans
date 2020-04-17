@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_activities"
+        android:icon="@drawable/ic_history"
+        android:orderInCategory="1"
+        android:title="@string/activities" />
+
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home"
+        android:orderInCategory="2"
+        android:title="@string/home" />
+
+
+    <item
+        android:id="@+id/navigation_styles"
+        android:icon="@drawable/ic_bubble"
+        android:orderInCategory="3"
+        android:title="@string/styles" />
+
+    <item
+        android:id="@+id/navigation_request"
+        android:icon="@drawable/ic_request"
+        android:orderInCategory="4"
+        android:title="@string/requests" />
+
+
+</menu>

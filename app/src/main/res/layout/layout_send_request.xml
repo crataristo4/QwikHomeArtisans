@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:id="@+id/scrolView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alwaysDrawnWithCache="true"
+        android:animateLayoutChanges="true"
+        android:animationCache="true"
+        android:clipToPadding="true"
+        android:drawingCacheQuality="auto"
+        android:fadeScrollbars="true"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true"
+        android:focusable="auto"
+        android:foregroundGravity="top"
+        android:isScrollContainer="true"
+        android:measureAllChildren="true"
+        android:overScrollMode="ifContentScrolls"
+        android:padding="@dimen/eightDp">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground">
+
+            <ProgressBar
+                android:id="@+id/pbLoading"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:indeterminate="true"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imgItemPhoto"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pbLoading"
+                tools:srcCompat="@tools:sample/avatars" />
+
+
+            <ImageView
+                android:id="@+id/imgShadow"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintBottom_toBottomOf="@+id/imgItemPhoto"
+                app:layout_constraintEnd_toEndOf="@+id/imgItemPhoto"
+                app:layout_constraintStart_toStartOf="@+id/imgItemPhoto"
+                app:layout_constraintTop_toBottomOf="@+id/progressBar"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/bottom_shadow" />
+
+            <TextView
+                android:id="@+id/txtStyleName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imgItemPhoto"
+                app:layout_constraintEnd_toEndOf="@+id/imgShadow"
+                app:layout_constraintStart_toStartOf="@+id/imgShadow"
+                app:layout_constraintTop_toBottomOf="@+id/progressBar"
+                app:layout_constraintVertical_bias="1.0" />
+
+
+            <TextView
+                android:id="@+id/txtPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/curvebotton"
+                android:includeFontPadding="true"
+                android:padding="@dimen/eightDp"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/progressBar"
+                app:layout_constraintTop_toTopOf="@+id/imgItemPhoto" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/reasonInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="@string/state_reason_for_request"
+                android:importantForAutofill="no"
+                android:textColorHint="#7B1FA2"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="@dimen/twentyFourDp"
+                app:boxCornerRadiusBottomStart="@dimen/twentyFourDp"
+                app:boxCornerRadiusTopEnd="@dimen/twentyFourDp"
+                app:boxCornerRadiusTopStart="@dimen/twentyFourDp"
+                app:boxStrokeColor="#7B1FA2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgItemPhoto">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine|textLongMessage" />
+
+                <requestFocus />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/btnSendRequest"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="32dp"
+                android:text="@string/request"
+                android:textColor="@color/purple"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/reasonInputLayout" />
+
+            <TextView
+                android:id="@+id/txtCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/cancel"
+                android:textColor="@color/colorRed"
+                app:layout_constraintBottom_toBottomOf="@+id/btnSendRequest"
+                app:layout_constraintEnd_toStartOf="@+id/btnSendRequest"
+                app:layout_constraintTop_toTopOf="@+id/btnSendRequest" />
+
+            <View
+                android:id="@+id/progressBar"
+                android:layout_width="2dp"
+                android:layout_height="0dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/imgItemPhoto"
+                app:layout_constraintEnd_toEndOf="@+id/imgItemPhoto"
+                app:layout_constraintStart_toStartOf="@+id/imgItemPhoto"
+                app:layout_constraintTop_toTopOf="@+id/imgItemPhoto" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>

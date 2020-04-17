@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.artisans.qwikhomeservices.activities.home.fragments.ProfileFragment">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mConstrainProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/sixteenDp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgPhoto"
+                android:layout_width="@dimen/eightyDp"
+                android:layout_height="@dimen/eightyDp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/photoe"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgPhoto"
+                app:layout_constraintTop_toTopOf="@+id/imgPhoto" />
+
+            <TextView
+                android:id="@+id/txtAbout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/txtName"
+                app:layout_constraintTop_toBottomOf="@+id/txtAccountType" />
+
+            <TextView
+                android:id="@+id/txtAccountType"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/txtAbout"
+                app:layout_constraintStart_toStartOf="@+id/txtAbout"
+                app:layout_constraintTop_toBottomOf="@+id/txtName" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/divider5"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="?android:attr/listDivider" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/sixteenDp"
+                    android:drawableStart="@drawable/ic_security"
+                    android:drawableLeft="@drawable/ic_security"
+                    android:drawablePadding="@dimen/eightDp"
+                    android:padding="@dimen/eightDp"
+                    android:text="@string/account"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtNotifications"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/sixteenDp"
+                    android:drawableStart="@drawable/ic_notifications"
+                    android:drawableLeft="@drawable/ic_notifications"
+                    android:drawablePadding="@dimen/eightDp"
+                    android:padding="@dimen/eightDp"
+                    android:text="@string/notifications"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtHelp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/sixteenDp"
+                    android:drawableStart="@drawable/ic_help"
+                    android:drawableLeft="@drawable/ic_help"
+                    android:drawablePadding="@dimen/eightDp"
+                    android:padding="@dimen/eightDp"
+                    android:text="@string/help"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

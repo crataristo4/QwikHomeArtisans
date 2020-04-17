@@ -1,0 +1,260 @@
+<resources>
+    <string name="app_name">QwikHome Services</string>
+    <item name="visible" type="id" />
+    <item name="masked" type="id" />
+    <string name="title_activity_main2">QwikHome Services</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="logout">Log out</string>
+    <string name="addStyle">Add a style</string>
+    <string name="some_text_description">Some Text Description</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="_15_n_projects">15   projects</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="profession_prompt">Choose your profession </string>
+    <string name="view">View</string>
+    <string name="you_requested_a_job_to_be_done">Job Requested</string>
+    <string name="delete">Delete</string>
+    <string name="done">Done</string>
+    <string name="reset">Reset</string>
+    <string name="cancel">Cancel</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="log_in">Log In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="enter_email">Enter email</string>
+    <string name="enter_password">Enter password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="firstname">First name</string>
+    <string name="email">Email</string>
+    <string name="mobile_number">Phone number</string>
+    <string name="location">Location</string>
+    <string name="last_name">Last name</string>
+    <string name="dont_have_an_account_yet">Don\'t have an account yet?</string>
+    <string name="enter_full_name">Enter full name</string>
+    <string name="already_have_an_account">Already have an account ?</string>
+    <string name="we_will_send_a_link_to_your_email_once_you_submit_it">We will send a link to your email to change your password once it is submitted</string>
+    <string name="to_complete_the_registration_process_please_add_a_password">To complete the registration process please add a password</string>
+    <string name="sign_up_today_and_enjoy">Want to enjoy quick and affordable services?Don\'t miss out ,sign up now</string>
+    <string name="profileDetails">Hi! My name is Mark, I’m a Professional hair stylist from Legon, GH. Display about here. Contact me at +233 014 021 0319.\n
+        Want to enjoy quick and affordable services?Don\'t miss out ,sign up nowWant to enjoy quick and affordable services?Don\'t miss out ,sign up now</string>
+    <string name="call">CALL</string>
+    <string name="message">MESSAGE</string>
+    <string name="accountType">Select your profession</string>
+    <string name="gh">GH %s</string>
+
+
+    <string-array name="plate_initials">
+
+        <item>Carpenter</item>
+        <item>Mechanic</item>
+        <item>Pest Control</item>
+        <item>Plumber</item>
+        <item>Tv Installer</item>
+        <item>Tiler</item>
+        <item>Carpenter</item>
+        <item>Roller</item>
+        <item>Gardener</item>
+        <item>Painter</item>
+    </string-array>
+
+    <string-array name="userTypes">
+        <item>Please select your profession</item>
+        <item>Barbers</item>
+        <item>Women Hairstylists</item>
+        <item>Interior Decorators</item>
+        <item>Carpenter</item>
+        <item>Mechanic</item>
+        <item>Pest Control</item>
+        <item>Plumber</item>
+        <item>Tv Installer</item>
+        <item>Tiler</item>
+        <item>Carpenter</item>
+        <item>Roller</item>
+        <item>Gardener</item>
+        <item>Painter</item>
+
+    </string-array>
+    <string name="adUnit" templateMergeStrategy="preserve" translatable="false">ca-app-pub-7358181102198543~9661993486</string>
+    <string name="title_activity_handy_man_maps">Map</string>
+    <string name="mchin">Getting your mechanic....</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="write_your_message">Write your message</string>
+    <string name="rate">Rate</string>
+    <string name="finish">finish</string>
+    <string name="reset_password">Reset password</string>
+    <string name="home">Home</string>
+    <string name="posts">Posts</string>
+    <string name="activities">Activities</string>
+    <string name="history">History</string>
+    <string name="nearMe">Near me</string>
+    <string name="profile">Profile</string>
+    <string name="dummy_location">Dummy Location</string>
+    <string name="dummy_name">Dummy Name</string>
+    <string name="hair_dresser">Hair Dresser</string>
+    <string name="Decorations">Decoration</string>
+    <string name="barbering">Barbering</string>
+    <string name="briefly_tell_us_about_yourself">Briefly tell us about yourself</string>
+    <string name="style_name">Style name</string>
+    <string name="add_a_price">Add a price</string>
+    <string name="add">Add</string>
+    <string name="dummyText">Add a picture of what styles you can do,\n the price and the name of what you can do to help others identify you</string>
+    <string name="recommend">We recommend that you upload your real photo and professionally tell us about who you are and what you can do</string>
+    <string name="user_profile">User Profile</string>
+    <string name="about">About</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="phone">Phone</string>
+    <string name="name">Name</string>
+    <string name="account">Account</string>
+    <string name="notifications">Notifications</string>
+    <string name="help">Help</string>
+    <string name="barbers">Barbers</string>
+    <string name="hair_stylist">Hair Stylist</string>
+    <string name="interior_decorators">Interior Decorators</string>
+    <string name="title_activity_details_scrolling">DetailsScrollingActivity</string>
+    <string name="large_text">
+        "Material is the metaphor.\n\n"
+
+        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
+        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
+        "technologically advanced and open to imagination and magic.\n"
+        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
+        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
+        "flexibility of the material creates new affordances that supercede those in the physical "
+        "world, without breaking the rules of physics.\n"
+        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
+        "interact, and exist in space and in relation to each other. Realistic lighting shows "
+        "seams, divides space, and indicates moving parts.\n\n"
+
+        "Bold, graphic, intentional.\n\n"
+
+        "The foundational elements of print based design typography, grids, space, scale, color, "
+        "and use of imagery guide visual treatments. These elements do far more than please the "
+        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
+        "imagery, large scale typography, and intentional white space create a bold and graphic "
+        "interface that immerse the user in the experience.\n"
+        "An emphasis on user actions makes core functionality immediately apparent and provides "
+        "waypoints for the user.\n\n"
+
+        "Motion provides meaning.\n\n"
+
+        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
+        "inflection points that initiate motion, transforming the whole design.\n"
+        "All action takes place in a single environment. Objects are presented to the user without "
+        "breaking the continuity of experience even as they transform and reorganize.\n"
+        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
+        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
+
+        "3D world.\n\n"
+
+        "The material environment is a 3D space, which means all objects have x, y, and z "
+        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
+        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
+        "position along the z-axis and has a standard 1dp thickness.\n"
+        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
+        "emulated by manipulating the y-axis.\n\n"
+
+        "Light and shadow.\n\n"
+
+        "Within the material environment, virtual lights illuminate the scene. Key lights create "
+        "directional shadows, while ambient light creates soft shadows from all angles.\n"
+        "Shadows in the material environment are cast by these two light sources. In Android "
+        "development, shadows occur when light sources are blocked by sheets of material at "
+        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
+        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
+
+        "Resting elevation.\n\n"
+
+        "All material objects, regardless of size, have a resting elevation, or default elevation "
+        "that does not change. If an object changes elevation, it should return to its resting "
+        "elevation as soon as possible.\n\n"
+
+        "Component elevations.\n\n"
+
+        "The resting elevation for a component type is consistent across apps (e.g., FAB elevation "
+        "does not vary from 6dp in one app to 16dp in another app).\n"
+        "Components may have different resting elevations across platforms, depending on the depth "
+        "of the environment (e.g., TV has a greater depth than mobile or desktop).\n\n"
+
+        "Responsive elevation and dynamic elevation offsets.\n\n"
+
+        "Some component types have responsive elevation, meaning they change elevation in response "
+        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
+        "changes are consistently implemented using dynamic elevation offsets.\n"
+        "Dynamic elevation offsets are the goal elevation that a component moves towards, relative "
+        "to the component’s resting state. They ensure that elevation changes are consistent "
+        "across actions and component types. For example, all components that lift on press have "
+        "the same elevation change relative to their resting elevation.\n"
+        "Once the input event is completed or cancelled, the component will return to its resting "
+        "elevation.\n\n"
+
+        "Avoiding elevation interference.\n\n"
+
+        "Components with responsive elevations may encounter other components as they move between "
+        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
+        "through other material, components avoid interfering with one another any number of ways, "
+        "whether on a per component basis or using the entire app layout.\n"
+        "On a component level, components can move or be removed before they cause interference. "
+        "For example, a floating action button (FAB) can disappear or move off screen before a "
+        "user picks up a card, or it can move if a snackbar appears.\n"
+        "On the layout level, design your app layout to minimize opportunities for interference. "
+        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
+        "when a user tries to pick up one of cards.\n\n"
+    </string>
+    <string name="styles_offered">Styles Offered</string>
+    <string name="noStyles">No styles offered</string>
+    <string name="requests">Requests</string>
+    <string name="styles">Styles</string>
+    <string name="state_reason_for_request">State reason for request</string>
+    <string name="select_start_date">Select start date</string>
+    <string name="request">Request</string>
+    <string name="requestSentTo">Request sent to %s</string>
+    <string name="sentOn">Sent on %s</string>
+    <string name="start_date">Start date</string>
+    <string name="allStyles">View All Styles</string>
+    <string name="status">Status</string>
+    <string name="payment_status">Payment Status</string>
+    <string name="confirm_payment">CONFIRM PAYMENT</string>
+    <string name="accept">Accept</string>
+    <string name="reject">Reject</string>
+    <string name="eg_024_xxxxxxx">eg. 024_xxx_xxxx</string>
+    <string name="confirmCode">Confirm code</string>
+    <string name="verify">Verify</string>
+    <string name="addPhoneNumber">Add phone number</string>
+    <string name="agree_and_continue">Agree and continue</string>
+
+    <string name="termAndConditions">
+        <![CDATA[
+
+        Agree to our <b><font color = #3AE212>terms and conditions</font></b> and our <font color = #3AE212>policies</font>
+        to continue.
+
+
+        ]]>
+    </string>
+</resources>

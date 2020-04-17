@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.artisans.qwikhomeservices">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- TARGET ANDROID O -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.Manifest.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <application
+        android:name=".QwikHomeArtisans"
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".activities.auth.signup.SignInWithPhoneNumberActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.home.serviceTypes.TestAcceptOrRejectActivity" />
+        <activity android:name=".activities.home.serviceTypes.TestPaginatioinActivity" />
+        <activity
+            android:name=".activities.home.serviceTypes.DetailsScrollingActivity"
+            android:configChanges="keyboardHidden|screenSize|screenLayout|orientation"
+            android:label="@string/title_activity_details_scrolling"
+            android:parentActivityName=".activities.home.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.home.serviceTypes.DetailsActivity" />
+        <activity android:name=".activities.home.about.ProfileActivity" />
+        <activity
+            android:name=".activities.home.about.SettingsActivity"
+            android:configChanges="keyboardHidden|screenSize|screenLayout|orientation"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".activities.home.MainActivity" />
+        <activity
+            android:name=".activities.home.serviceTypes.AllBarbersActivity"
+            android:parentActivityName=".activities.home.MainActivity" />
+        <activity
+            android:name=".activities.auth.signup.SignUpServicePersonelActivity"
+            android:alwaysRetainTaskState="true"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.home.about.JobTypesActivity"
+            android:alwaysRetainTaskState="true"
+            android:configChanges="screenSize|orientation"
+            android:exported="true"
+            android:parentActivityName=".activities.home.about.AboutActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.home.about.AboutActivity"
+            android:alwaysRetainTaskState="true"
+            android:configChanges="keyboardHidden|screenSize|screenLayout|orientation"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.home.MainActivity"
+            android:configChanges="keyboardHidden"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent" />
+        <activity
+            android:name=".activities.auth.resetpass.ResetPasswordActivity"
+            android:configChanges="keyboardHidden|screenSize|screenLayout|orientation"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.auth.signup.SignupCompleteActivity"
+            android:alwaysRetainTaskState="true"
+            android:configChanges="keyboardHidden|screenSize|screenLayout|orientation"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.auth.signup.SignupActivity"
+            android:configChanges="keyboardHidden|screenSize|screenLayout|orientation"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.auth.LoginActivity"
+            android:alwaysRetainTaskState="true"
+            android:configChanges="keyboardHidden|screenSize|screenLayout|orientation"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.welcome.OnboardingScreenActivity" />
+        <activity android:name=".activities.customeractivity.ShowRouteActivity" />
+        <activity
+            android:name=".activities.customeractivity.RatingActivity"
+            android:excludeFromRecents="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.customeractivity.ChatActivity"
+            android:configChanges="screenSize|orientation"
+            android:parentActivityName=".activities.handymanactivity.RequestHandyManActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.customeractivity.MyMapActivity" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7358181102198543~9661993486" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".activities.customeractivity.HandyManMapsActivity"
+            android:label="@string/title_activity_handy_man_maps" />
+        <activity
+            android:name=".activities.welcome.SplashScreenActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.handymanactivity.AcceptOrRejectActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.handymanactivity.HandyManLogin" />
+        <activity android:name=".activities.handymanactivity.MainActivityHandyMen" />
+        <activity android:name=".models.Listofrequest" />
+        <activity android:name=".Chooseurregistertype" />
+        <activity android:name=".activities.handymanactivity.HandymanRegister" />
+        <activity android:name=".EditProfile" />
+        <activity android:name=".Forgotpassword" />
+        <activity android:name=".Handymantypes" />
+        <activity
+            android:name=".activities.customeractivity.MainActivityCustomers"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.welcome.WelcomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.customeractivity.CustomerLogin" />
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+
+        <receiver
+            android:name=".broadcastreceivers.SmsBroadcastReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVE" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".activities.handymanactivity.TvInstallerActivity" />
+        <activity android:name=".activities.handymanactivity.TilerListActivity" />
+        <activity android:name=".activities.handymanactivity.RollerListActivity" />
+        <activity android:name=".activities.handymanactivity.PlumberListActivity" />
+        <activity android:name=".activities.handymanactivity.PestControlListActivity" />
+        <activity android:name=".activities.handymanactivity.ActivityMechanicList" />
+        <activity android:name=".activities.handymanactivity.PainterActivity" />
+        <activity android:name=".activities.handymanactivity.CarpenterActivity" />
+        <activity android:name=".activities.handymanactivity.GardenerListActivity" />
+        <activity android:name=".activities.handymanactivity.RequestHandyManActivity" />
+        <activity android:name=".activities.home.bottomsheets.AddPhoneNumberActivity" />
+    </application>
+
+</manifest>

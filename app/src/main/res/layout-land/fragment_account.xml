@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.artisans.qwikhomeservices.activities.home.fragments.AccountFragment">
+
+    <!-- <ScrollView
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+
+         <androidx.constraintlayout.widget.ConstraintLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+
+
+             <de.hdodenhof.circleimageview.CircleImageView
+                 android:id="@+id/imgProfilePhoto"
+                 android:layout_width="120dp"
+                 android:layout_height="120dp"
+                 android:layout_marginStart="16dp"
+                 android:layout_marginLeft="16dp"
+                 android:layout_marginTop="16dp"
+                 android:src="@drawable/photoe"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent" />
+
+             <TextView
+                 android:id="@+id/txtName"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_marginStart="16dp"
+                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                 app:layout_constraintStart_toEndOf="@+id/imgProfilePhoto"
+                 android:layout_marginLeft="16dp"
+                 app:layout_constraintTop_toTopOf="@+id/imgProfilePhoto" />
+
+             <TextView
+                 android:id="@+id/txtAccountType"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 app:layout_constraintStart_toStartOf="@+id/txtName"
+                 app:layout_constraintTop_toBottomOf="@+id/txtName" />
+
+             <androidx.core.widget.NestedScrollView
+                 android:id="@+id/scrollView2"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_marginStart="16dp"
+                 android:layout_marginEnd="16dp"
+                 android:layout_marginBottom="16dp"
+                 app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@+id/txtNumOfProject">
+
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="vertical">
+
+                     <TextView
+                         android:id="@+id/txtAboutPerson"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:ellipsize="end"
+                         android:fitsSystemWindows="true"
+                         android:focusableInTouchMode="true"
+                         android:fontFamily="sans-serif"
+                         android:gravity="start"
+                         android:includeFontPadding="true"
+                         android:isScrollContainer="false"
+                         android:lineSpacingExtra="6sp"
+                         android:padding="@dimen/eightDp"
+                         android:text="@string/profileDetails"
+                         android:textSize="18sp" />
+                 </LinearLayout>
+             </androidx.core.widget.NestedScrollView>
+
+             <com.google.android.material.floatingactionbutton.FloatingActionButton
+                 android:id="@+id/btnCall"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="16dp"
+                 app:srcCompat="@drawable/ic_call"
+                 app:backgroundTint="@color/white"
+                 app:layout_constraintStart_toStartOf="@+id/txtAccountType"
+                 app:layout_constraintTop_toBottomOf="@+id/txtAccountType" />
+
+             <com.google.android.material.floatingactionbutton.FloatingActionButton
+                 android:id="@+id/btnMsg"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginStart="16dp"
+                 app:srcCompat="@drawable/ic_messageblue"
+                 app:backgroundTint="@color/amber"
+                 app:layout_constraintBottom_toBottomOf="@+id/btnCall"
+                 app:layout_constraintStart_toEndOf="@+id/btnCall"
+                 app:layout_constraintTop_toTopOf="@+id/btnCall"
+                 android:layout_marginLeft="16dp" />
+
+             <RatingBar
+                 android:id="@+id/ratedResults"
+                 style="@style/Widget.AppCompat.RatingBar.Small"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginStart="16dp"
+                 android:layout_marginLeft="16dp"
+                 android:numStars="5"
+                 android:saveEnabled="true"
+                 android:stepSize="1.5"
+                 android:theme="@style/CustomRatingBar"
+                 app:layout_constraintBottom_toBottomOf="@+id/txtAccountType"
+                 app:layout_constraintStart_toEndOf="@+id/txtAccountType"
+                 app:layout_constraintTop_toTopOf="@+id/txtAccountType" />
+
+             <TextView
+                 android:id="@+id/txtNumOfProject"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="32dp"
+                 android:text="@string/about"
+                 android:textAlignment="center"
+                 android:textSize="18sp"
+                 android:textStyle="bold"
+                 app:layout_constraintBottom_toBottomOf="@+id/btnMsg"
+                 app:layout_constraintStart_toStartOf="@+id/imgProfilePhoto"
+                 app:layout_constraintTop_toBottomOf="@+id/imgProfilePhoto" />
+
+
+         </androidx.constraintlayout.widget.ConstraintLayout>
+
+     </ScrollView>
+ -->
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvbb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>
