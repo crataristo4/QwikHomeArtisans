@@ -3,7 +3,6 @@ package com.artisans.qwikhomeservices.activities.welcome;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
-import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -24,7 +23,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
 
         activityWelcomeBinding = DataBindingUtil.setContentView(this, R.layout.activity_welcome);
@@ -32,6 +31,7 @@ public class WelcomeActivity extends AppCompatActivity {
         activityWelcomeBinding.setOnItemClick(itemViewClickEvents);
 
         initViews();
+        // TODO: 17-Apr-20 display terms and conditions on click 
 
     }
 

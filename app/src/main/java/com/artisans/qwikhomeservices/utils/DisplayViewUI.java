@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.view.Gravity;
 import android.widget.Toast;
 
@@ -12,9 +14,11 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.artisans.qwikhomeservices.R;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class DisplayViewUI {
+
 
     private static ColorDrawable[] vibrantLightColorList =
             {
@@ -77,5 +81,13 @@ public class DisplayViewUI {
         if (btnPos != null) builder.setPositiveButton(btnPos, onClickListener);
         builder.setIcon(context.getResources().getDrawable(R.drawable.sorry));
         builder.show();
+    }
+
+    static public boolean isNetworkConnected(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) Objects.requireNonNull(context).getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = Objects.requireNonNull(connectivityManager).getActiveNetworkInfo();
+        assert networkInfo != null;
+        return networkInfo.isConnectedOrConnecting();
+
     }
 }

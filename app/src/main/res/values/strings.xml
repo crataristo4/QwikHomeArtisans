@@ -45,6 +45,7 @@
     <string name="we_will_send_a_link_to_your_email_once_you_submit_it">We will send a link to your email to change your password once it is submitted</string>
     <string name="to_complete_the_registration_process_please_add_a_password">To complete the registration process please add a password</string>
     <string name="sign_up_today_and_enjoy">Want to enjoy quick and affordable services?Don\'t miss out ,sign up now</string>
+    <string name="gettingStarted">Lets get started.\n Tell us your name and select your profession.Take note your profession can not be undone </string>
     <string name="profileDetails">Hi! My name is Mark, I’m a Professional hair stylist from Legon, GH. Display about here. Contact me at +233 014 021 0319.\n
         Want to enjoy quick and affordable services?Don\'t miss out ,sign up nowWant to enjoy quick and affordable services?Don\'t miss out ,sign up now</string>
     <string name="call">CALL</string>
@@ -242,7 +243,7 @@
     <string name="confirm_payment">CONFIRM PAYMENT</string>
     <string name="accept">Accept</string>
     <string name="reject">Reject</string>
-    <string name="eg_024_xxxxxxx">eg. 024_xxx_xxxx</string>
+    <string name="eg_024_xxxxxxx">eg. 024 380 2230</string>
     <string name="confirmCode">Confirm code</string>
     <string name="verify">Verify</string>
     <string name="addPhoneNumber">Add phone number</string>
@@ -257,4 +258,9 @@
 
         ]]>
     </string>
+    <string name="phoneNumber">Enter your phone number</string>
+    <string name="cont">Continue</string>
+    <string name="final_step_verify_your_phone_number">Final step,verify your phone number</string>
+    <string name="tellUs">Tell us who you are.Be professional , users may interest you when you are real about what you can do.</string>
+    <string name="noInternet">No internet.Internet connection is needed to continue.\nCheck your internet connection.If problem still exist contact your service provider</string>
 </resources>

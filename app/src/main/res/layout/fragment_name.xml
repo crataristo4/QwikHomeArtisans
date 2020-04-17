@@ -5,10 +5,10 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fillViewport="true">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:context=".activities.auth.signup.NameFragment">
@@ -23,7 +23,7 @@
                 android:gravity="center_horizontal"
                 android:includeFontPadding="true"
                 android:padding="@dimen/eightDp"
-                android:text="@string/sign_up_today_and_enjoy"
+                android:text="@string/gettingStarted"
                 android:textAlignment="center"
                 android:textColor="@color/purple"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -54,14 +54,13 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:autofillHints="username"
+                    android:inputType="textCapWords"
                     android:drawableStart="@drawable/ic_person_ash"
                     android:drawableLeft="@drawable/ic_person_ash"
                     android:drawablePadding="@dimen/eightDp"
                     android:hint="@string/firstname"
                     android:imeOptions="actionNext"
                     android:importantForAutofill="yes"
-                    android:inputType="textPersonName"
                     android:paddingStart="@dimen/eightDp"
                     android:paddingEnd="@dimen/eightDp"
                     android:singleLine="true"
@@ -74,7 +73,6 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtLastName"
-                android:inputType="textCapWords"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -96,7 +94,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:inputType="textCapWords"
                     android:drawableStart="@drawable/ic_person_ash"
                     android:drawableLeft="@drawable/ic_person_ash"
                     android:drawablePadding="@dimen/eightDp"
