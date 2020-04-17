@@ -4,11 +4,9 @@ import android.os.Bundle;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
 
 import com.artisans.qwikhomeservices.R;
-import com.artisans.qwikhomeservices.databinding.ActivitySignInWithPhoneNumberBinding;
 
 public class SignInWithPhoneNumberActivity extends AppCompatActivity {
 
@@ -16,8 +14,7 @@ public class SignInWithPhoneNumberActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        ActivitySignInWithPhoneNumberBinding activitySignInWithPhoneNumberBinding = DataBindingUtil.
-                setContentView(this, R.layout.activity_sign_in_with_phone_number);
+        setContentView(R.layout.activity_sign_in_with_phone_number);
 
         NameFragment nameFragment = new NameFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
