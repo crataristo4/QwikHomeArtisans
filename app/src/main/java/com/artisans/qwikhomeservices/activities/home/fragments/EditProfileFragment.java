@@ -25,9 +25,14 @@ import com.artisans.qwikhomeservices.activities.home.bottomsheets.VerifyPhoneBot
 import com.artisans.qwikhomeservices.databinding.FragmentEditProfileBinding;
 import com.artisans.qwikhomeservices.utils.DisplayViewUI;
 import com.artisans.qwikhomeservices.utils.MyConstants;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +44,7 @@ public class EditProfileFragment extends Fragment {
     private Uri uri;
     private long mLastClickTime = 0;
     private OnFragmentInteractionListener mListener;
+    private CircleImageView profileImage;
 
 
     public EditProfileFragment() {
@@ -61,8 +67,8 @@ public class EditProfileFragment extends Fragment {
 
         fragmentEditProfileBinding
                 .fabUploadPhoto.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fadein));
-        fragmentEditProfileBinding
-                .imgUploadPhoto.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_transition_animation));
+        profileImage = fragmentEditProfileBinding.imgUploadPhoto;
+        profileImage.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fadein));
 
         fragmentEditProfileBinding.imgUploadPhoto.setOnClickListener(v -> {
             FragmentManager fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
@@ -72,33 +78,33 @@ public class EditProfileFragment extends Fragment {
                     .addToBackStack(null)
                     .commit();
 
-            // getActivity().setTitle("Profile photo");
-
-
         });
 
         fragmentEditProfileBinding.fabUploadPhoto.setOnClickListener(v -> openGallery());
 
-        MainActivity.retrieveSingleUserDetails(fragmentEditProfileBinding.txtUserName,
-                fragmentEditProfileBinding.txtAboutUser, fragmentEditProfileBinding.imgUploadPhoto);
+        fragmentEditProfileBinding.txtUserName.setText(MainActivity.fullName);
 
-        //  fragmentEditProfileBinding.nameLayout.setEnabled(true);
+        fragmentEditProfileBinding.txtAboutUser.setText(MainActivity.about);
+        Glide.with(view.getContext()).load(MainActivity.imageUrl)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(fragmentEditProfileBinding.imgUploadPhoto);
+
+        fragmentEditProfileBinding.txtPhoneNumber.setText(MainActivity.firebaseUser.getPhoneNumber());
         fragmentEditProfileBinding.nameLayout.setOnClickListener(//open bottom sheet to edit name
                 this::onClick);
 
         fragmentEditProfileBinding.aboutLayout.setOnClickListener(
                 //open bottom sheet to edit about
                 this::onClick);
-
-
         fragmentEditProfileBinding.editPhoneLayout.setOnClickListener(this::onClick);
 
     }
 
     private void openGallery() {
         CropImage.activity()
+                .setGuidelines(CropImageView.Guidelines.ON)
                 .setAspectRatio(16, 16)
-                .start(Objects.requireNonNull(getActivity()));
+                .start(Objects.requireNonNull(getContext()), this);
     }
 
     public void onClick(View v) {
@@ -112,12 +118,10 @@ public class EditProfileFragment extends Fragment {
 
         mLastClickTime = SystemClock.elapsedRealtime();
 
-
         if (v.getId() == R.id.nameLayout) {
             if (fragmentEditProfileBinding.nameLayout.isEnabled()) {
-                // fragmentEditProfileBinding.nameLayout.setEnabled(false);
                 String getName = String.valueOf(fragmentEditProfileBinding.txtUserName.getText());
-                bundle.putString(MyConstants.NAME, getName);
+                bundle.putString(MyConstants.FULL_NAME, getName);
                 editItemBottomSheet.setArguments(bundle);
                 editItemBottomSheet.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), MyConstants.NAME);
 
@@ -130,12 +134,6 @@ public class EditProfileFragment extends Fragment {
             bundle.putString(MyConstants.ABOUT, getAbout);
             editItemBottomSheet.setArguments(bundle);
             editItemBottomSheet.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), MyConstants.ABOUT);
-        } else if (v.getId() == R.id.editPhoneLayout) {
-            //open phone number verification
-            //Objects.requireNonNull(getActivity()).startActivity(new Intent(getContext(), AddPhoneNumberActivity.class));
-
-            verifyPhoneBottomSheet.setCancelable(false);
-            verifyPhoneBottomSheet.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), MyConstants.PHONE_NUMBER);
         }
     }
 
@@ -152,10 +150,10 @@ public class EditProfileFragment extends Fragment {
                 assert result != null;
                 uri = result.getUri();
 
-                /*Glide.with(getActivity())
+                Glide.with(Objects.requireNonNull(getActivity()))
                         .load(uri)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(profileImage);*/
+                        .into(profileImage);
 
                 // uploadFile();
 

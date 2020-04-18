@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import com.artisans.qwikhomeservices.R;
 import com.artisans.qwikhomeservices.activities.home.MainActivity;
 import com.artisans.qwikhomeservices.databinding.FragmentProfilePhotoEditBinding;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.Objects;
@@ -51,13 +53,20 @@ public class ProfilePhotoEditFragment extends Fragment {
 
         fragmentProfilePhotoEditBinding.imgEditPhoto.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.scale_in));
 
-        MainActivity.retrieveSingleUserDetails(fragmentProfilePhotoEditBinding.imgEditPhoto);
+        String imageUrl = MainActivity.imageUrl;
+        if (imageUrl == null) {
 
-        /*serviceTypeDbRef = FirebaseDatabase.getInstance()
-                .getReference()
-                .child("Services")
-                .child("ServiceType")
-                .child(uid);*/
+            Glide.with(Objects.requireNonNull(getActivity()))
+                    .load(getActivity().getResources().getDrawable(R.drawable.photoe))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(fragmentProfilePhotoEditBinding.imgEditPhoto);
+        } else {
+            Glide.with(Objects.requireNonNull(getActivity()))
+                    .load(MainActivity.imageUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(fragmentProfilePhotoEditBinding.imgEditPhoto);
+        }
+
 
         //TODO : UPDATE SERVICE TYPE USER PHOTO ON PICTURE CHANGE
 

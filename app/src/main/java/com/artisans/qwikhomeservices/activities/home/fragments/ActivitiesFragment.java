@@ -2,6 +2,8 @@ package com.artisans.qwikhomeservices.activities.home.fragments;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,12 +29,16 @@ import com.google.firebase.database.Query;
  */
 public class ActivitiesFragment extends Fragment {
 
+    private static final String KEY = "key";
+    private Bundle mBundleState;
     private static final String TAG = "ActivityFragment";
     private FragmentActivitiesBinding fragmentActivitiesBinding;
     private RecyclerView rvBarbers, rvHairStylist, rvInteriorDeco, rvItems;
     // private AllServicesAdapter allServicesAdapter, allServicesAdapter1, allServicesAdapter2;
     private DatabaseReference dbRef;
     private ActivityItemAdapter activityItemAdapter;
+    private LinearLayoutManager layoutManager;
+    private Parcelable mState;
 
     public ActivitiesFragment() {
         // Required empty public constructor
@@ -78,7 +84,7 @@ public class ActivitiesFragment extends Fragment {
         rvItems = fragmentActivitiesBinding.rvItems;
         rvItems.setHasFixedSize(true);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
 
@@ -176,6 +182,32 @@ public class ActivitiesFragment extends Fragment {
        /* allServicesAdapter.stopListening();
         allServicesAdapter1.stopListening();
         allServicesAdapter2.stopListening();*/
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mBundleState = new Bundle();
+        mState = layoutManager.onSaveInstanceState();
+        mBundleState.putParcelable(KEY, mState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mBundleState != null) {
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    mState = mBundleState.getParcelable(KEY);
+                    layoutManager.onRestoreInstanceState(mState);
+                }
+            }, 50);
+        }
+
+        rvItems.setLayoutManager(layoutManager);
     }
 
 

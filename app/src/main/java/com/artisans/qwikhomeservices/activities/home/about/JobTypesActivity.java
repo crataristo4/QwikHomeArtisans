@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -56,7 +55,7 @@ public class JobTypesActivity extends AppCompatActivity {
     private StorageReference mStorageReference;
     private Uri uri;
     private DatabaseReference serviceTypeDbRef, activityDbRef;
-    private int price;
+    private String price;
     private String uid, style, getImageUploadUri, accountType, userImage, userName;
 
     @Override
@@ -121,7 +120,7 @@ public class JobTypesActivity extends AppCompatActivity {
 
     private void validateInputs(View v) {
         style = Objects.requireNonNull(txtStyleName.getEditText()).getText().toString();
-        price = Objects.requireNonNull(Integer.parseInt(String.valueOf(txtPrice.getEditText().getText())));
+        price = String.valueOf(Objects.requireNonNull(txtPrice.getEditText()).getText());
 
         if (style.trim().isEmpty()) {
             txtStyleName.setErrorEnabled(true);
@@ -130,13 +129,7 @@ public class JobTypesActivity extends AppCompatActivity {
             txtStyleName.setErrorEnabled(false);
         }
 //TODO : price input validation is missing, crashes system
-        if (TextUtils.isEmpty(txtPrice.getEditText().getText().toString().trim())) {
-            txtPrice.setErrorEnabled(true);
-            txtPrice.setError("must include a price");
-        } else {
-            txtPrice.setErrorEnabled(false);
-        }
-        if (price == 0 || price > 10000) {
+        if (price.trim().isEmpty()) {
             txtPrice.setErrorEnabled(true);
             txtPrice.setError("invalid price");
         } else {
@@ -149,10 +142,10 @@ public class JobTypesActivity extends AppCompatActivity {
         }
 
         if (!style.trim().isEmpty() && uri != null
-                && price <= 10000 &&
-                !TextUtils.isEmpty(txtPrice.getEditText().getText().toString().trim())) {
-
+                && Integer.parseInt(price) <= 10000 &&
+                !price.trim().isEmpty()) {
             uploadFile();
+
         }
     }
 
@@ -207,7 +200,7 @@ public class JobTypesActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    StylesItemModel itemModel = new StylesItemModel(price,
+                    StylesItemModel itemModel = new StylesItemModel(Integer.parseInt(price),
                             style,
                             getImageUploadUri,
                             userImage,
@@ -233,7 +226,7 @@ public class JobTypesActivity extends AppCompatActivity {
 
                         } else {
                             progressDialog.dismiss();
-                            DisplayViewUI.displayToast(this, task1.getException().getMessage());
+                            DisplayViewUI.displayToast(this, Objects.requireNonNull(task1.getException()).getMessage());
 
                         }
 
@@ -241,7 +234,7 @@ public class JobTypesActivity extends AppCompatActivity {
 
                 } else {
                     progressDialog.dismiss();
-                    DisplayViewUI.displayToast(this, task.getException().getMessage());
+                    DisplayViewUI.displayToast(this, Objects.requireNonNull(task.getException()).getMessage());
 
                 }
 
@@ -308,7 +301,7 @@ public class JobTypesActivity extends AppCompatActivity {
 
         //get user details
         accountType = MainActivity.serviceType;
-        userName = MainActivity.name;
+        userName = MainActivity.fullName;
         userImage = MainActivity.imageUrl;
 
         Log.i(TAG, "onStart: " + userImage + userName);

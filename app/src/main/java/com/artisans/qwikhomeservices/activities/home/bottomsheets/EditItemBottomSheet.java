@@ -57,12 +57,12 @@ public class EditItemBottomSheet extends BottomSheetDialogFragment {
         bundle = getArguments();
         if (bundle != null) {
 
-            if (Objects.equals(bundle.getString(MyConstants.NAME), MainActivity.name)) {
+            if (Objects.equals(bundle.getString(MyConstants.FULL_NAME), MainActivity.fullName)) {
 
                 layoutEditItemBottomSheetBinding.textInputLayout.setHint("Edit name");
                 Objects.requireNonNull(layoutEditItemBottomSheetBinding.textInputLayout.getEditText()).setSingleLine(true);
                 Objects.requireNonNull(layoutEditItemBottomSheetBinding.textInputLayout
-                        .getEditText()).setText(bundle.getString(MyConstants.NAME));
+                        .getEditText()).setText(bundle.getString(MyConstants.FULL_NAME));
 
             } else if (Objects.equals(bundle.getString(MyConstants.ABOUT), MainActivity.about)) {
                 Objects.requireNonNull(layoutEditItemBottomSheetBinding.textInputLayout.getEditText()).setImeOptions(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
@@ -92,7 +92,7 @@ public class EditItemBottomSheet extends BottomSheetDialogFragment {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void onOkClicked(View view) {
 
-        if (Objects.equals(bundle.getString(MyConstants.NAME), MainActivity.name)) {
+        if (Objects.equals(bundle.getString(MyConstants.FULL_NAME), MainActivity.fullName)) {
 
             updateUserName();
 

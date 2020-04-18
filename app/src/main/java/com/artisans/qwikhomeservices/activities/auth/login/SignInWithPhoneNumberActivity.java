@@ -3,7 +3,6 @@ package com.artisans.qwikhomeservices.activities.auth.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -16,7 +15,6 @@ import com.artisans.qwikhomeservices.R;
 import com.artisans.qwikhomeservices.activities.home.MainActivity;
 import com.artisans.qwikhomeservices.databinding.ActivitySignInWithPhoneNumberBinding;
 import com.artisans.qwikhomeservices.utils.DisplayViewUI;
-import com.google.android.gms.tasks.TaskExecutors;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
@@ -111,22 +109,17 @@ public class SignInWithPhoneNumberActivity extends AppCompatActivity {
         });
 
         activitySignInWithPhoneNumberBinding.btnVerify.setOnClickListener(v -> {
-
-            try {
-                String getCodeFromUser = Objects.requireNonNull(txtVerifyCode.getEditText()).getText().toString();
+            String getCodeFromUser = Objects.requireNonNull(txtVerifyCode.getEditText()).getText().toString();
                 if (!getCodeFromUser.trim().isEmpty() && getCodeFromUser.length() == 6) {
-
                     verifyCode(getCodeFromUser);
 
-                } else if (getCodeFromUser.length() < 6) {
+                }
+
+            if (getCodeFromUser.length() < 6) {
                     txtVerifyCode.setErrorEnabled(true);
                     txtVerifyCode.setError("code too short");
-                } else {
-                    txtVerifyCode.setErrorEnabled(false);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+
 
         });
 
@@ -145,7 +138,7 @@ public class SignInWithPhoneNumberActivity extends AppCompatActivity {
                 number,        // Phone number to verify
                 60,                 // Timeout duration
                 TimeUnit.SECONDS,   // Unit of timeout
-                Objects.requireNonNull(TaskExecutors.MAIN_THREAD),               // Activity (for callback binding)
+                Objects.requireNonNull(this),               // Activity (for callback binding)
                 mCallbacks);
     }
 
@@ -171,9 +164,6 @@ public class SignInWithPhoneNumberActivity extends AppCompatActivity {
 
                 user = firebaseAuth.getCurrentUser();
                 uid = firebaseAuth.getUid();
-                assert uid != null;
-                Log.i("uid  ", uid);
-
 
                 Intent intent = new Intent(SignInWithPhoneNumberActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -183,6 +173,7 @@ public class SignInWithPhoneNumberActivity extends AppCompatActivity {
 
             } else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                 loading.setVisibility(View.GONE);
+                activitySignInWithPhoneNumberBinding.txtResendCode.setVisibility(View.VISIBLE);
                 DisplayViewUI.displayToast(SignInWithPhoneNumberActivity.this, task.getException().getMessage());
             }
 

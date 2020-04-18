@@ -15,10 +15,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.artisans.qwikhomeservices.R;
-import com.artisans.qwikhomeservices.activities.home.MainActivity;
-import com.artisans.qwikhomeservices.adapters.StylesAdapter;
+import com.artisans.qwikhomeservices.adapters.AllBarbersAdapter;
 import com.artisans.qwikhomeservices.databinding.FragmentAccountBinding;
-import com.artisans.qwikhomeservices.models.StylesItemModel;
+import com.artisans.qwikhomeservices.models.ServicePerson;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -38,7 +37,8 @@ public class AccountFragment extends Fragment {
 
     private FragmentAccountBinding accountBinding;
     private DatabaseReference databaseReference;
-    private StylesAdapter adapter;
+    //private StylesAdapter adapter;
+    private AllBarbersAdapter adapter;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -67,41 +67,19 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-       /* mAuth = FirebaseAuth.getInstance();
-        FirebaseUser mFirebaseUser = mAuth.getCurrentUser();
-        if (mFirebaseUser == null) {
-            return;
-        }
-        uid = mFirebaseUser.getUid();
 
-        accountType = MainActivity.serviceType;
-
-
-        serviceAccountDbRef = FirebaseDatabase.getInstance()
-                .getReference()
-                .child("Services").child(accountType).child(uid);
-
-        txtAbout = accountBinding.txtAboutPerson;
-        txtName = accountBinding.txtName;
-        txtServiceType = accountBinding.txtAccountType;
-        mPhoto = accountBinding.imgProfilePhoto;
-
-        txtAbout.setText(MainActivity.about);
-        txtName.setText(MainActivity.name);
-        txtServiceType.setText(MainActivity.serviceType);
-
-    */
 
         RecyclerView rv = accountBinding.rvbb;
         rv.setHasFixedSize(true);
         // databaseReference = FirebaseDatabase.getInstance().getReference().child("Styles");
+        // TODO: 18-Apr-20 change dbref
         databaseReference = FirebaseDatabase.getInstance().getReference()
-                .child("Styles")
-                .child(MainActivity.uid);
+                .child("Services").child("ServiceType");
+
         databaseReference.keepSynced(true);
 
         //querying the database BY NAME
-        Query query = databaseReference.orderByChild("price");
+        Query query = databaseReference.orderByChild("accountType").equalTo("Barbers");
 
   /*      PagedList.Config config = new PagedList.Config.Builder()
                 .setEnablePlaceholders(false)
@@ -115,9 +93,9 @@ public class AccountFragment extends Fragment {
                 .build();
 */
 
-        FirebaseRecyclerOptions<StylesItemModel> options =
-                new FirebaseRecyclerOptions.Builder<StylesItemModel>().setQuery(query,
-                        StylesItemModel.class)
+        FirebaseRecyclerOptions<ServicePerson> options =
+                new FirebaseRecyclerOptions.Builder<ServicePerson>().setQuery(query,
+                        ServicePerson.class)
                         .build();
 
         if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -129,7 +107,7 @@ public class AccountFragment extends Fragment {
         }
 
 
-        adapter = new StylesAdapter(options);
+        adapter = new AllBarbersAdapter(options, getContext());
         rv.setAdapter(adapter);
 
 

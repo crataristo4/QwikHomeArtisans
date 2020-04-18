@@ -62,6 +62,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -69,10 +70,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     private static final String TAG = "MainActivity";
-    public static String serviceType, name, imageUrl, about, uid;
+    public static String serviceType, fullName, firstName, lastName, imageUrl, about, uid;
     public static DatabaseReference serviceTypeDbRef, serviceAccountDbRef;
-    private static FirebaseUser firebaseUser;
-    private static FirebaseAuth mAuth;
+    public static FirebaseUser firebaseUser;
+    public static FirebaseAuth mAuth;
     private static Object mContext;
     private ActivityMainBinding activityMainBinding;
     //adds
@@ -117,10 +118,13 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 serviceType = (String) dataSnapshot.child("accountType").getValue();
-                name = (String) dataSnapshot.child("name").getValue();
+                fullName = (String) dataSnapshot.child("fullName").getValue();
                 imageUrl = (String) dataSnapshot.child("image").getValue();
+                firstName = (String) dataSnapshot.child("firstName").getValue();
+                lastName = (String) dataSnapshot.child("lastName").getValue();
+                about = (String) dataSnapshot.child("about").getValue();
 
-                Log.i(TAG, "onDataChange: " + serviceType + " " + name + " " + imageUrl);
+                Log.i(TAG, "onDataChange: " + serviceType + " " + fullName + " " + about + " " + imageUrl);
 
 
             }
@@ -134,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public static void retrieveSingleUserDetails(TextView txtName, TextView txtAbout, CircleImageView photo) {
+    public static void retrieveSingleUserDetails(TextView txtName, TextView txtServiceType, CircleImageView photo) {
         serviceAccountDbRef = FirebaseDatabase.getInstance()
                 .getReference().child("Services")
                 .child(serviceType)
@@ -145,16 +149,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                name = (String) dataSnapshot.child("name").getValue();
-                about = (String) dataSnapshot.child("about").getValue();
+                fullName = (String) dataSnapshot.child("fullName").getValue();
+                serviceType = (String) dataSnapshot.child("accountType").getValue();
                 imageUrl = (String) dataSnapshot.child("image").getValue();
+                firstName = (String) dataSnapshot.child("firstName").getValue();
+                lastName = (String) dataSnapshot.child("lastName").getValue();
 
-                txtName.setText(name);
-                txtAbout.setText(about);
-                Glide.with(getAppContext())
-                        .load(MainActivity.imageUrl)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(photo);
+                txtName.setText(fullName);
+                txtServiceType.setText(about);
+                if (imageUrl == null) {
+
+                    Glide.with(getAppContext())
+                            .load(getAppContext().getResources().getDrawable(R.drawable.photoe))
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(photo);
+                } else {
+                    Glide.with(getAppContext())
+                            .load(MainActivity.imageUrl)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(photo);
+                }
+
 
 
             }
@@ -180,10 +195,18 @@ public class MainActivity extends AppCompatActivity {
 
                 imageUrl = (String) dataSnapshot.child("image").getValue();
 
-                Glide.with(getAppContext())
-                        .load(MainActivity.imageUrl)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(photo);
+                if (Objects.requireNonNull(imageUrl).isEmpty()) {
+
+                    Glide.with(getAppContext())
+                            .load(getAppContext().getResources().getDrawable(R.drawable.photoe))
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(photo);
+                } else {
+                    Glide.with(getAppContext())
+                            .load(MainActivity.imageUrl)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(photo);
+                }
 
             }
 
@@ -207,16 +230,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                name = (String) dataSnapshot.child("name").getValue();
+                fullName = (String) dataSnapshot.child("fullName").getValue();
                 about = (String) dataSnapshot.child("about").getValue();
                 imageUrl = (String) dataSnapshot.child("image").getValue();
+                firstName = (String) dataSnapshot.child("firstName").getValue();
+                lastName = (String) dataSnapshot.child("lastName").getValue();
 
-                txtName.setText(name);
+                txtName.setText(fullName);
                 txtAbout.setText(about);
-                Glide.with(getAppContext())
-                        .load(MainActivity.imageUrl)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(photo);
+                if (imageUrl.isEmpty()) {
+
+                    Glide.with(getAppContext())
+                            .load(getAppContext().getResources().getDrawable(R.drawable.photoe))
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(photo);
+                } else {
+                    Glide.with(getAppContext())
+                            .load(MainActivity.imageUrl)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(photo);
+                }
 
 
             }
@@ -242,9 +275,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                name = (String) dataSnapshot.child("name").getValue();
+                fullName = (String) dataSnapshot.child("fullName").getValue();
                 about = (String) dataSnapshot.child("about").getValue();
                 imageUrl = (String) dataSnapshot.child("image").getValue();
+                firstName = (String) dataSnapshot.child("firstName").getValue();
+                lastName = (String) dataSnapshot.child("lastName").getValue();
 
             }
 
@@ -333,7 +368,7 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.action_addStyles:
                 Intent intent = new Intent(MainActivity.this, JobTypesActivity.class);
-                intent.putExtra("name", name);
+                intent.putExtra("name", fullName);
                 intent.putExtra("image", imageUrl);
                 intent.putExtra("serviceType", serviceType);
                 startActivity(intent);

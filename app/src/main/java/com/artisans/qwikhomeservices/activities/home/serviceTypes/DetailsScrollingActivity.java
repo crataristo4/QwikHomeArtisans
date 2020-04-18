@@ -194,7 +194,7 @@ public class DetailsScrollingActivity extends AppCompatActivity {
             bundle.putString(MyConstants.SERVICE_PERSON_NAME, name);
 
             //pass users name , user photo , user id to bundle
-            String userName = MainActivity.name;
+            String userName = MainActivity.fullName;
             String userId = MainActivity.uid;
             String userPhoto = MainActivity.imageUrl;
 

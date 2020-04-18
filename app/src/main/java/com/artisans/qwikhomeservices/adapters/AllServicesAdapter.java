@@ -76,7 +76,7 @@ public class AllServicesAdapter extends FirebaseRecyclerAdapter<ServicePerson,
             gotoDetailsIntent.putExtra("name", singlePerson.getName());
             gotoDetailsIntent.putExtra("about", singlePerson.getAbout());
             gotoDetailsIntent.putExtra("image", singlePerson.getImage());
-            gotoDetailsIntent.putExtra("userId", singlePerson.getUserId());
+            gotoDetailsIntent.putExtra("userId", singlePerson.getServicePersonId());
 
             allServiceViewHolder.itemView.getContext().startActivity(gotoDetailsIntent);
 

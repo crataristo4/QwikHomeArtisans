@@ -19,6 +19,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import java.util.Objects;
+
 //TODO change class name
 public class AllBarbersActivity extends AppCompatActivity {
     private ActivityAllBarbersBinding activityAllBarbersBinding;
@@ -39,11 +41,11 @@ public class AllBarbersActivity extends AppCompatActivity {
 
         Intent getIntent = getIntent();
 
-        //88getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (getIntent != null) {
 
-            switch (getIntent.getStringExtra(MyConstants.ACCOUNT_TYPE)) {
+            switch (Objects.requireNonNull(getIntent.getStringExtra(MyConstants.ACCOUNT_TYPE))) {
                 case MyConstants.BARBERS:
                     serviceType = MyConstants.BARBERS;
                     setTitle(serviceType);

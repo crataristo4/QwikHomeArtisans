@@ -17,6 +17,8 @@ import androidx.fragment.app.FragmentManager;
 import com.artisans.qwikhomeservices.R;
 import com.artisans.qwikhomeservices.activities.home.MainActivity;
 import com.artisans.qwikhomeservices.databinding.FragmentProfileBinding;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.Objects;
 
@@ -36,7 +38,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getActivity().setTitle("Settings");
+        Objects.requireNonNull(getActivity()).setTitle("Settings");
         // Inflate the layout for this fragment
         fragmentProfileBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
         return fragmentProfileBinding.getRoot();
@@ -45,11 +47,23 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        MainActivity.retrieveSingleUserDetails(fragmentProfileBinding.txtName,
-                fragmentProfileBinding.txtAbout, fragmentProfileBinding.imgPhoto);
-        fragmentProfileBinding.txtAccountType.setText(MainActivity.serviceType);
         fragmentProfileBinding.imgPhoto.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.fadein));
+
+        fragmentProfileBinding.txtName.setText(MainActivity.fullName);
+        fragmentProfileBinding.txtAccountType.setText(MainActivity.serviceType);
+        String imageUrl = MainActivity.imageUrl;
+        if (imageUrl == null) {
+
+            Glide.with(Objects.requireNonNull(getActivity()))
+                    .load(getActivity().getResources().getDrawable(R.drawable.photoe))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(fragmentProfileBinding.imgPhoto);
+        } else {
+            Glide.with(Objects.requireNonNull(getActivity()))
+                    .load(MainActivity.imageUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(fragmentProfileBinding.imgPhoto);
+        }
 
         fragmentProfileBinding.mConstrainProfile.setOnClickListener(this::onClick);
 
@@ -97,16 +111,7 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }

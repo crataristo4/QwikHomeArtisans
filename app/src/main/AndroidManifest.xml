@@ -28,9 +28,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.home.about.FinishAccountSetUpActivity"></activity>
+        <activity
+            android:name=".activities.home.about.FinishAccountSetUpActivity"
+            android:noHistory="true"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.auth.login.SignInWithPhoneNumberActivity"
+            android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.home.serviceTypes.TestAcceptOrRejectActivity" />
         <activity android:name=".activities.home.serviceTypes.TestPaginatioinActivity" />
@@ -64,12 +68,13 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.home.about.AboutActivity"
-            android:alwaysRetainTaskState="true"
+
             android:configChanges="keyboardHidden|screenSize|screenLayout|orientation"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.home.MainActivity"
-            android:configChanges="keyboardHidden"
+            android:alwaysRetainTaskState="true"
+            android:configChanges="screenSize|orientation"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

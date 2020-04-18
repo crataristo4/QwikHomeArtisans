@@ -1,5 +1,6 @@
 package com.artisans.qwikhomeservices.activities.auth.signup;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import com.artisans.qwikhomeservices.R;
 import com.artisans.qwikhomeservices.activities.home.MainActivity;
 import com.artisans.qwikhomeservices.databinding.FragmentAboutBinding;
+import com.artisans.qwikhomeservices.models.ServicePerson;
 import com.artisans.qwikhomeservices.utils.DisplayViewUI;
 import com.artisans.qwikhomeservices.utils.MyConstants;
 import com.bumptech.glide.Glide;
@@ -29,12 +31,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -78,11 +82,6 @@ public class AboutFragment extends Fragment {
 
         }
 
-        initViews();
-
-    }
-
-    private void initViews() {
         profileImage = fragmentAboutBinding.imgUploadPhoto;
         //service type database
         serviceTypeDbRef = FirebaseDatabase.getInstance()
@@ -99,57 +98,38 @@ public class AboutFragment extends Fragment {
 
     private void openGallery() {
         CropImage.activity()
+                .setGuidelines(CropImageView.Guidelines.ON)
                 .setAspectRatio(16, 16)
-                .start(Objects.requireNonNull(getActivity()));
+                .start(Objects.requireNonNull(getContext()), this);
     }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-
-            getActivity();
-            if (resultCode == Activity.RESULT_OK) {
-                assert result != null;
-                uri = result.getUri();
-
-                Glide.with(Objects.requireNonNull(getActivity()))
-                        .load(uri)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(profileImage);
-
-                // uploadFile();
-
-            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                // progressDialog.dismiss();
-                assert result != null;
-                String error = result.getError().getMessage();
-                DisplayViewUI.displayToast(getActivity(), error);
-            }
-        }
-    }
-
 
     private void onClick(View view) {
         TextInputLayout txtAbout = fragmentAboutBinding.txtAbout;
         about = Objects.requireNonNull(txtAbout.getEditText()).getText().toString();
-        if (!about.trim().isEmpty() && about.length() > 15 && uri != null) {
-
-            updateAccount();
-
-        } else if (about.trim().isEmpty()) {
-            txtAbout.setError("about required");
-            txtAbout.setErrorEnabled(true);
-        } else if (!about.trim().isEmpty() && about.length() < 15) {
-            txtAbout.setError("content too less");
-            txtAbout.setErrorEnabled(true);
-        }
         if (uri == null) {
             DisplayViewUI.displayToast(getActivity(), "Please select a photo to upload");
 
         }
+
+        if (about.trim().isEmpty()) {
+            txtAbout.setError("about required");
+            txtAbout.setErrorEnabled(true);
+        } else {
+            txtAbout.setErrorEnabled(false);
+        }
+        if (!about.trim().isEmpty() && about.length() < 15) {
+            txtAbout.setError("content too less");
+            txtAbout.setErrorEnabled(true);
+        } else {
+            txtAbout.setErrorEnabled(false);
+
+        }
+        if (!about.trim().isEmpty() && about.length() > 15 && uri != null) {
+
+            updateAccount();
+
+        }
+
     }
 
     private void updateAccount() {
@@ -191,15 +171,33 @@ public class AboutFragment extends Fragment {
                     assert downLoadUri != null;
                     getImageUri = downLoadUri.toString();
 
-                    Map<String, Object> updateProfile = new HashMap<>();
+                    String mobileNumber = MainActivity.firebaseUser.getPhoneNumber();
+                    String uid = MainActivity.uid;
+
+                    @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:MM a");
+                    String dateJoined = dateFormat.format(Calendar.getInstance().getTime());
+
+                   /* Map<String, Object> updateProfile = new HashMap<>();
                     updateProfile.put("image", getImageUri);
                     updateProfile.put("about", about);
                     updateProfile.put("firstName", mGetFirstName);
                     updateProfile.put("lastName", mGetLatName);
                     updateProfile.put("fullName", mGetFullName);
                     updateProfile.put("accountType", mGetAccountType);
+                    updateProfile.put("mobileNumber",mobileNumber);
+                    updateProfile.put("servicePersonId",uid);*/
 
-                    serviceTypeDbRef.child(uid).setValue(updateProfile).addOnCompleteListener(task1 -> {
+
+                    ServicePerson servicePerson = new ServicePerson(uid,
+                            mGetFirstName,
+                            mGetLatName,
+                            mGetFullName,
+                            about,
+                            mobileNumber,
+                            mGetAccountType,
+                            getImageUri, dateJoined);
+
+                    serviceTypeDbRef.setValue(servicePerson).addOnCompleteListener(task1 -> {
                         if (task1.isSuccessful()) {
                             progressDialog.dismiss();
                             DisplayViewUI.displayToast(getActivity(), "Successfully updated");
@@ -224,4 +222,27 @@ public class AboutFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == Activity.RESULT_OK) {
+                assert result != null;
+                uri = result.getUri();
+                Log.i(TAG, "URI: " + uri);
+                Glide.with(Objects.requireNonNull(getActivity()))
+                        .load(uri)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(profileImage);
+
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                // progressDialog.dismiss();
+                assert result != null;
+                String error = result.getError().getMessage();
+                DisplayViewUI.displayToast(getActivity(), error);
+            }
+        }
+
+    }
 }

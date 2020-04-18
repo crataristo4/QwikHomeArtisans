@@ -20,7 +20,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ServicePerson extends BaseObservable {
 
     public float rating;
-    public String userId;
+    public String servicePersonId;
     public String firstName, lastName, fullName, name;
     public String email;
     public String reason;
@@ -33,7 +33,7 @@ public class ServicePerson extends BaseObservable {
     public String location;
     public String date;
     public String about;
-    public String number;
+    public String mobileNumber;
     public String accountType;
     public String image;
     public String distanceBetween;
@@ -43,17 +43,32 @@ public class ServicePerson extends BaseObservable {
     public String servicePersonPhoto;
     public String dateRequested;
     public long timeStamp;
+    public String joinedDate;
 
 
     public ServicePerson() {
     }
 
-    public ServicePerson(String userId, String name, String email, String accountType) {
-        this.userId = userId;
+    public ServicePerson(String servicePersonId, String firstName, String lastName, String fullName,
+                         String about, String mobileNumber, String accountType, String image, String joinedDate) {
+        this.servicePersonId = servicePersonId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.fullName = fullName;
+        this.about = about;
+        this.mobileNumber = mobileNumber;
+        this.accountType = accountType;
+        this.image = image;
+        this.joinedDate = joinedDate;
+    }
+
+    public ServicePerson(String servicePersonId, String name, String email, String accountType) {
+        this.servicePersonId = servicePersonId;
         this.name = name;
         this.email = email;
         this.accountType = accountType;
     }
+
 
     public ServicePerson(int price, String styleItem, String image) {
         this.price = price;
@@ -83,12 +98,12 @@ public class ServicePerson extends BaseObservable {
                 .into(imageView);
     }
 
-    public String getUserId() {
-        return userId;
+    public String getServicePersonId() {
+        return servicePersonId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setServicePersonId(String servicePersonId) {
+        this.servicePersonId = servicePersonId;
     }
 
     @Bindable
@@ -187,12 +202,12 @@ public class ServicePerson extends BaseObservable {
     }
 
     @Bindable
-    public String getNumber() {
-        return number;
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 
     @Bindable
@@ -315,5 +330,13 @@ public class ServicePerson extends BaseObservable {
 
     public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public String getJoinedDate() {
+        return joinedDate;
+    }
+
+    public void setJoinedDate(String joinedDate) {
+        this.joinedDate = joinedDate;
     }
 }

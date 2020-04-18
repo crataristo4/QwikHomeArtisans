@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.artisans.qwikhomeservices.R;
 import com.artisans.qwikhomeservices.activities.auth.signup.NameFragment;
-import com.artisans.qwikhomeservices.utils.DisplayViewUI;
 
 import java.util.Objects;
 
@@ -36,12 +35,12 @@ public class FinishAccountSetUpActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (mBackPressed + INTERVAL > System.currentTimeMillis()) {
-            super.onBackPressed();
-            return;
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
         } else {
-            DisplayViewUI.displayToast(this, "Please complete your profile");
+            super.onBackPressed();
+
         }
-        mBackPressed = System.currentTimeMillis();
+
     }
 }
