@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.artisans.qwikhomeservices.R;
-import com.artisans.qwikhomeservices.activities.auth.LoginActivity;
+import com.artisans.qwikhomeservices.activities.auth.login.LoginActivity;
 import com.artisans.qwikhomeservices.databinding.ActivitySignupCompleteBinding;
 import com.artisans.qwikhomeservices.models.ServicePerson;
 import com.artisans.qwikhomeservices.utils.DisplayViewUI;

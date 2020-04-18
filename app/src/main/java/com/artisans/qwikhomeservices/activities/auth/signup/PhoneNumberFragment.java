@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.artisans.qwikhomeservices.R;
+import com.artisans.qwikhomeservices.activities.home.MainActivity;
 import com.artisans.qwikhomeservices.databinding.FragmentPhoneNumberBinding;
 import com.artisans.qwikhomeservices.utils.DisplayViewUI;
 import com.artisans.qwikhomeservices.utils.MyConstants;
@@ -25,11 +27,8 @@ import com.google.android.gms.auth.api.credentials.Credential;
 import com.google.android.gms.auth.api.credentials.HintRequest;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,6 +38,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hbb20.CountryCodePicker;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -46,9 +47,20 @@ import java.util.concurrent.TimeUnit;
 public class PhoneNumberFragment extends Fragment implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
-    String mGetFirstName, mGetLatName, mGetAccountType, mGetAbout;
+    private String mGetFirstName, mGetLatName, mGetAccountType, mGetAbout, mGetFullName;
     private FragmentPhoneNumberBinding fragmentPhoneNumberBinding;
     private String mVerificationCode;
+    private DatabaseReference servicePersonDbRef;
+    private GoogleApiClient mGoogleApiClient;
+    private CountryCodePicker countryCodePicker;
+    private ProgressBar loading;
+    private TextInputLayout txtPhoneNumber, txtVerifyCode;
+    private int RESOLVE_HINT = 2;
+    private String getPhone;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser user;
+    private String uid;
+    private String number;
     private final PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
         public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
@@ -75,13 +87,7 @@ public class PhoneNumberFragment extends Fragment implements
 
         }
     };
-    private DatabaseReference userDbRef;
-    private GoogleApiClient mGoogleApiClient;
-    private CountryCodePicker countryCodePicker;
-    private ProgressBar loading;
-    private TextInputLayout txtPhoneNumber, txtVerifyCode;
-    private int RESOLVE_HINT = 2;
-    private String getPhone, getmVerificationCode;
+
 
     public PhoneNumberFragment() {
         // Required empty public constructor
@@ -99,6 +105,9 @@ public class PhoneNumberFragment extends Fragment implements
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        firebaseAuth = FirebaseAuth.getInstance();
+
+
         Bundle getBundle = getArguments();
 
         if (getBundle != null) {
@@ -107,19 +116,20 @@ public class PhoneNumberFragment extends Fragment implements
             mGetFirstName = getBundle.getString(MyConstants.FIRST_NAME);
             mGetLatName = getBundle.getString(MyConstants.LAST_NAME);
             mGetAbout = getBundle.getString(MyConstants.ABOUT);
+            mGetFullName = getBundle.getString(MyConstants.FULL_NAME);
 
             DisplayViewUI.displayToast(getActivity(), mGetAccountType + " " +
-                    mGetFirstName + " " + mGetLatName + " " + mGetAbout);
+                    mGetFirstName + " " + mGetLatName + " " + mGetAbout + " " + mGetFullName);
         }
 
         countryCodePicker = fragmentPhoneNumberBinding.ccp;
         loading = fragmentPhoneNumberBinding.progressBarVerify;
         txtPhoneNumber = fragmentPhoneNumberBinding.textInputLayoutPhone;
         txtVerifyCode = fragmentPhoneNumberBinding.textInputLayoutConfirmCode;
-        userDbRef = FirebaseDatabase.getInstance().getReference("Users");
+        servicePersonDbRef = FirebaseDatabase.getInstance().getReference("Services");
 
         countryCodePicker.registerCarrierNumberEditText(txtPhoneNumber.getEditText());
-        countryCodePicker.setNumberAutoFormattingEnabled(true);
+        //countryCodePicker.setNumberAutoFormattingEnabled(true);
 
         //set google api client for hint request
         mGoogleApiClient = new GoogleApiClient.Builder(Objects.requireNonNull(getActivity()))
@@ -127,6 +137,52 @@ public class PhoneNumberFragment extends Fragment implements
                 .enableAutoManage(getActivity(), this)
                 .addApi(Auth.CREDENTIALS_API)
                 .build();
+
+        getHintPhoneNumber();
+
+        fragmentPhoneNumberBinding.btnRegisterPhoneNumber.setOnClickListener(v -> {
+
+            String getPhoneNumber = Objects.requireNonNull(txtPhoneNumber.getEditText()).getText().toString();
+            if (!getPhoneNumber.trim().isEmpty()) {
+
+                if (DisplayViewUI.isNetworkConnected(getContext())) {
+                    getPhone = countryCodePicker.getFormattedFullNumber();
+                    sendVerificationCode(getPhone);
+                    showHideLayout();
+                } else {
+                    DisplayViewUI.displayAlertDialogMsg(getContext(), Objects.requireNonNull(getContext()).getResources().getString(R.string.noInternet), "ok",
+                            (dialog, which) -> dialog.dismiss());
+                }
+            } else if (getPhoneNumber.trim().isEmpty()) {
+                txtPhoneNumber.setErrorEnabled(true);
+                txtPhoneNumber.setError("number required");
+            } else {
+                txtPhoneNumber.setErrorEnabled(false);
+            }
+
+        });
+
+        fragmentPhoneNumberBinding.btnVerify.setOnClickListener(v -> {
+
+            try {
+                String getCodeFromUser = Objects.requireNonNull(txtVerifyCode.getEditText()).getText().toString();
+                if (!getCodeFromUser.trim().isEmpty() && getCodeFromUser.length() == 6) {
+
+                    verifyCode(getCodeFromUser);
+
+
+                } else if (getCodeFromUser.length() < 6) {
+                    txtVerifyCode.setErrorEnabled(true);
+                    txtVerifyCode.setError("code too short");
+                } else {
+                    txtVerifyCode.setErrorEnabled(false);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        });
+
     }
 
 
@@ -162,20 +218,45 @@ public class PhoneNumberFragment extends Fragment implements
 
     private void signInWithCredentials(PhoneAuthCredential phoneAuthCredential) {
 
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        String uid = Objects.requireNonNull(user).getUid();
+        loading.setVisibility(View.VISIBLE);
 
-        firebaseAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
 
-                } else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+        firebaseAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                user = firebaseAuth.getCurrentUser();
 
-                }
+                uid = firebaseAuth.getUid();
+                assert uid != null;
+                Log.i("uid  ", uid);
 
+                loading.setVisibility(View.GONE);
+                number = user.getPhoneNumber();
+
+                //todo create account with details using dbref
+                Map<String, Object> servicePerson = new HashMap<>();
+                servicePerson.put("firstName", mGetFirstName);
+                servicePerson.put("lastName", mGetLatName);
+                servicePerson.put("fullName", mGetFullName);
+                servicePerson.put("about", mGetAbout);
+                servicePerson.put("uid", uid);
+                servicePerson.put("serviceType", mGetAccountType);
+                servicePerson.put("mobileNumber", number);
+
+                Log.i("onComplete: ", task.getResult().getUser().getPhoneNumber());
+                Log.i("onComplete: ", number);
+
+                servicePersonDbRef.child(mGetAccountType).child(uid).setValue(servicePerson);
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                Objects.requireNonNull(getContext()).startActivity(intent);
+                Objects.requireNonNull(getActivity()).finish();
+
+
+            } else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                loading.setVisibility(View.GONE);
+                DisplayViewUI.displayToast(getActivity(), task.getException().getMessage());
             }
+
         });
 
     }
@@ -199,7 +280,7 @@ public class PhoneNumberFragment extends Fragment implements
             loading.setVisibility(View.GONE);
             fragmentPhoneNumberBinding.constrainLayoutConfrimNumber.setVisibility(View.GONE);
             fragmentPhoneNumberBinding.constrainLayoutVerifyPhone.setVisibility(View.VISIBLE);
-        }, 5000);
+        }, 7000);
     }
 
 

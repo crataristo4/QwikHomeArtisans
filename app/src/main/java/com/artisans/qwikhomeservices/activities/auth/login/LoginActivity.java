@@ -1,4 +1,4 @@
-package com.artisans.qwikhomeservices.activities.auth;
+package com.artisans.qwikhomeservices.activities.auth.login;
 
 import android.app.ProgressDialog;
 import android.content.Intent;

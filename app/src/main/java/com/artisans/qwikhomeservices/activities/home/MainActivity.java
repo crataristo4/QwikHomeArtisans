@@ -33,9 +33,9 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.artisans.qwikhomeservices.R;
-import com.artisans.qwikhomeservices.activities.home.about.AboutActivity;
 import com.artisans.qwikhomeservices.activities.home.about.JobTypesActivity;
 import com.artisans.qwikhomeservices.activities.home.about.SettingsActivity;
+import com.artisans.qwikhomeservices.activities.home.bottomsheets.WelcomeNoticeBottomSheet;
 import com.artisans.qwikhomeservices.activities.home.serviceTypes.TestAcceptOrRejectActivity;
 import com.artisans.qwikhomeservices.activities.welcome.SplashScreenActivity;
 import com.artisans.qwikhomeservices.databinding.ActivityMainBinding;
@@ -265,11 +265,7 @@ public class MainActivity extends AppCompatActivity {
         mContext = getApplicationContext();
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
-        assert firebaseUser != null;
-        if (mAuth.getCurrentUser() == null) {
-            SendUserToLoginActivity();
-            return;
-        }
+
 
         //initialize step 5
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -279,9 +275,120 @@ public class MainActivity extends AppCompatActivity {
         // getLastLocation();
 
         //load add
-        loadAdds();
+        // loadAdds();
 
 
+    }
+
+    private void checkDisplayAlertDialog() {
+        SharedPreferences pref = getSharedPreferences(MyConstants.PREFS, 0);
+        boolean alertShown = pref.getBoolean(MyConstants.IS_DIALOG_SHOWN, false);
+
+        if (!alertShown) {
+            new Handler().postDelayed(() -> {
+
+                WelcomeNoticeBottomSheet welcomeNoticeBottomSheet = new WelcomeNoticeBottomSheet();
+                welcomeNoticeBottomSheet.setCancelable(false);
+                welcomeNoticeBottomSheet.show(getSupportFragmentManager(), "welcome");
+
+            }, 2000);
+
+            SharedPreferences.Editor edit = pref.edit();
+            edit.putBoolean(MyConstants.IS_DIALOG_SHOWN, true);
+            edit.apply();
+        }
+    }
+
+    private void SendUserToLoginActivity() {
+        Intent Login = new Intent(MainActivity.this, SplashScreenActivity.class);
+        startActivity(Login);
+        finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater menuInflater = getMenuInflater();
+
+        menuInflater.inflate(R.menu.main_settings, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Intent gotoSettingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(gotoSettingsIntent);
+
+                return true;
+
+            case R.id.action_logout:
+                mAuth.signOut();
+                startActivity(new Intent(MainActivity.this, SplashScreenActivity.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
+
+                break;
+
+            case R.id.action_addStyles:
+                Intent intent = new Intent(MainActivity.this, JobTypesActivity.class);
+                intent.putExtra("name", name);
+                intent.putExtra("image", imageUrl);
+                intent.putExtra("serviceType", serviceType);
+                startActivity(intent);
+                break;
+
+            /*case R.id.action_viewAllStyles:
+                startActivity(new Intent(MainActivity.this, TestPaginatioinActivity.class));
+                */
+
+            case R.id.action_viewAllRequests:
+                startActivity(new Intent(MainActivity.this, TestAcceptOrRejectActivity.class));
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+        return true;
+    }
+
+    private void setUpAppBarConfig() {
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_activities, R.id.navigation_home,
+                R.id.navigation_styles, R.id.navigation_request)
+                .build();
+
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(activityMainBinding.bottomNavigationView, navController);
+
+        activityMainBinding.bottomNavigationView.setOnNavigationItemReselectedListener(menuItem -> {
+            //do nothing
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        try {
+            assert firebaseUser != null;
+
+            if (mAuth.getCurrentUser() == null) {
+                SendUserToLoginActivity();
+            } else {
+                uid = firebaseUser.getUid();
+                checkDisplayAlertDialog();
+                retrieveServiceType();
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadAdds() {
@@ -394,99 +501,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void checkDisplayAlertDialog() {
-        SharedPreferences pref = getSharedPreferences(MyConstants.PREFS, 0);
-        boolean alertShown = pref.getBoolean(MyConstants.IS_DIALOG_SHOWN, false);
-
-        if (!alertShown) {
-            new Handler().postDelayed(() -> DisplayViewUI.displayAlertDialogMsg(this,
-                    "Want to be seen by more users?\nPlease edit profile and add more skills",
-                    "OK", (dialog, which) -> {
-                        if (which == -1) {
-
-                            dialog.dismiss();
-                            Intent gotoAbout = new Intent(MainActivity.this, AboutActivity.class);
-                            gotoAbout.putExtra(MyConstants.ACCOUNT_TYPE, serviceType);
-                            startActivity(gotoAbout);
-                        }
-                    }), 15000);
-
-            SharedPreferences.Editor edit = pref.edit();
-            edit.putBoolean(MyConstants.IS_DIALOG_SHOWN, true);
-            edit.apply();
-        }
-    }
-
-    private void SendUserToLoginActivity() {
-        Intent Login = new Intent(MainActivity.this, SplashScreenActivity.class);
-        startActivity(Login);
-        finish();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater menuInflater = getMenuInflater();
-
-        menuInflater.inflate(R.menu.main_settings, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                Intent gotoSettingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivity(gotoSettingsIntent);
-
-                return true;
-
-            case R.id.action_logout:
-                mAuth.signOut();
-                startActivity(new Intent(MainActivity.this, SplashScreenActivity.class)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
-                finish();
-
-                break;
-
-            case R.id.action_addStyles:
-                Intent intent = new Intent(MainActivity.this, JobTypesActivity.class);
-                intent.putExtra("name", name);
-                intent.putExtra("image", imageUrl);
-                intent.putExtra("serviceType", serviceType);
-                startActivity(intent);
-                break;
-
-            /*case R.id.action_viewAllStyles:
-                startActivity(new Intent(MainActivity.this, TestPaginatioinActivity.class));
-                */
-
-            case R.id.action_viewAllRequests:
-                startActivity(new Intent(MainActivity.this, TestAcceptOrRejectActivity.class));
-
-
-            default:
-                return super.onOptionsItemSelected(item);
-
-        }
-        return true;
-    }
-
-    private void setUpAppBarConfig() {
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_activities, R.id.navigation_home,
-                R.id.navigation_styles, R.id.navigation_request)
-                .build();
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(activityMainBinding.bottomNavigationView, navController);
-
-        activityMainBinding.bottomNavigationView.setOnNavigationItemReselectedListener(menuItem -> {
-            //do nothing
-        });
-    }
 
 
     //Step 3
@@ -502,32 +516,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
 
-        try {
-            assert firebaseUser != null;
 
-            if (mAuth.getCurrentUser() == null || !firebaseUser.isEmailVerified()) {
-                SendUserToLoginActivity();
-            } else {
-                uid = firebaseUser.getUid();
-                checkDisplayAlertDialog();
-                retrieveServiceType();
 
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-       /* if (checkPermission()){
-            getLastLocation();
-        }*/
-    }
 }

@@ -248,6 +248,8 @@
     <string name="verify">Verify</string>
     <string name="addPhoneNumber">Add phone number</string>
     <string name="agree_and_continue">Agree and continue</string>
+    <string name="completeProfile">Complete profile</string>
+    <string name="welcome">Welcome to Qwik Home Services</string>
 
     <string name="termAndConditions">
         <![CDATA[
@@ -263,4 +265,36 @@
     <string name="final_step_verify_your_phone_number">Final step,verify your phone number</string>
     <string name="tellUs">Tell us who you are.Be professional , users may interest you when you are real about what you can do.</string>
     <string name="noInternet">No internet.Internet connection is needed to continue.\nCheck your internet connection.If problem still exist contact your service provider</string>
+    <string name="resend_code">Resend code</string>
+
+    <string name="welcomeNote">
+        <![CDATA[
+
+        Thank you creating an account with <b>Qwik Home Services. </b>
+        We hope you will enjoy using this our services<br>
+<br>
+         <b>Please <b>TAKE NOTE</b> of these <b>RULES</b></b>
+         <ol>
+        <li>Do not make any transaction if you do not feel safe</li>
+        <li>Get to know  more about whoever the transaction may be with</li>
+        <li>Whenever a request is sent and approved, after you complete the work  status as done to the <b> users/b></li>
+        <li><b>This will allow them to make payment from your job status</b></li>
+        <li><b>Insist that all payment be made through the application to improve our security <b></li>
+        <li><b>Report any suspicious / fraudulent account </b></li>
+        <li>Do not be rude, act professional</li>
+        </ol>
+
+        <br><br>
+
+          <b>We also recommend the following </b>
+        <ol>
+        <li>Spice up your profile by completing the account set up</li>
+        <li>Add a profile picture for easy identification</li>
+        <li>Add a mobile number  </li>
+        </ol>
+
+
+        ]]>
+    </string>
+
 </resources>

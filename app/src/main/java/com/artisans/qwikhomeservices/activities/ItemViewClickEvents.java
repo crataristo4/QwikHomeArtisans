@@ -7,7 +7,7 @@ import android.net.NetworkInfo;
 import android.view.View;
 
 import com.artisans.qwikhomeservices.R;
-import com.artisans.qwikhomeservices.activities.auth.signup.SignInWithPhoneNumberActivity;
+import com.artisans.qwikhomeservices.activities.auth.login.SignInWithPhoneNumberActivity;
 import com.artisans.qwikhomeservices.utils.DisplayViewUI;
 
 import java.util.Objects;

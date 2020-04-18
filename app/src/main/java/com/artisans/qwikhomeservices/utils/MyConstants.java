@@ -13,6 +13,7 @@ public final class MyConstants {
     public static final int NUM_HASHED_BYTES = 9;
     public static final int NUM_BASE64_CHAR = 11;
     public static final String FIRST_NAME = "firstName";
+    public static final String FULL_NAME = "fullName";
     public static final String LAST_NAME = "lastName";
     public static String ACCOUNT_TYPE = "accountType";
     public static String NAME = "name";

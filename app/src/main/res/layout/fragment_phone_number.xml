@@ -48,7 +48,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView12">
@@ -117,19 +116,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/txtCancel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginRight="24dp"
-                    android:text="@string/cancel"
-                    android:textColor="@color/colorRed"
-                    app:layout_constraintBottom_toBottomOf="@+id/btnRegisterPhoneNumber"
-                    app:layout_constraintEnd_toStartOf="@+id/btnRegisterPhoneNumber"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/btnRegisterPhoneNumber" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -169,6 +155,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:hint="@string/confirmCode"
                         android:inputType="number"
                         android:maxLength="6"
@@ -176,6 +163,8 @@
                         android:singleLine="true"
                         tools:layout_editor_absoluteX="9dp"
                         tools:layout_editor_absoluteY="203dp" />
+
+                    <requestFocus />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -196,19 +185,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textInputLayoutConfirmCode" />
 
-                <TextView
-                    android:id="@+id/txtCancelCode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
-                    android:text="@string/cancel"
-                    android:textColor="@color/colorRed"
-                    app:layout_constraintBottom_toBottomOf="@+id/btnVerify"
-                    app:layout_constraintEnd_toStartOf="@+id/btnVerify"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/btnVerify" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

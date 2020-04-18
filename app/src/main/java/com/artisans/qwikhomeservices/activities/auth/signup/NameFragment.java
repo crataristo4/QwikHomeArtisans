@@ -80,6 +80,7 @@ public class NameFragment extends Fragment {
 
         String mGetFirstName = Objects.requireNonNull(txtFirstName.getEditText()).getText().toString();
         String mGetLatName = Objects.requireNonNull(txtLastName.getEditText()).getText().toString();
+        String fullName = mGetFirstName.concat(" ").concat(mGetLatName);
 
 
         if (mGetFirstName.trim().isEmpty() || mGetFirstName.length() < 3) {
@@ -103,12 +104,13 @@ public class NameFragment extends Fragment {
             args.putString(MyConstants.FIRST_NAME, mGetFirstName);
             args.putString(MyConstants.LAST_NAME, mGetLatName);
             args.putString(MyConstants.ACCOUNT_TYPE, mGetAccountType);
+            args.putString(MyConstants.FULL_NAME, fullName);
             aboutFragment.setArguments(args);
             FragmentManager fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right,
                     R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right)
                     .replace(R.id.containerFragment, aboutFragment)
-                    .addToBackStack("aboutFragment")
+                    .addToBackStack("nameFragment")
                     .commit();
         }
     }

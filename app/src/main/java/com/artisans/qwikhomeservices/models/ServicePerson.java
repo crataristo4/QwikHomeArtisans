@@ -21,7 +21,7 @@ public class ServicePerson extends BaseObservable {
 
     public float rating;
     public String userId;
-    public String name;
+    public String firstName, lastName, fullName, name;
     public String email;
     public String reason;
     public int price;
@@ -42,6 +42,7 @@ public class ServicePerson extends BaseObservable {
     public String servicePersonName;
     public String servicePersonPhoto;
     public String dateRequested;
+    public long timeStamp;
 
 
     public ServicePerson() {
@@ -280,5 +281,39 @@ public class ServicePerson extends BaseObservable {
         this.dateRequested = dateRequested;
     }
 
+    @Bindable
+    public String getFirstName() {
+        return firstName;
+    }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    @Bindable
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    @Bindable
+    public String getFullName() {
+        return firstName.concat(" ").concat(lastName);
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    @Bindable
+    public long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
+    }
 }

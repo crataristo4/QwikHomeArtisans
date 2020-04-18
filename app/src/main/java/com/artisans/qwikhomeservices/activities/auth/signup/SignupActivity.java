@@ -8,7 +8,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.artisans.qwikhomeservices.R;
-import com.artisans.qwikhomeservices.activities.auth.LoginActivity;
+import com.artisans.qwikhomeservices.activities.auth.login.LoginActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class SignupActivity extends AppCompatActivity {

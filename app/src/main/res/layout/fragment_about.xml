@@ -14,7 +14,41 @@
             android:orientation="vertical"
             tools:context=".activities.auth.signup.AboutFragment">
 
-        <com.google.android.material.textfield.TextInputLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:context="com.artisans.qwikhomeservices.activities.home.about.ProfileActivity">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgUploadPhoto"
+                    android:layout_width="@dimen/TwoHundredDp"
+                    android:layout_height="@dimen/TwoHundredDp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:contentDescription="@string/user_profile"
+                    android:src="@drawable/defaultavatar"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabUploadPhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:backgroundTint="@color/purple"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgUploadPhoto"
+                    app:layout_constraintEnd_toEndOf="@+id/imgUploadPhoto"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/imgUploadPhoto"
+                    app:layout_constraintTop_toTopOf="@+id/imgUploadPhoto"
+                    app:layout_constraintVertical_bias="1.0"
+                    app:srcCompat="@drawable/ic_camera" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtAbout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,7 +92,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btnContinue"
+            android:id="@+id/btnFinish"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -69,7 +103,7 @@
             android:background="@drawable/curvebotton"
             android:includeFontPadding="false"
             android:padding="@dimen/eightDp"
-            android:text="@string/cont"
+            android:text="@string/finish"
             android:textAlignment="inherit"
             android:textAllCaps="false"
             android:textColor="@color/white"

@@ -8,9 +8,38 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:682951871653:android:655b86d2a7af1d467bd14c",
+        "mobilesdk_app_id": "1:682951871653:android:a77256d924314c027bd14c",
         "android_client_info": {
           "package_name": "com.artisans.qwikhomeservices"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "682951871653-qgk5194jul1vid2ndlggoinnh0mvrg9a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDl6iP2d48kpy0b7O2u6fdhTaTGzyNFcEw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "682951871653-qgk5194jul1vid2ndlggoinnh0mvrg9a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682951871653:android:655b86d2a7af1d467bd14c",
+        "android_client_info": {
+          "package_name": "com.example.handyman"
         }
       },
       "oauth_client": [
@@ -18,7 +47,7 @@
           "client_id": "682951871653-arh0rtn3hf5g0g4019ddlfgusugtr61f.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.artisans.qwikhomeservices",
+            "package_name": "com.example.handyman",
             "certificate_hash": "121eaab94eddbfa943e99be4569dcefbe1f75093"
           }
         },
@@ -45,17 +74,54 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:682951871653:android:49069168606aaa897bd14c",
+        "mobilesdk_app_id": "1:682951871653:android:bd920130826b6ccd7bd14c",
         "android_client_info": {
-          "package_name": "com.artisans.qwikhomeservicesadmin"
+          "package_name": "com.quickhomeservices"
         }
       },
       "oauth_client": [
         {
-          "client_id": "682951871653-1i2ali6haterc4eek2k6o9sb29ontoqa.apps.googleusercontent.com",
+          "client_id": "682951871653-rcvb2u0hgkhpffqdjk3mfdklu6ishlpk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.artisans.qwikhomeservicesadmin",
+            "package_name": "com.quickhomeservices",
+            "certificate_hash": "121eaab94eddbfa943e99be4569dcefbe1f75093"
+          }
+        },
+        {
+          "client_id": "682951871653-qgk5194jul1vid2ndlggoinnh0mvrg9a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDl6iP2d48kpy0b7O2u6fdhTaTGzyNFcEw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "682951871653-qgk5194jul1vid2ndlggoinnh0mvrg9a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682951871653:android:daf34c6d4e79852d7bd14c",
+        "android_client_info": {
+          "package_name": "com.users.quickhomeservices"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "682951871653-kskr4iu9q9kdojnd1g8mi2dccvj990b9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.users.quickhomeservices",
             "certificate_hash": "121eaab94eddbfa943e99be4569dcefbe1f75093"
           }
         },

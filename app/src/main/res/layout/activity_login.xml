@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context="com.artisans.qwikhomeservices.activities.auth.LoginActivity">
+        tools:context="com.artisans.qwikhomeservices.activities.auth.login.LoginActivity">
 
 
         <com.google.android.material.textfield.TextInputLayout
