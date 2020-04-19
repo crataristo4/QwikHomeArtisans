@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 <!--
     <ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -191,6 +192,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <SearchView
+        android:queryHint="@string/searchForServices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/sixteenDp"
+        android:dividerPadding="@dimen/eightDp"
+        android:textColorHint="#7B1FA2"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="@dimen/twentyFourDp"
+        app:boxCornerRadiusBottomStart="@dimen/twentyFourDp"
+        app:boxCornerRadiusTopEnd="@dimen/twentyFourDp"
+        app:boxCornerRadiusTopStart="@dimen/twentyFourDp"
+        app:boxStrokeColor="#7B1FA2"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_search"
+            android:drawableLeft="@drawable/ic_search"
+            android:drawablePadding="@dimen/eightDp"
+            android:hint="@string/searchForServices"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:paddingStart="@dimen/eightDp"
+            android:paddingEnd="@dimen/eightDp"
+            android:singleLine="true"
+            android:textColor="@color/purple"
+            android:textColorHint="@color/purple"
+             />
+
+        <requestFocus />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ListView
         android:entries="@array/services"

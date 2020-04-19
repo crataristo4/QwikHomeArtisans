@@ -51,6 +51,7 @@
     <string name="call">CALL</string>
     <string name="message">MESSAGE</string>
     <string name="accountType">Select your profession</string>
+    <string name="searchForServices">Search for service</string>
     <string name="gh">GH %s</string>
 
 
