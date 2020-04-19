@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<!--
+    <ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -60,7 +60,8 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imgSerViceTypePhoto1" />
+                        app:layout_constraintTop_toBottomOf="@+id/imgSerViceTypePhoto1"
+                        android:gravity="center_horizontal" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -108,6 +109,7 @@
                         android:maxLines="1"
                         android:text="@string/Decorations"
                         android:textAlignment="center"
+                        android:gravity="center_horizontal"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textColor="@color/deepPurple"
                         android:textSize="14sp"
@@ -163,6 +165,7 @@
                         android:maxLines="1"
                         android:text="@string/barbering"
                         android:textAlignment="center"
+                        android:gravity="center_horizontal"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textColor="@color/deepPurple"
                         android:textSize="14sp"
@@ -182,4 +185,18 @@
         </LinearLayout>
 
     </ScrollView>
+-->
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ListView
+        android:entries="@array/services"
+        android:id="@+id/servicesListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</androidx.appcompat.widget.LinearLayoutCompat>
+
 </layout>

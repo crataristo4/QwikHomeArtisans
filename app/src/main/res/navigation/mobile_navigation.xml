@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.artisans.qwikhomeservices.activities.home.fragments.HomeFragment"
-        android:label="Home"
+        android:label="Services"
         tools:layout="@layout/fragment_home">
 
         <action

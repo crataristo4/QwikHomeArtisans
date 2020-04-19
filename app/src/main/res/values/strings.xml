@@ -54,8 +54,10 @@
     <string name="gh">GH %s</string>
 
 
-    <string-array name="plate_initials">
-
+    <string-array name="services">
+        <item>Women Hairstylists</item>
+        <item>Interior Decorators</item>
+        <item>Barbers</item>
         <item>Carpenter</item>
         <item>Mechanic</item>
         <item>Pest Control</item>
@@ -69,7 +71,7 @@
     </string-array>
 
     <string-array name="userTypes">
-        <item>Please select your profession</item>
+        <item >Please select your profession</item>
         <item>Barbers</item>
         <item>Women Hairstylists</item>
         <item>Interior Decorators</item>
