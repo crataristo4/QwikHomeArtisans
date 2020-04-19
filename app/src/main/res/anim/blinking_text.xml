@@ -3,7 +3,7 @@
     android:startOffset="40">
 
     <alpha
-        android:duration="3000"
+        android:duration="5000"
         android:fromAlpha="0.0"
         android:interpolator="@android:anim/accelerate_interpolator"
         android:repeatCount="infinite"

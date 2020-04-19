@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
@@ -42,14 +42,13 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import id.zelory.compressor.Compressor;
 
 public class AddDesignOrStyleActivity extends AppCompatActivity {
 
     private static final String TAG = "JobTypesActivity";
     String dateTime;
-    private ActivityDesignStyleBinding activityJobTypesBinding;
+    private ActivityDesignStyleBinding activityDesignStyleBinding;
     private AppCompatImageView styleItemPhoto;
     private TextInputLayout txtStyleName, txtPrice;
     private StorageReference mStorageReference;
@@ -62,6 +61,7 @@ public class AddDesignOrStyleActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         if (savedInstanceState != null) {
             Objects.requireNonNull(txtStyleName.getEditText()).setText(savedInstanceState.getString(MyConstants.STYLE));
@@ -75,7 +75,7 @@ public class AddDesignOrStyleActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        activityJobTypesBinding = DataBindingUtil.setContentView(this, R.layout.activity_design_style);
+        activityDesignStyleBinding = DataBindingUtil.setContentView(this, R.layout.activity_design_style);
         mStorageReference = FirebaseStorage.getInstance().getReference("photos");
         serviceTypeDbRef = FirebaseDatabase.getInstance()
                 .getReference("Styles");
@@ -90,17 +90,17 @@ public class AddDesignOrStyleActivity extends AppCompatActivity {
 
     private void intViews() {
 
-        activityJobTypesBinding.txtDes.startAnimation(AnimationUtils.loadAnimation(this, R.anim.blinking_text));
+        activityDesignStyleBinding.txtDes.startAnimation(AnimationUtils.loadAnimation(this, R.anim.blinking_text));
 
-        txtPrice = activityJobTypesBinding.textInputLayoutPrice;
-        txtStyleName = activityJobTypesBinding.txtInputLayoutStyle;
-        styleItemPhoto = activityJobTypesBinding.imgStylePhoto;
+        txtPrice = activityDesignStyleBinding.textInputLayoutPrice;
+        txtStyleName = activityDesignStyleBinding.txtInputLayoutStyle;
+        styleItemPhoto = activityDesignStyleBinding.imgStylePhoto;
 
         uid = MainActivity.uid;
 
-        activityJobTypesBinding.imgStylePhoto.setOnClickListener(v -> openGallery());
+        activityDesignStyleBinding.imgStylePhoto.setOnClickListener(v -> openGallery());
 
-        activityJobTypesBinding.btnAdd.setOnClickListener(this::validateInputs);
+        activityDesignStyleBinding.btnAdd.setOnClickListener(this::validateInputs);
 
 
     }
@@ -134,13 +134,7 @@ public class AddDesignOrStyleActivity extends AppCompatActivity {
 
         }
 
-        if(Integer.parseInt(price) > 10000){
 
-            txtPrice.setErrorEnabled(true);
-            txtPrice.setError("price too expensive");
-        } else {
-            txtPrice.setErrorEnabled(false);
-        }
         if (!style.trim().isEmpty() && uri != null
                 && Integer.parseInt(price) <= 10000 &&
                 !price.trim().isEmpty()) {
@@ -272,10 +266,12 @@ public class AddDesignOrStyleActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (mBackPressed + INTERVAL > System.currentTimeMillis()){
-            DisplayViewUI.displayToast(this,"Press back again to exit");
+            super.onBackPressed();
+
             return;
         }else {
-            super.onBackPressed();
+            DisplayViewUI.displayToast(this, "Press back again to exit");
+
 
         }
 

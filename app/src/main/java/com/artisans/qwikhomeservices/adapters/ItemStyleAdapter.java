@@ -144,10 +144,7 @@ public class ItemStyleAdapter extends RecyclerView.Adapter<ItemStyleAdapter.Item
         notifyItemRangeChanged(initialSize, stylesItemModels.size());
     }
 
-    public String getLastItemId() {
 
-        return stylesItemModelList.get(stylesItemModelList.size() - 1).getTimeStamp();
-    }
 
     public void removeLastItemId() {
         stylesItemModelList.remove(stylesItemModelList.size() - 1);

@@ -122,7 +122,6 @@
                 android:drawableLeft="@drawable/ic_date"
                 android:drawablePadding="4dp"
                 android:padding="4dp"
-                android:text="@{items.timeStamp}"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
