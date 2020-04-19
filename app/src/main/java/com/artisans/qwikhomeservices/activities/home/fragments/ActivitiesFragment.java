@@ -24,9 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class ActivitiesFragment extends Fragment {
 
     private static final String KEY = "key";
@@ -44,6 +42,11 @@ public class ActivitiesFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -83,11 +86,9 @@ public class ActivitiesFragment extends Fragment {
     private void loadActivityData() {
         rvItems = fragmentActivitiesBinding.rvItems;
         rvItems.setHasFixedSize(true);
-
         layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
-
         rvItems.setLayoutManager(layoutManager);
 
         dbRef = FirebaseDatabase.getInstance().getReference()
@@ -103,6 +104,8 @@ public class ActivitiesFragment extends Fragment {
                         .build();
 
         activityItemAdapter = new ActivityItemAdapter(options);
+
+
         rvItems.setAdapter(activityItemAdapter);
     }
 
@@ -209,6 +212,5 @@ public class ActivitiesFragment extends Fragment {
 
         rvItems.setLayoutManager(layoutManager);
     }
-
 
 }

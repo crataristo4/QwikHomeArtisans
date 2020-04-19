@@ -14,6 +14,7 @@ import com.artisans.qwikhomeservices.R;
 import com.artisans.qwikhomeservices.databinding.LayoutActivityItemsBinding;
 import com.artisans.qwikhomeservices.models.StylesItemModel;
 import com.artisans.qwikhomeservices.utils.DisplayViewUI;
+import com.artisans.qwikhomeservices.utils.GetTimeAgo;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -37,7 +38,7 @@ public class ActivityItemAdapter extends FirebaseRecyclerAdapter<StylesItemModel
                                     int i, @NonNull StylesItemModel itemModel) {
 
         activityItemAdapterViewHolder.activityItemsBinding.setItems(itemModel);
-        // activityItemAdapterViewHolder.activityItemsBinding.txtTime.setText(GetDateTime.DateToTimeFormat(itemModel.timeStamp));
+        activityItemAdapterViewHolder.activityItemsBinding.txtTime.setText(GetTimeAgo.getTimeAgo(itemModel.getTimeStamp()));
         // activityItemAdapterViewHolder.activityItemsBinding.txtPubDate.setText(GetDateTime.DateToTimeFormat(itemModel.timeStamp));
 
         RequestOptions requestOptions = new RequestOptions();

@@ -100,6 +100,7 @@
                 android:layout_margin="8dp"
                 android:layout_marginTop="7dp"
                 android:ellipsize="end"
+                android:textColor="@color/purple"
                 android:padding="4dp"
                 android:singleLine="true"
                 android:text="@{items.userName}"
@@ -122,7 +123,7 @@
                 android:drawableLeft="@drawable/ic_date"
                 android:drawablePadding="4dp"
                 android:padding="4dp"
-                android:textColor="@color/black"
+                android:textColor="@color/purple"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -146,13 +147,11 @@
                 android:id="@+id/txtServiceType"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:text="@{items.accountType}"
+                android:textColor="@color/purple"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/imgUserPhoto"
+                app:layout_constraintStart_toStartOf="@+id/txtName"
                 app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
             <TextView
@@ -170,6 +169,7 @@
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/progressBar"
+                android:gravity="center_horizontal"
                 app:layout_constraintTop_toTopOf="@+id/imgItemPhoto" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

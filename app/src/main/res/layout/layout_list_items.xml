@@ -13,7 +13,7 @@
         android:id="@+id/mMaterialCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/purple"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/eightDp"
         app:cardUseCompatPadding="true">
 
@@ -50,12 +50,13 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="16dp"
                 android:ellipsize="end"
+                android:gravity="center_horizontal"
                 android:maxLength="20"
                 android:maxLines="1"
                 android:text="@{serviceType.name}"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/white"
+                android:textColor="@color/purple"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

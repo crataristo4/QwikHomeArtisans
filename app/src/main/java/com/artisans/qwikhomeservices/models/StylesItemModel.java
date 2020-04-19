@@ -20,10 +20,16 @@ public class StylesItemModel extends BaseObservable {
     public StylesItemModel() {
     }
 
-    public StylesItemModel(int price, String styleItem, String itemImage) {
+    public StylesItemModel(int price, String styleItem, String itemImage, String userImage, String userName,
+                           Object timestamp, String accountType) {
         this.price = price;
         this.styleItem = styleItem;
         this.itemImage = itemImage;
+        this.userPhoto = userImage;
+        this.userName = userName;
+        this.accountType = accountType;
+        this.timeStamp = timestamp;
+
     }
 
     public StylesItemModel(int price, String styleItem, String itemImage, double rating) {
@@ -33,7 +39,8 @@ public class StylesItemModel extends BaseObservable {
         this.rating = rating;
     }
 
-    public StylesItemModel(int price, String styleItem, String itemImage, String userPhoto, String userName, String timeStamp) {
+    public StylesItemModel(int price, String styleItem, String itemImage,
+                           String userPhoto, String userName, Object timeStamp) {
         this.price = price;
         this.styleItem = styleItem;
         this.itemImage = itemImage;
@@ -42,17 +49,6 @@ public class StylesItemModel extends BaseObservable {
         this.timeStamp = timeStamp;
     }
 
-
-
-    public StylesItemModel(int price, String styleItem, String itemImage, String userPhoto, String userName, Object timeStamp, String accountType) {
-        this.price = price;
-        this.styleItem = styleItem;
-        this.itemImage = itemImage;
-        this.userPhoto = userPhoto;
-        this.userName = userName;
-        this.timeStamp = timeStamp;
-        this.accountType = accountType;
-    }
 
     @Bindable
     public String getAccountType() {
@@ -117,15 +113,12 @@ public class StylesItemModel extends BaseObservable {
         this.userName = userName;
     }
 
-    @Bindable
     @Exclude
-    public Object getTimeStamp() {
-        return timeStamp;
+    public long getTimeStamp() {
+        return (long) timeStamp;
     }
 
     public void setTimeStamp(Object timeStamp) {
         this.timeStamp = timeStamp;
     }
-
-
 }
