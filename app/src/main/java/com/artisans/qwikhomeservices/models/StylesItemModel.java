@@ -3,6 +3,8 @@ package com.artisans.qwikhomeservices.models;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
+import com.google.firebase.database.Exclude;
+
 public class StylesItemModel extends BaseObservable {
 
     public int price;
@@ -11,7 +13,7 @@ public class StylesItemModel extends BaseObservable {
     public double rating;
     public String userPhoto;
     public String userName;
-    public String timeStamp;
+    public Object timeStamp;
     public String accountType;
 
 
@@ -40,7 +42,9 @@ public class StylesItemModel extends BaseObservable {
         this.timeStamp = timeStamp;
     }
 
-    public StylesItemModel(int price, String styleItem, String itemImage, String userPhoto, String userName, String timeStamp, String accountType) {
+
+
+    public StylesItemModel(int price, String styleItem, String itemImage, String userPhoto, String userName, Object timeStamp, String accountType) {
         this.price = price;
         this.styleItem = styleItem;
         this.itemImage = itemImage;
@@ -114,11 +118,14 @@ public class StylesItemModel extends BaseObservable {
     }
 
     @Bindable
-    public String getTimeStamp() {
+    @Exclude
+    public Object getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(String timeStamp) {
+    public void setTimeStamp(Object timeStamp) {
         this.timeStamp = timeStamp;
     }
+
+
 }

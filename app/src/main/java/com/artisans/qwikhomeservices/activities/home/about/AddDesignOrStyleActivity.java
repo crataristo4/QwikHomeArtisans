@@ -12,11 +12,12 @@ import android.view.animation.AnimationUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.databinding.DataBindingUtil;
 
 import com.artisans.qwikhomeservices.R;
 import com.artisans.qwikhomeservices.activities.home.MainActivity;
-import com.artisans.qwikhomeservices.databinding.ActivityJobTypesBinding;
+import com.artisans.qwikhomeservices.databinding.ActivityDesignStyleBinding;
 import com.artisans.qwikhomeservices.models.StylesItemModel;
 import com.artisans.qwikhomeservices.utils.DisplayViewUI;
 import com.artisans.qwikhomeservices.utils.GetDateTime;
@@ -24,10 +25,9 @@ import com.artisans.qwikhomeservices.utils.MyConstants;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -45,18 +45,20 @@ import java.util.Objects;
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.zelory.compressor.Compressor;
 
-public class JobTypesActivity extends AppCompatActivity {
+public class AddDesignOrStyleActivity extends AppCompatActivity {
 
     private static final String TAG = "JobTypesActivity";
     String dateTime;
-    private ActivityJobTypesBinding activityJobTypesBinding;
-    private CircleImageView styleItemPhoto;
+    private ActivityDesignStyleBinding activityJobTypesBinding;
+    private AppCompatImageView styleItemPhoto;
     private TextInputLayout txtStyleName, txtPrice;
     private StorageReference mStorageReference;
     private Uri uri;
     private DatabaseReference serviceTypeDbRef, activityDbRef;
     private String price;
     private String uid, style, getImageUploadUri, accountType, userImage, userName;
+    private static int INTERVAL = 2000;
+    private long mBackPressed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +66,7 @@ public class JobTypesActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             Objects.requireNonNull(txtStyleName.getEditText()).setText(savedInstanceState.getString(MyConstants.STYLE));
             Objects.requireNonNull(txtPrice.getEditText()).setText(savedInstanceState.getString(MyConstants.PRICE));
-            Glide.with(JobTypesActivity.this)
+            Glide.with(AddDesignOrStyleActivity.this)
                     .load((Uri) savedInstanceState.getParcelable(MyConstants.IMAGE_URL))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(styleItemPhoto);
@@ -73,8 +75,7 @@ public class JobTypesActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-
-        activityJobTypesBinding = DataBindingUtil.setContentView(this, R.layout.activity_job_types);
+        activityJobTypesBinding = DataBindingUtil.setContentView(this, R.layout.activity_design_style);
         mStorageReference = FirebaseStorage.getInstance().getReference("photos");
         serviceTypeDbRef = FirebaseDatabase.getInstance()
                 .getReference("Styles");
@@ -95,14 +96,7 @@ public class JobTypesActivity extends AppCompatActivity {
         txtStyleName = activityJobTypesBinding.txtInputLayoutStyle;
         styleItemPhoto = activityJobTypesBinding.imgStylePhoto;
 
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser mFirebaseUser = mAuth.getCurrentUser();
-        if (mFirebaseUser == null) {
-            return;
-        }
-        uid = mFirebaseUser.getUid();
-
-        activityJobTypesBinding.fabAddIcon.setOnClickListener(v -> openGallery());
+        uid = MainActivity.uid;
 
         activityJobTypesBinding.imgStylePhoto.setOnClickListener(v -> openGallery());
 
@@ -115,7 +109,7 @@ public class JobTypesActivity extends AppCompatActivity {
         CropImage.activity()
                 .setGuidelines(CropImageView.Guidelines.ON)
                 .setAspectRatio(16, 16)
-                .start(JobTypesActivity.this);
+                .start(AddDesignOrStyleActivity.this);
     }
 
     private void validateInputs(View v) {
@@ -128,7 +122,6 @@ public class JobTypesActivity extends AppCompatActivity {
         } else {
             txtStyleName.setErrorEnabled(false);
         }
-//TODO : price input validation is missing, crashes system
         if (price.trim().isEmpty()) {
             txtPrice.setErrorEnabled(true);
             txtPrice.setError("invalid price");
@@ -141,6 +134,13 @@ public class JobTypesActivity extends AppCompatActivity {
 
         }
 
+        if(Integer.parseInt(price) > 10000){
+
+            txtPrice.setErrorEnabled(true);
+            txtPrice.setError("price too expensive");
+        } else {
+            txtPrice.setErrorEnabled(false);
+        }
         if (!style.trim().isEmpty() && uri != null
                 && Integer.parseInt(price) <= 10000 &&
                 !price.trim().isEmpty()) {
@@ -176,7 +176,7 @@ public class JobTypesActivity extends AppCompatActivity {
             fileReference.putFile(uri).continueWithTask(task -> {
                 if (!task.isSuccessful()) {
                     progressDialog.dismiss();
-                    DisplayViewUI.displayToast(JobTypesActivity.this, task.getException().getMessage());
+                    DisplayViewUI.displayToast(AddDesignOrStyleActivity.this, Objects.requireNonNull(task.getException()).getMessage());
 
                 }
                 return fileReference.getDownloadUrl();
@@ -205,7 +205,7 @@ public class JobTypesActivity extends AppCompatActivity {
                             getImageUploadUri,
                             userImage,
                             userName,
-                            dateTime,
+                            ServerValue.TIMESTAMP,
                             accountType);
                     String randomUID = serviceTypeDbRef.push().getKey();
 
@@ -219,8 +219,8 @@ public class JobTypesActivity extends AppCompatActivity {
                             progressDialog.dismiss();
                             DisplayViewUI.displayToast(this, "Successful");
 
-                            startActivity(new Intent(JobTypesActivity.this, MainActivity.class)
-                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+                            startActivity(new Intent(AddDesignOrStyleActivity.this, MainActivity.class)
+                                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                             finish();
 
 
@@ -252,7 +252,7 @@ public class JobTypesActivity extends AppCompatActivity {
                 assert result != null;
                 uri = result.getUri();
 
-                Glide.with(JobTypesActivity.this)
+                Glide.with(AddDesignOrStyleActivity.this)
                         .load(uri)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(styleItemPhoto);
@@ -271,7 +271,15 @@ public class JobTypesActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if (mBackPressed + INTERVAL > System.currentTimeMillis()){
+            DisplayViewUI.displayToast(this,"Press back again to exit");
+            return;
+        }else {
+            super.onBackPressed();
+
+        }
+
+        mBackPressed = System.currentTimeMillis();
     }
 
 
@@ -288,7 +296,7 @@ public class JobTypesActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
         Objects.requireNonNull(txtStyleName.getEditText()).setText(savedInstanceState.getString(MyConstants.STYLE));
         Objects.requireNonNull(txtPrice.getEditText()).setText(savedInstanceState.getString(MyConstants.PRICE));
-        Glide.with(JobTypesActivity.this)
+        Glide.with(AddDesignOrStyleActivity.this)
                 .load((Uri) savedInstanceState.getParcelable(MyConstants.IMAGE_URL))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(styleItemPhoto);
@@ -298,16 +306,14 @@ public class JobTypesActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         //get user details
         accountType = MainActivity.serviceType;
         userName = MainActivity.fullName;
         userImage = MainActivity.imageUrl;
 
-        Log.i(TAG, "onStart: " + userImage + userName);
-
-
     }
+
+
 
 
 }

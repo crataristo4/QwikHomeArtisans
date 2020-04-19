@@ -205,7 +205,7 @@ public class AboutActivity extends AppCompatActivity {
                             progressDialog.dismiss();
                             DisplayViewUI.displayToast(this, "Successfully updated");
 
-                            Intent addItemIntent = new Intent(AboutActivity.this, JobTypesActivity.class);
+                            Intent addItemIntent = new Intent(AboutActivity.this, AddDesignOrStyleActivity.class);
                             addItemIntent.putExtra(MyConstants.ACCOUNT_TYPE, accountType);
                             addItemIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(addItemIntent);
@@ -243,7 +243,7 @@ public class AboutActivity extends AppCompatActivity {
                 loading.dismiss();
                 DisplayViewUI.displayToast(AboutActivity.this, "Successfully updated");
 
-                startActivity(new Intent(AboutActivity.this, JobTypesActivity.class)
+                startActivity(new Intent(AboutActivity.this, AddDesignOrStyleActivity.class)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
 

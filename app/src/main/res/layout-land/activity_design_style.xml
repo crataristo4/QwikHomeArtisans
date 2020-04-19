@@ -10,7 +10,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context="com.artisans.qwikhomeservices.activities.home.about.JobTypesActivity">
+            tools:context="com.artisans.qwikhomeservices.activities.home.about.AddDesignOrStyleActivity">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar7"

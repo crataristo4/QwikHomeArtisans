@@ -33,7 +33,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.artisans.qwikhomeservices.R;
-import com.artisans.qwikhomeservices.activities.home.about.JobTypesActivity;
+import com.artisans.qwikhomeservices.activities.home.about.AddDesignOrStyleActivity;
 import com.artisans.qwikhomeservices.activities.home.about.SettingsActivity;
 import com.artisans.qwikhomeservices.activities.home.bottomsheets.WelcomeNoticeBottomSheet;
 import com.artisans.qwikhomeservices.activities.home.serviceTypes.TestAcceptOrRejectActivity;
@@ -367,7 +367,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_addStyles:
-                Intent intent = new Intent(MainActivity.this, JobTypesActivity.class);
+                Intent intent = new Intent(MainActivity.this, AddDesignOrStyleActivity.class);
                 intent.putExtra("name", fullName);
                 intent.putExtra("image", imageUrl);
                 intent.putExtra("serviceType", serviceType);

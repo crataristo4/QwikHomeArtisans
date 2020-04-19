@@ -60,7 +60,7 @@
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.home.about.JobTypesActivity"
+            android:name=".activities.home.about.AddDesignOrStyleActivity"
             android:alwaysRetainTaskState="true"
             android:configChanges="screenSize|orientation"
             android:exported="true"
