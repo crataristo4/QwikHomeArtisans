@@ -44,6 +44,7 @@ public class ServicePerson extends BaseObservable {
     public String dateRequested;
     public long timeStamp;
     public String joinedDate;
+    private String userId;
 
 
     public ServicePerson() {
@@ -338,5 +339,13 @@ public class ServicePerson extends BaseObservable {
 
     public void setJoinedDate(String joinedDate) {
         this.joinedDate = joinedDate;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

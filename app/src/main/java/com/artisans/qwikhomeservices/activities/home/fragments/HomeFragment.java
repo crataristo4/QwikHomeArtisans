@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -104,9 +104,24 @@ public class HomeFragment extends Fragment {
                     intent.putExtra(MyConstants.ACCOUNT_TYPE, MyConstants.BARBERS);
                     startActivity(intent);
                     break;
+                // TODO: 19-Apr-20 do same for rest of artisans
 
 
 
+            }
+        });
+
+
+        fragmentHomeBinding.searchList.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return true;
             }
         });
 

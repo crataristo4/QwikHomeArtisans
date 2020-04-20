@@ -89,7 +89,7 @@ public class AllBarbersAdapter extends FirebaseRecyclerAdapter<ServicePerson,
             gotoDetailsIntent.putExtra("name", singlePerson.getName());
             gotoDetailsIntent.putExtra("about", singlePerson.getAbout());
             gotoDetailsIntent.putExtra("image", singlePerson.getImage());
-            gotoDetailsIntent.putExtra("userId", singlePerson.getServicePersonId());
+            gotoDetailsIntent.putExtra("userId", singlePerson.getUserId());
 
             allBarbersViewHolder.listItemsServicesBinding.getRoot().getContext().startActivity(gotoDetailsIntent);
 
