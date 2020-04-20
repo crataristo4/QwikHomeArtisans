@@ -27,7 +27,6 @@ import java.util.Objects;
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding fragmentHomeBinding;
     private Intent intent;
-    private ListView listView;
     private ArrayAdapter<String> adapter;
 
     public HomeFragment() {
@@ -52,34 +51,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-        /*fragmentHomeBinding.mMaterialCard1.setOnClickListener(v -> {
-
-            intent = new Intent(getContext(), AllServicesActivity.class);
-            intent.putExtra(MyConstants.ACCOUNT_TYPE, MyConstants.WOMEN_HAIR_STYLIST);
-            startActivity(intent);
-
-
-        });
-
-        fragmentHomeBinding.mMaterialCard2.setOnClickListener(v -> {
-
-            intent = new Intent(getContext(), AllServicesActivity.class);
-            intent.putExtra(MyConstants.ACCOUNT_TYPE, MyConstants.INTERIOR_DERCORATOR);
-            startActivity(intent);
-
-        });
-
-        fragmentHomeBinding.mMaterialCard3.setOnClickListener(v -> {
-
-            intent = new Intent(getContext(), AllServicesActivity.class);
-            intent.putExtra(MyConstants.ACCOUNT_TYPE, MyConstants.BARBERS);
-            startActivity(intent);
-
-
-        });
-*/
-        listView = fragmentHomeBinding.servicesListView;
+        ListView listView = fragmentHomeBinding.servicesListView;
         //string list from xml
         List<String> serviceList = Arrays.asList(getResources().getStringArray(R.array.services));
 
