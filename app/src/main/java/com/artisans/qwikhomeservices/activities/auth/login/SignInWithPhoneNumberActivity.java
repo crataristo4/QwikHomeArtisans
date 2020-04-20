@@ -28,7 +28,8 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class SignInWithPhoneNumberActivity extends AppCompatActivity {
-
+    private static int INTERVAL = 3000;
+    private long mBackPressed;
     private String mGetFirstName, mGetLatName, mGetAccountType, mGetAbout, mGetFullName;
     private ActivitySignInWithPhoneNumberBinding activitySignInWithPhoneNumberBinding;
     private String mVerificationCode;
@@ -192,7 +193,14 @@ public class SignInWithPhoneNumberActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if (mBackPressed + INTERVAL > System.currentTimeMillis()) {
+
+            finish();
+        } else {
+
+            DisplayViewUI.displayToast(this, "Press back again to exit");
+        }
+        mBackPressed = System.currentTimeMillis();
 
     }
 }
