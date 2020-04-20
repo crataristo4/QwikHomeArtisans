@@ -25,9 +25,7 @@ import com.google.firebase.database.Query;
 
 import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class AccountFragment extends Fragment {
    /* private static final String TAG = "AccountFragment";
     String uid, accountType, name, about, imageUrl;

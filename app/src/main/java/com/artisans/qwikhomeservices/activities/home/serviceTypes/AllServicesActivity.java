@@ -76,18 +76,22 @@ public class AllServicesActivity extends AppCompatActivity {
         }
 
 
-        DatabaseReference allBarbersDbRef = FirebaseDatabase.getInstance()
+        DatabaseReference allServicesDbRef = FirebaseDatabase.getInstance()
                 .getReference()
                 .child(MyConstants.SERVICES)
                 .child(serviceType);
-        allBarbersDbRef.keepSynced(true);
+        allServicesDbRef.keepSynced(true);
+
+        // TODO: 19-Apr-20  change if crush
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference()
+                .child("Services").child("ServiceType");
 
         recyclerView = allServicesBinding.rvAllBarbers;
         gridLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
         //querying the database BY NAME
-        Query query = allBarbersDbRef.orderByChild("name");
+        Query query = db.orderByChild("accountType").equalTo(serviceType);
 
         FirebaseRecyclerOptions<ServicePerson> options =
                 new FirebaseRecyclerOptions.Builder<ServicePerson>().setQuery(query,

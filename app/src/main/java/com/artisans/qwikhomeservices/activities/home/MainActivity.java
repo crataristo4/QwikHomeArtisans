@@ -358,14 +358,6 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
 
-            case R.id.action_logout:
-                mAuth.signOut();
-                startActivity(new Intent(MainActivity.this, SplashScreenActivity.class)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
-                finish();
-
-                break;
-
             case R.id.action_addStyles:
                 Intent intent = new Intent(MainActivity.this, AddDesignOrStyleActivity.class);
                 intent.putExtra("name", fullName);

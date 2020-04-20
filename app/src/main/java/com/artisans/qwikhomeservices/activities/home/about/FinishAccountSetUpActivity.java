@@ -41,6 +41,7 @@ public class FinishAccountSetUpActivity extends AppCompatActivity {
             super.onBackPressed();
 
         }
+        // todo fix back pressed
 
     }
 }
