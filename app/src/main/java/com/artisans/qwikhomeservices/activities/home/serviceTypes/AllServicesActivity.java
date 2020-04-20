@@ -3,6 +3,7 @@ package com.artisans.qwikhomeservices.activities.home.serviceTypes;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Parcelable;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -21,12 +22,14 @@ import com.google.firebase.database.Query;
 
 import java.util.Objects;
 
-//TODO change class name
 public class AllServicesActivity extends AppCompatActivity {
     private ActivityAllServicesBinding allServicesBinding;
     private AllBarbersAdapter adapter;
     private RecyclerView recyclerView;
     private String serviceType;
+    private GridLayoutManager gridLayoutManager;
+    private Parcelable mParcelable;
+    private Bundle mBundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +78,8 @@ public class AllServicesActivity extends AppCompatActivity {
         allBarbersDbRef.keepSynced(true);
 
         recyclerView = allServicesBinding.rvAllBarbers;
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        gridLayoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(gridLayoutManager);
 
         //querying the database BY NAME
         Query query = allBarbersDbRef.orderByChild("name");
@@ -116,4 +120,6 @@ public class AllServicesActivity extends AppCompatActivity {
         super.onStop();
         adapter.stopListening();
     }
+
+    // TODO: 19-Apr-20 save item state 
 }
