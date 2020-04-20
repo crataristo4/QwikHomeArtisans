@@ -19,7 +19,7 @@ public class ItemViewClickEvents {
         this.context = context;
     }
 
-    //simple click
+
     public void startRegistrationActivity(View view) {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
