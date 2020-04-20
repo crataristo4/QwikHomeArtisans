@@ -28,11 +28,10 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".activities.home.about.FinishAccountSetUpActivity"
-            android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.auth.login.SignInWithPhoneNumberActivity"
-            android:noHistory="true"
+
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.home.serviceTypes.TestAcceptOrRejectActivity" />
         <activity android:name=".activities.home.serviceTypes.TestPaginatioinActivity" />
@@ -140,6 +139,7 @@
         <activity android:name=".EditProfile" />
         <activity android:name=".Forgotpassword" />
         <activity
+            android:noHistory="true"
             android:name=".activities.welcome.WelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
