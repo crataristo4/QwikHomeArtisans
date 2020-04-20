@@ -66,7 +66,6 @@
                     app:boxCornerRadiusTopEnd="@dimen/twentyFourDp"
                     app:boxCornerRadiusTopStart="@dimen/twentyFourDp"
                     app:boxStrokeColor="@color/purple"
-                    app:counterMaxLength="10"
                     app:helperText="phone number might be required during payment"
                     app:helperTextTextColor="@color/purple"
                     app:layout_constraintEnd_toEndOf="@+id/ccp"
@@ -78,8 +77,8 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:hint="@string/phoneNumber"
-                        android:inputType="number"
-                        android:maxLength="10"
+                        android:inputType="phone"
+                        android:maxLength="11"
                         android:selectAllOnFocus="true"
                         android:singleLine="true" />
 

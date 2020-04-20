@@ -177,17 +177,6 @@ public class AboutFragment extends Fragment {
                     @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:MM a");
                     String dateJoined = dateFormat.format(Calendar.getInstance().getTime());
 
-                   /* Map<String, Object> updateProfile = new HashMap<>();
-                    updateProfile.put("image", getImageUri);
-                    updateProfile.put("about", about);
-                    updateProfile.put("firstName", mGetFirstName);
-                    updateProfile.put("lastName", mGetLatName);
-                    updateProfile.put("fullName", mGetFullName);
-                    updateProfile.put("accountType", mGetAccountType);
-                    updateProfile.put("mobileNumber",mobileNumber);
-                    updateProfile.put("servicePersonId",uid);*/
-
-
                     ServicePerson servicePerson = new ServicePerson(uid,
                             mGetFirstName,
                             mGetLatName,

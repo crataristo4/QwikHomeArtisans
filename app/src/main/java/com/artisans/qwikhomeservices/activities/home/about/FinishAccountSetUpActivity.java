@@ -9,13 +9,13 @@ import androidx.fragment.app.FragmentManager;
 
 import com.artisans.qwikhomeservices.R;
 import com.artisans.qwikhomeservices.activities.auth.signup.NameFragment;
+import com.artisans.qwikhomeservices.utils.DisplayViewUI;
 
 import java.util.Objects;
 
 
 public class FinishAccountSetUpActivity extends AppCompatActivity {
 
-    private static int INTERVAL = 2000;
     private long mBackPressed;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -35,10 +35,11 @@ public class FinishAccountSetUpActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStack();
+        int INTERVAL = 3000;
+        if (mBackPressed + INTERVAL > System.currentTimeMillis()) {
+
         } else {
-            super.onBackPressed();
+            DisplayViewUI.displayToast(this, "Please complete account set up");
 
         }
         // todo fix back pressed

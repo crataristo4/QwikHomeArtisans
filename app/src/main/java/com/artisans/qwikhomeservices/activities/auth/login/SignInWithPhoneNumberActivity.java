@@ -38,10 +38,6 @@ public class SignInWithPhoneNumberActivity extends AppCompatActivity {
     private ProgressBar loading;
     private TextInputLayout txtPhoneNumber, txtVerifyCode;
     private int RESOLVE_HINT = 2;
-    private String getPhone;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseUser user;
-    private String uid;
     private final PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
         public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
@@ -56,8 +52,11 @@ public class SignInWithPhoneNumberActivity extends AppCompatActivity {
             String code = phoneAuthCredential.getSmsCode();
             if (code != null) {
                 Objects.requireNonNull(txtVerifyCode.getEditText()).setText(code);
+                activitySignInWithPhoneNumberBinding.btnVerify.setText(R.string.plsWait);
 
                 verifyCode(code);
+            } else {
+                activitySignInWithPhoneNumberBinding.btnVerify.setText(R.string.verify);
             }
 
 
@@ -69,6 +68,10 @@ public class SignInWithPhoneNumberActivity extends AppCompatActivity {
             activitySignInWithPhoneNumberBinding.txtResendCode.setVisibility(View.VISIBLE);
         }
     };
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser user;
+    private String uid;
+    private String getPhone, getPhoneNumber;
     private TextView txtResend;
     private String number;
 
@@ -86,10 +89,9 @@ public class SignInWithPhoneNumberActivity extends AppCompatActivity {
         countryCodePicker.registerCarrierNumberEditText(txtPhoneNumber.getEditText());
         countryCodePicker.setNumberAutoFormattingEnabled(true);
 
-
         activitySignInWithPhoneNumberBinding.btnRegisterPhoneNumber.setOnClickListener(v -> {
 
-            String getPhoneNumber = Objects.requireNonNull(txtPhoneNumber.getEditText()).getText().toString();
+            getPhoneNumber = Objects.requireNonNull(txtPhoneNumber.getEditText()).getText().toString();
             if (!getPhoneNumber.trim().isEmpty()) {
 
                 if (DisplayViewUI.isNetworkConnected(SignInWithPhoneNumberActivity.this)) {

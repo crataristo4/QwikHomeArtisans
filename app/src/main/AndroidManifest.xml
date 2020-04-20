@@ -131,6 +131,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
+            android:noHistory="true"
             android:name=".activities.welcome.SplashScreenActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

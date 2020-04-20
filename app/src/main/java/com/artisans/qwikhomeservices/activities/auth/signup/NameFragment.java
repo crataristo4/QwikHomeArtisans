@@ -110,7 +110,7 @@ public class NameFragment extends Fragment {
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right,
                     R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right)
                     .replace(R.id.containerFragment, aboutFragment)
-                    .addToBackStack("nameFragment")
+                    .addToBackStack("aboutFragment")
                     .commit();
         }
     }
