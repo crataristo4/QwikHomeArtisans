@@ -50,7 +50,7 @@
             android:label="@string/title_activity_settings"
             android:parentActivityName=".activities.home.MainActivity" />
         <activity
-            android:name=".activities.home.serviceTypes.AllBarbersActivity"
+            android:name=".activities.home.serviceTypes.AllServicesActivity"
             android:parentActivityName=".activities.home.MainActivity" />
         <activity
             android:name=".activities.auth.signup.SignUpServicePersonelActivity"

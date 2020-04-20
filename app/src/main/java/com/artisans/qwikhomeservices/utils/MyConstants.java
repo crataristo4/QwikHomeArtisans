@@ -6,6 +6,16 @@ public final class MyConstants {
     public static final String PROFILE_FRAGMENT_TAG = "profileFrag";
     public static final String SERVICES = "Services";
     public static final String BARBERS = "Barbers";
+    public static final String CARPENTERS = "Carpenters";
+    public static final String MECHANICS = "Mechanics";
+    public static final String PLUMBERS = "Plumbers";
+    public static final String PEST_CONTROLS = "PestControls";
+    public static final String TV_INSTALLERS = "TvInstallers";
+    public static final String ROLLERS = "Rollers";
+    public static final String TILERS = "Tilers";
+    public static final String GARDENERS = "Gardeners";
+    public static final String PAINTERS = "Painters";
+    public static final String WELDERS = "Welders";
     public static final String WOMEN_HAIR_STYLIST = "Women Hairstylists";
     public static final String INTERIOR_DERCORATOR = "Interior Decorators";
     public static final String PHONE_NUMBER = "phoneNumber";

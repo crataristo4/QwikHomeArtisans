@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.artisans.qwikhomeservices.R;
 import com.artisans.qwikhomeservices.adapters.AllBarbersAdapter;
-import com.artisans.qwikhomeservices.databinding.ActivityAllBarbersBinding;
+import com.artisans.qwikhomeservices.databinding.ActivityAllServicesBinding;
 import com.artisans.qwikhomeservices.models.ServicePerson;
 import com.artisans.qwikhomeservices.utils.MyConstants;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -22,8 +22,8 @@ import com.google.firebase.database.Query;
 import java.util.Objects;
 
 //TODO change class name
-public class AllBarbersActivity extends AppCompatActivity {
-    private ActivityAllBarbersBinding activityAllBarbersBinding;
+public class AllServicesActivity extends AppCompatActivity {
+    private ActivityAllServicesBinding allServicesBinding;
     private AllBarbersAdapter adapter;
     private RecyclerView recyclerView;
     private String serviceType;
@@ -31,7 +31,7 @@ public class AllBarbersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityAllBarbersBinding = DataBindingUtil.setContentView(this, R.layout.activity_all_barbers);
+        allServicesBinding = DataBindingUtil.setContentView(this, R.layout.activity_all_services);
 
         initRecyclerView();
 
@@ -74,7 +74,7 @@ public class AllBarbersActivity extends AppCompatActivity {
                 .child(serviceType);
         allBarbersDbRef.keepSynced(true);
 
-        recyclerView = activityAllBarbersBinding.rvAllBarbers;
+        recyclerView = allServicesBinding.rvAllBarbers;
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
         //querying the database BY NAME
@@ -97,7 +97,7 @@ public class AllBarbersActivity extends AppCompatActivity {
 
         }
 
-        adapter = new AllBarbersAdapter(options, AllBarbersActivity.this);
+        adapter = new AllBarbersAdapter(options, AllServicesActivity.this);
 
         recyclerView.setAdapter(adapter);
 

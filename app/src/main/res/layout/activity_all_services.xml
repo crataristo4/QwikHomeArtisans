@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.artisans.qwikhomeservices.activities.home.serviceTypes.AllBarbersActivity">
+        tools:context="com.artisans.qwikhomeservices.activities.home.serviceTypes.AllServicesActivity">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefresh"

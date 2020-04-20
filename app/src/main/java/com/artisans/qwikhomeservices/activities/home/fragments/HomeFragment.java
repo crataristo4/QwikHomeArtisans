@@ -16,7 +16,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.artisans.qwikhomeservices.R;
-import com.artisans.qwikhomeservices.activities.home.serviceTypes.AllBarbersActivity;
+import com.artisans.qwikhomeservices.activities.home.serviceTypes.AllServicesActivity;
 import com.artisans.qwikhomeservices.databinding.FragmentHomeBinding;
 import com.artisans.qwikhomeservices.utils.MyConstants;
 
@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
 
         /*fragmentHomeBinding.mMaterialCard1.setOnClickListener(v -> {
 
-            intent = new Intent(getContext(), AllBarbersActivity.class);
+            intent = new Intent(getContext(), AllServicesActivity.class);
             intent.putExtra(MyConstants.ACCOUNT_TYPE, MyConstants.WOMEN_HAIR_STYLIST);
             startActivity(intent);
 
@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
 
         fragmentHomeBinding.mMaterialCard2.setOnClickListener(v -> {
 
-            intent = new Intent(getContext(), AllBarbersActivity.class);
+            intent = new Intent(getContext(), AllServicesActivity.class);
             intent.putExtra(MyConstants.ACCOUNT_TYPE, MyConstants.INTERIOR_DERCORATOR);
             startActivity(intent);
 
@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
 
         fragmentHomeBinding.mMaterialCard3.setOnClickListener(v -> {
 
-            intent = new Intent(getContext(), AllBarbersActivity.class);
+            intent = new Intent(getContext(), AllServicesActivity.class);
             intent.putExtra(MyConstants.ACCOUNT_TYPE, MyConstants.BARBERS);
             startActivity(intent);
 
@@ -90,18 +90,23 @@ public class HomeFragment extends Fragment {
         listView.setOnItemClickListener((parent, view1, position, id) -> {
             switch (position){
                 case 0:
-                    intent = new Intent(getContext(), AllBarbersActivity.class);
+                    intent = new Intent(getContext(), AllServicesActivity.class);
                     intent.putExtra(MyConstants.ACCOUNT_TYPE, MyConstants.WOMEN_HAIR_STYLIST);
                     startActivity(intent);
                     break;
                 case 1:
-                    intent = new Intent(getContext(), AllBarbersActivity.class);
+                    intent = new Intent(getContext(), AllServicesActivity.class);
                     intent.putExtra(MyConstants.ACCOUNT_TYPE, MyConstants.INTERIOR_DERCORATOR);
                     startActivity(intent);
                     break;
                 case 2:
-                    intent = new Intent(getContext(), AllBarbersActivity.class);
+                    intent = new Intent(getContext(), AllServicesActivity.class);
                     intent.putExtra(MyConstants.ACCOUNT_TYPE, MyConstants.BARBERS);
+                    startActivity(intent);
+                    break;
+                case 3:
+                    intent = new Intent(getContext(), AllServicesActivity.class);
+                    intent.putExtra(MyConstants.ACCOUNT_TYPE, MyConstants.CARPENTERS);
                     startActivity(intent);
                     break;
                 // TODO: 19-Apr-20 do same for rest of artisans
