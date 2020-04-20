@@ -64,6 +64,11 @@ public class AllServicesActivity extends AppCompatActivity {
                     setTitle(serviceType);
 
                     break;
+                case MyConstants.CARPENTERS:
+                    serviceType = MyConstants.CARPENTERS;
+                    setTitle(serviceType);
+
+                    break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + getIntent.getStringExtra(MyConstants.ACCOUNT_TYPE));
             }
