@@ -15,9 +15,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.artisans.qwikhomeservices.R;
-import com.artisans.qwikhomeservices.adapters.AllBarbersAdapter;
+import com.artisans.qwikhomeservices.activities.home.MainActivity;
+import com.artisans.qwikhomeservices.adapters.StylesAdapter;
 import com.artisans.qwikhomeservices.databinding.FragmentAccountBinding;
-import com.artisans.qwikhomeservices.models.ServicePerson;
+import com.artisans.qwikhomeservices.models.StylesItemModel;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,18 +28,10 @@ import java.util.Objects;
 
 
 public class AccountFragment extends Fragment {
-   /* private static final String TAG = "AccountFragment";
-    String uid, accountType, name, about, imageUrl;
-    private FirebaseAuth mAuth;
-    private DatabaseReference serviceAccountDbRef, serviceTypeDbRef;
-    private FragmentAccountBinding accountBinding;
-    private TextView txtName, txtServiceType, txtAbout;
-    private CircleImageView mPhoto;*/
-
     private FragmentAccountBinding accountBinding;
     private DatabaseReference databaseReference;
-    //private StylesAdapter adapter;
-    private AllBarbersAdapter adapter;
+    private StylesAdapter adapter;
+    //private AllBarbersAdapter adapter;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -49,17 +42,6 @@ public class AccountFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         accountBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_account, container, false);
-
-        /*if (savedInstanceState != null) {
-            accountBinding.txtAboutPerson.setText(savedInstanceState.getString(MyConstants.ABOUT));
-            accountBinding.txtName.setText(savedInstanceState.getString(MyConstants.NAME));
-            accountBinding.txtAccountType.setText(savedInstanceState.getString(MyConstants.ACCOUNT_TYPE));
-
-            Glide.with(getActivity())
-                    .load(savedInstanceState.getString(MyConstants.IMAGE_URL))
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(accountBinding.imgProfilePhoto);
-        }*/
         return accountBinding.getRoot();
     }
 
@@ -71,31 +53,20 @@ public class AccountFragment extends Fragment {
 
         RecyclerView rv = accountBinding.rvbb;
         rv.setHasFixedSize(true);
-        // databaseReference = FirebaseDatabase.getInstance().getReference().child("Styles");
-        // TODO: 18-Apr-20 change dbref
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Styles").child(MainActivity.uid);
+        /*// TODO: 18-Apr-20 change dbref
         databaseReference = FirebaseDatabase.getInstance().getReference()
-                .child("Services").child("ServiceType");
+                .child("Services").child("ServiceType");*/
 
         databaseReference.keepSynced(true);
 
-        //querying the database BY NAME
-        Query query = databaseReference.orderByChild("accountType").equalTo("Barbers");
-
-  /*      PagedList.Config config = new PagedList.Config.Builder()
-                .setEnablePlaceholders(false)
-                .setPrefetchDistance(10)
-                .setPageSize(3)
-                .build();
-
-        DatabasePagingOptions<StylesItemModel> databasePagingOptions = new DatabasePagingOptions.Builder<StylesItemModel>()
-                .setLifecycleOwner(this)
-                .setQuery(query, config, StylesItemModel.class)
-                .build();
+        /*//querying the database BY NAME
+       // Query query = databaseReference.orderByChild("accountType").equalTo("Barbers");
 */
-
-        FirebaseRecyclerOptions<ServicePerson> options =
-                new FirebaseRecyclerOptions.Builder<ServicePerson>().setQuery(query,
-                        ServicePerson.class)
+        Query query = databaseReference.orderByChild("price");
+        FirebaseRecyclerOptions<StylesItemModel> options =
+                new FirebaseRecyclerOptions.Builder<StylesItemModel>().setQuery(query,
+                        StylesItemModel.class)
                         .build();
 
         if (Objects.requireNonNull(getActivity()).getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -107,20 +78,12 @@ public class AccountFragment extends Fragment {
         }
 
 
-        adapter = new AllBarbersAdapter(options, getContext());
+        adapter = new StylesAdapter(options);
         rv.setAdapter(adapter);
 
 
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-       /* outState.putString(MyConstants.ACCOUNT_TYPE, MainActivity.serviceType);
-        outState.putString(MyConstants.NAME, MainActivity.name);
-        outState.putString(MyConstants.ABOUT, MainActivity.about);
-        outState.putString(MyConstants.IMAGE_URL, MainActivity.imageUrl);*/
-    }
 
     @Override
     public void onStart() {
