@@ -16,7 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.artisans.qwikhomeservices.R;
 import com.artisans.qwikhomeservices.activities.home.MainActivity;
-import com.artisans.qwikhomeservices.adapters.RequestAdapter;
+import com.artisans.qwikhomeservices.adapters.RequestReceivedAdapter;
 import com.artisans.qwikhomeservices.databinding.FragmentRequestBinding;
 import com.artisans.qwikhomeservices.models.RequestModel;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -24,10 +24,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import java.util.Objects;
+
 
 public class RequestFragment extends Fragment {
     private FragmentRequestBinding fragmentRequestBinding;
-    private RequestAdapter requestAdapter;
+    private RequestReceivedAdapter requestAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private DatabaseReference requestDbRef;
     private RecyclerView recyclerView;
@@ -53,20 +55,17 @@ public class RequestFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        requestDbRef = FirebaseDatabase.getInstance().getReference("Requests");
+        requestDbRef.keepSynced(true);
         intViews();
     }
 
     private void intViews() {
         recyclerView = fragmentRequestBinding.rvRequests;
-        swipeRefreshLayout = fragmentRequestBinding.swipeRefresh;
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        requestDbRef = FirebaseDatabase.getInstance().getReference("Requests");
-        requestDbRef.keepSynced(true);
-
+        swipeRefreshLayout = fragmentRequestBinding.swipeRefresh;
         swipeRefreshLayout.setColorSchemeResources(R.color.amber, R.color.fb,
                 R.color.colorAccent, R.color.colorAsh, R.color.colorOrange);
 
@@ -86,15 +85,13 @@ public class RequestFragment extends Fragment {
 
     private void loadData() {
 
-        String uid = MainActivity.uid;
-
-        Query query = requestDbRef.orderByChild("senderId").equalTo(uid);
-
+        String uid = MainActivity.servicePersonId;
+        Query query = requestDbRef.orderByChild("receiverId").equalTo(uid);
 
         FirebaseRecyclerOptions<RequestModel> options = new FirebaseRecyclerOptions.Builder<RequestModel>().
                 setQuery(query, RequestModel.class).build();
-        requestAdapter = new RequestAdapter(options);
-        requestAdapter.notifyDataSetChanged();
+        requestAdapter = new RequestReceivedAdapter(options, Objects.requireNonNull(getActivity()).getSupportFragmentManager());
+        // requestAdapter.notifyDataSetChanged();
 
         swipeRefreshLayout.setRefreshing(true);
         new Handler().postDelayed(() -> {

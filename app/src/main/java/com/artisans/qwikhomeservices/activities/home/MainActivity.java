@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private static final String TAG = "MainActivity";
-    public static String serviceType, fullName, firstName, lastName, imageUrl, about, uid;
+    public static String serviceType, fullName, firstName, lastName, imageUrl, about, uid, servicePersonId;
     public static DatabaseReference serviceTypeDbRef, serviceAccountDbRef;
     public static FirebaseUser firebaseUser;
     public static FirebaseAuth mAuth;
@@ -123,8 +123,10 @@ public class MainActivity extends AppCompatActivity {
                 firstName = (String) dataSnapshot.child("firstName").getValue();
                 lastName = (String) dataSnapshot.child("lastName").getValue();
                 about = (String) dataSnapshot.child("about").getValue();
+                servicePersonId = (String) dataSnapshot.child("servicePersonId").getValue();
 
-                Log.i(TAG, "onDataChange: " + serviceType + " " + fullName + " " + about + " " + imageUrl);
+
+                Log.i(TAG, "onDataChange: " + serviceType + " " + fullName + " " + about + " " + imageUrl + " id::" + servicePersonId);
 
 
             }

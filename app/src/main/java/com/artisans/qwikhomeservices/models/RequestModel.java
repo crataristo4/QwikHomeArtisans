@@ -22,12 +22,9 @@ public class RequestModel extends BaseObservable {
     public String receiverId;
     public String name;
     public String reason;
-    public int price;
+    public String price;
     public String itemName;
-    public double latitude;
-    public double longitude;
     public String response;
-    public String location;
     public String mobileNumber;
     public String itemImage;
     public String distanceBetween;
@@ -44,7 +41,7 @@ public class RequestModel extends BaseObservable {
     }
 
     public RequestModel(float rating, String senderId, String receiverId,
-                        String name, String reason, int price, String itemName,
+                        String name, String reason, String price, String itemName,
                         String response, String itemImage, String senderPhoto, String senderName,
                         String servicePersonName, String servicePersonPhoto, String dateRequested) {
         this.rating = rating;
@@ -129,11 +126,11 @@ public class RequestModel extends BaseObservable {
     }
 
     @Bindable
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -146,22 +143,6 @@ public class RequestModel extends BaseObservable {
         this.itemName = itemName;
     }
 
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
     @Bindable
     public String getResponse() {
         return response;
@@ -169,14 +150,6 @@ public class RequestModel extends BaseObservable {
 
     public void setResponse(String response) {
         this.response = response;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     @Bindable
@@ -188,7 +161,7 @@ public class RequestModel extends BaseObservable {
         this.mobileNumber = mobileNumber;
     }
 
-    @Bindable
+
     public String getItemImage() {
         return itemImage;
     }
