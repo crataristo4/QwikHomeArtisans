@@ -40,6 +40,7 @@ public class AcceptOrRejectBtSheet extends BottomSheetDialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
 
 
     }
@@ -85,17 +86,17 @@ public class AcceptOrRejectBtSheet extends BottomSheetDialogFragment {
                 Glide.with(Objects.requireNonNull(getActivity())).load(getItemPhoto)
                         .into(layoutAcceptOrRejectBottomSheetBinding.imgUserPhoto);
             }
-            Glide.with(Objects.requireNonNull(getActivity())).load(getItemPhoto)
+            Glide.with(Objects.requireNonNull(getActivity())).load(getUserPhoto)
                     .into(layoutAcceptOrRejectBottomSheetBinding.imgItemImage);
 
+            requestDbref =
+                    FirebaseDatabase.getInstance().getReference().child("Requests").child(adapterPosition);
 
         }
 
         btnAccept = layoutAcceptOrRejectBottomSheetBinding.btnAccept;
         btnReject = layoutAcceptOrRejectBottomSheetBinding.btnDecline;
 
-        requestDbref =
-                FirebaseDatabase.getInstance().getReference().child("Requests").child(adapterPosition);
 
 
         retrieveRequestDetails();
@@ -151,19 +152,17 @@ public class AcceptOrRejectBtSheet extends BottomSheetDialogFragment {
     }
 
 
-    //Method to approve l
+    //Method to approve
     private void acceptRequest() {
 
 //Updating the database
         Map<String, Object> approve = new HashMap<>();
         approve.put("response", accepted);
-//node for approved leave
         final DatabaseReference Approved = requestDbref.child("Approved");
-        //leave accepted node
+
         final Map<String, Object> approvedLeave = new HashMap<>();
         approvedLeave.put("name", getUserName);
         approvedLeave.put("timeStamp", ServerValue.TIMESTAMP);
-        //random key for leave accepted
         final String Id = requestDbref.push().getKey();
 
         requestDbref.updateChildren(approve).addOnCompleteListener(task -> {
@@ -188,14 +187,11 @@ public class AcceptOrRejectBtSheet extends BottomSheetDialogFragment {
 
     //method to reject
     private void rejectRequest() {
-
-
         Map<String, Object> rejectxx = new HashMap<>();
         rejectxx.put("response", rejected);
         //node for rejected leaves
         final DatabaseReference Rejected = requestDbref.child("Request Rejected");
 
-//leave accepted node
         final Map<String, Object> reject = new HashMap<>();
         reject.put("name", getUserName);
         reject.put("timeStamp", ServerValue.TIMESTAMP);

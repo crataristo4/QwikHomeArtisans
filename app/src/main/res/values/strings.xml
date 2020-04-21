@@ -248,6 +248,7 @@
     <string name="confirm_payment">CONFIRM PAYMENT</string>
     <string name="accept">Accept request</string>
     <string name="decline">Decline request</string>
+    <string name="requestReason">Reason for request</string>
     <string name="eg_024_xxxxxxx">eg. 024 380 2230</string>
     <string name="confirmCode">Confirm code</string>
     <string name="verify">Verify</string>

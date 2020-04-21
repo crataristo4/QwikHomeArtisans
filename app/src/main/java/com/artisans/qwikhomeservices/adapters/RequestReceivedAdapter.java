@@ -37,7 +37,7 @@ public class RequestReceivedAdapter extends FirebaseRecyclerAdapter<RequestModel
         requestReceivedAdapterViewHolder.btnView.setOnClickListener(v -> {
             AcceptOrRejectBtSheet acceptOrRejectBtSheet = new AcceptOrRejectBtSheet();
             Bundle bundle = new Bundle();
-            bundle.putString("position", getAdapterPosition);
+            bundle.putString(MyConstants.ADAPTER_POSITION, getAdapterPosition);
             bundle.putString(MyConstants.FULL_NAME, requestModel.getSenderName());
             bundle.putString(MyConstants.USER_IMAGE_URL, requestModel.getSenderPhoto());
             bundle.putString(MyConstants.ITEM_NAME, requestModel.getItemName());
