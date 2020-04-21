@@ -15,6 +15,7 @@ import com.artisans.qwikhomeservices.R;
 import com.artisans.qwikhomeservices.activities.home.bottomsheets.AcceptOrRejectBtSheet;
 import com.artisans.qwikhomeservices.databinding.LayoutRequestReceivedBinding;
 import com.artisans.qwikhomeservices.models.RequestModel;
+import com.artisans.qwikhomeservices.utils.MyConstants;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
@@ -37,11 +38,12 @@ public class RequestReceivedAdapter extends FirebaseRecyclerAdapter<RequestModel
             AcceptOrRejectBtSheet acceptOrRejectBtSheet = new AcceptOrRejectBtSheet();
             Bundle bundle = new Bundle();
             bundle.putString("position", getAdapterPosition);
-            bundle.putString("senderName", requestModel.getSenderName());
-            bundle.putString("senderPhoto", requestModel.getSenderPhoto());
-            bundle.putString("itemName", requestModel.getItemName());
-            bundle.putString("itemPhoto", requestModel.getItemImage());
-            bundle.putString("itemPrice", requestModel.getPrice());
+            bundle.putString(MyConstants.FULL_NAME, requestModel.getSenderName());
+            bundle.putString(MyConstants.USER_IMAGE_URL, requestModel.getSenderPhoto());
+            bundle.putString(MyConstants.ITEM_NAME, requestModel.getItemName());
+            bundle.putString(MyConstants.ITEM_PHOTO, requestModel.getItemImage());
+            bundle.putString(MyConstants.ITEM_PRICE, requestModel.getPrice());
+            bundle.putString(MyConstants.ITEM_REASON, requestModel.getReason());
             acceptOrRejectBtSheet.setArguments(bundle);
             acceptOrRejectBtSheet.show(fragmentManager, "show");
         });

@@ -3,6 +3,10 @@ package com.artisans.qwikhomeservices.utils;
 public final class MyConstants {
     public static final String PREFS = "prefs";
     public static final String IS_DIALOG_SHOWN = "dialogShown";
+    public static final String ITEM_NAME = "itemName";
+    public static final String ITEM_PHOTO = "itemPhoto";
+    public static final String ITEM_PRICE = "itemPrice";
+    public static final String ITEM_REASON = "itemReason";
     public static final String PROFILE_FRAGMENT_TAG = "profileFrag";
     public static final String SERVICES = "Services";
     public static final String BARBERS = "Barbers";
@@ -24,6 +28,7 @@ public final class MyConstants {
     public static final int NUM_BASE64_CHAR = 11;
     public static final String FIRST_NAME = "firstName";
     public static final String FULL_NAME = "fullName";
+    public static final String ADAPTER_POSITION = "adapterPosition";
     public static final String LAST_NAME = "lastName";
     public static final String ACCOUNT_TYPE = "accountType";
     public static final String NAME = "name";

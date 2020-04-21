@@ -1,7 +1,6 @@
 package com.artisans.qwikhomeservices.activities.home.bottomsheets;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +14,7 @@ import androidx.databinding.DataBindingUtil;
 import com.artisans.qwikhomeservices.R;
 import com.artisans.qwikhomeservices.databinding.LayoutAcceptOrRejectBottomSheetBinding;
 import com.artisans.qwikhomeservices.utils.DisplayViewUI;
+import com.artisans.qwikhomeservices.utils.MyConstants;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.database.DataSnapshot;
@@ -33,7 +33,7 @@ public class AcceptOrRejectBtSheet extends BottomSheetDialogFragment {
     private LayoutAcceptOrRejectBottomSheetBinding layoutAcceptOrRejectBottomSheetBinding;
     private String notApproved, accepted, rejected;
     private DatabaseReference requestDbref;
-    private String uid, response, getName, getDate, getReason, getPhoto, adapterPosition;
+    private String uid, response, getItemPrice, getUserName, getItemName, getReason, getUserPhoto, getItemPhoto, adapterPosition;
     private Button btnAccept, btnReject;
 
     @Override
@@ -64,16 +64,30 @@ public class AcceptOrRejectBtSheet extends BottomSheetDialogFragment {
         Bundle getData = getArguments();
         if (getData != null) {
 
-            adapterPosition = getData.getString("position");
-            Log.i(TAG, adapterPosition);
-            layoutAcceptOrRejectBottomSheetBinding.name.setText(getData.getString("name"));
-            Glide.with(Objects.requireNonNull(getActivity())).load(getData.getString("image"))
-                    .into(layoutAcceptOrRejectBottomSheetBinding.image);
+            getUserName = getData.getString(MyConstants.FULL_NAME);
+            getUserPhoto = getData.getString(MyConstants.USER_IMAGE_URL);
+            getItemPhoto = getData.getString(MyConstants.ITEM_PHOTO);
+            getItemName = getData.getString(MyConstants.ITEM_NAME);
+            getItemPrice = getData.getString(MyConstants.ITEM_PRICE);
+            getReason = getData.getString(MyConstants.ITEM_REASON);
+            adapterPosition = getData.getString(MyConstants.ADAPTER_POSITION);
+
+            layoutAcceptOrRejectBottomSheetBinding.txtUserName.setText(getUserName);
+            if (getUserPhoto == null) {
+                Glide.with(Objects.requireNonNull(getActivity())).load(getActivity().getResources().getDrawable(R.drawable.photoe))
+                        .into(layoutAcceptOrRejectBottomSheetBinding.imgUserPhoto);
+            } else {
+                Glide.with(Objects.requireNonNull(getActivity())).load(getItemPhoto)
+                        .into(layoutAcceptOrRejectBottomSheetBinding.imgUserPhoto);
+            }
+            Glide.with(Objects.requireNonNull(getActivity())).load(getItemPhoto)
+                    .into(layoutAcceptOrRejectBottomSheetBinding.imgItemImage);
+
 
         }
 
         btnAccept = layoutAcceptOrRejectBottomSheetBinding.btnAccept;
-        btnReject = layoutAcceptOrRejectBottomSheetBinding.btnReject;
+        btnReject = layoutAcceptOrRejectBottomSheetBinding.btnDecline;
 
         requestDbref =
                 FirebaseDatabase.getInstance().getReference().child("Requests").child(adapterPosition);
@@ -142,7 +156,7 @@ public class AcceptOrRejectBtSheet extends BottomSheetDialogFragment {
         final DatabaseReference Approved = requestDbref.child("Approved");
         //leave accepted node
         final Map<String, Object> approvedLeave = new HashMap<>();
-        approvedLeave.put("name", getName);
+        approvedLeave.put("name", getUserName);
         approvedLeave.put("timeStamp", ServerValue.TIMESTAMP);
         //random key for leave accepted
         final String Id = requestDbref.push().getKey();
@@ -178,7 +192,7 @@ public class AcceptOrRejectBtSheet extends BottomSheetDialogFragment {
 
 //leave accepted node
         final Map<String, Object> reject = new HashMap<>();
-        reject.put("name", getName);
+        reject.put("name", getUserName);
         reject.put("timeStamp", ServerValue.TIMESTAMP);
         final String Id = requestDbref.push().getKey();
         //random key for leave accepted
