@@ -26,7 +26,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 public class TestAcceptAdatapter extends FirebaseRecyclerAdapter<RequestModel, TestAcceptAdatapter.TestAcceptAdatapterViewHolder> {
-    FragmentManager fragmentManager;
+    private FragmentManager fragmentManager;
 
     public TestAcceptAdatapter(@NonNull FirebaseRecyclerOptions<RequestModel> options, FragmentManager fragmentManager) {
         super(options);
@@ -64,7 +64,7 @@ public class TestAcceptAdatapter extends FirebaseRecyclerAdapter<RequestModel, T
     }
 
     //an inner class to hold the views to be inflated
-    public class TestAcceptAdatapterViewHolder extends RecyclerView.ViewHolder {
+    public static class TestAcceptAdatapterViewHolder extends RecyclerView.ViewHolder {
         public ConstraintLayout viewForeground;
         FrameLayout frameLayout;
         private View view;

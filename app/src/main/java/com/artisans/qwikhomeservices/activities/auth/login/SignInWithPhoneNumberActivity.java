@@ -190,7 +190,7 @@ public class SignInWithPhoneNumberActivity extends AppCompatActivity {
             loading.setVisibility(View.GONE);
             activitySignInWithPhoneNumberBinding.constrainLayoutConfrimNumber.setVisibility(View.GONE);
             activitySignInWithPhoneNumberBinding.constrainLayoutVerifyPhone.setVisibility(View.VISIBLE);
-        }, 7000);
+        }, 10000);
     }
 
     @Override

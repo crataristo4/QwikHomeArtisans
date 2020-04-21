@@ -27,31 +27,28 @@ public class TestAcceptOrRejectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_accept_or_reject);
-
         databaseReference = FirebaseDatabase.getInstance()
                 .getReference()
                 .child("Requests");
         databaseReference.keepSynced(true);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
 
         loadData();
     }
 
     private void loadData() {
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
         Query query;
         String uid = MainActivity.uid;
-
-
-        query = databaseReference.orderByChild("senderId").equalTo(uid);
+        query = databaseReference.orderByChild("receiverId").equalTo(uid);
 
         FirebaseRecyclerOptions<RequestModel> options = new FirebaseRecyclerOptions.Builder<RequestModel>().
                 setQuery(query, RequestModel.class).build();
-        customerRequestSent = new TestAcceptAdatapter(options, getSupportFragmentManager());
+        customerRequestSent = new TestAcceptAdatapter(options, this.getSupportFragmentManager());
         recyclerView.setAdapter(customerRequestSent);
 
     }
