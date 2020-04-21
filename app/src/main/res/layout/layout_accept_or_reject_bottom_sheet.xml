@@ -11,6 +11,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ProgressBar
+                android:id="@+id/pbLoading"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgUserPhoto"
                 android:layout_width="@dimen/fortyDp"
@@ -20,7 +29,7 @@
                 android:layout_marginTop="8dp"
                 android:src="@drawable/photoe"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/pbLoading" />
 
             <TextView
                 android:id="@+id/txtUserName"
@@ -70,7 +79,7 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgItemImage"
                 android:layout_width="0dp"
-                android:layout_height="300dp"
+                android:layout_height="250dp"
                 android:layout_marginTop="8dp"
                 android:contentDescription="@string/app_name"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -148,7 +157,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnAccept" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

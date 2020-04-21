@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,6 +37,7 @@ public class AcceptOrRejectBtSheet extends BottomSheetDialogFragment {
     private DatabaseReference requestDbref;
     private String uid, response, getItemPrice, getUserName, getItemName, getReason, getUserPhoto, getItemPhoto, adapterPosition;
     private Button btnAccept, btnReject;
+    private ProgressBar progressBar;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,10 +85,10 @@ public class AcceptOrRejectBtSheet extends BottomSheetDialogFragment {
                 Glide.with(Objects.requireNonNull(getActivity())).load(getActivity().getResources().getDrawable(R.drawable.photoe))
                         .into(layoutAcceptOrRejectBottomSheetBinding.imgUserPhoto);
             } else {
-                Glide.with(Objects.requireNonNull(getActivity())).load(getItemPhoto)
+                Glide.with(Objects.requireNonNull(getActivity())).load(getUserPhoto)
                         .into(layoutAcceptOrRejectBottomSheetBinding.imgUserPhoto);
             }
-            Glide.with(Objects.requireNonNull(getActivity())).load(getUserPhoto)
+            Glide.with(Objects.requireNonNull(getActivity())).load(getItemPhoto)
                     .into(layoutAcceptOrRejectBottomSheetBinding.imgItemImage);
 
             requestDbref =
@@ -96,81 +98,68 @@ public class AcceptOrRejectBtSheet extends BottomSheetDialogFragment {
 
         btnAccept = layoutAcceptOrRejectBottomSheetBinding.btnAccept;
         btnReject = layoutAcceptOrRejectBottomSheetBinding.btnDecline;
+        progressBar = layoutAcceptOrRejectBottomSheetBinding.pbLoading;
 
-
-
+        btnAccept.setOnClickListener(this::onClickAccept);
+        btnReject.setOnClickListener(this::onClickDecline);
         retrieveRequestDetails();
-        btnAccept.setOnClickListener(this::processRequest);
-        btnReject.setOnClickListener(this::processRequest);
 
 
     }
 
-    private void processRequest(View view) {
-
-        if (view.getId() == R.id.btnAccept) {
-            btnAccept.setEnabled(false);
-
-            if (notApproved.equals("not approved")) {
-
+    private void onClickAccept(View view) {
+        if (notApproved.equals("not approved")) {
                 Objects.requireNonNull(getActivity()).runOnUiThread(() -> new AlertDialog.Builder(getActivity())
                         .setTitle("Accept request")
                         .setMessage("Do you really want to accept REQUEST")
                         .setPositiveButton("Yes", (dialog, which) -> {
                             dialog.dismiss();
                             acceptRequest();
-                            // loading.show();
-
-                            // ShowLeaveListener.onAcceptPressed();
-
 
                         }).setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss()).create().show());
 
             }
-            if (view.getId() == R.id.btnReject) {
-                btnReject.setEnabled(false);
-                if (notApproved.equals("not approved")) {
-                    Objects.requireNonNull(getActivity()).runOnUiThread(() -> new AlertDialog.Builder(getActivity())
-                            .setTitle("Reject request")
-                            .setMessage("Do you really want to cancel REQUEST")
-                            .setPositiveButton("Yes", (dialog, which) -> {
-                                dialog.dismiss();
-                                rejectRequest();
-                                //loading.setVisibility(View.VISIBLE);
 
-                                //ShowLeaveListener.onRejectPressed();
+    }
 
+    private void onClickDecline(View view) {
 
-                            }).setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss()).create().show());
+        if (notApproved.equals("not approved")) {
+            Objects.requireNonNull(getActivity()).runOnUiThread(() -> new AlertDialog.Builder(getActivity())
+                    .setTitle("Reject request")
+                    .setMessage("Do you really want to DECLINE REQUEST?\nThe process can not be undone")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        dialog.dismiss();
+                        rejectRequest();
 
-                }
-
-            }
+                    }).setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss()).create().show());
 
         }
 
     }
 
 
+
     //Method to approve
     private void acceptRequest() {
-
+        progressBar.setVisibility(View.VISIBLE);
 //Updating the database
         Map<String, Object> approve = new HashMap<>();
         approve.put("response", accepted);
-        final DatabaseReference Approved = requestDbref.child("Approved");
+        final DatabaseReference approveDbRef = requestDbref.child("Approved");
 
-        final Map<String, Object> approvedLeave = new HashMap<>();
-        approvedLeave.put("name", getUserName);
-        approvedLeave.put("timeStamp", ServerValue.TIMESTAMP);
+        final Map<String, Object> zzc = new HashMap<>();
+        zzc.put("name", getUserName);
+        zzc.put("timeStamp", ServerValue.TIMESTAMP);
         final String Id = requestDbref.push().getKey();
 
         requestDbref.updateChildren(approve).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
 
                 assert Id != null;
-                Approved.child(Id).setValue(approvedLeave).addOnCompleteListener(task1 -> {
+                approveDbRef.child(Id).setValue(zzc).addOnCompleteListener(task1 -> {
                     if (task1.isSuccessful()) {
+                        progressBar.setVisibility(View.GONE);
                         DisplayViewUI.displayToast(getActivity(), "Request successfully accepted ");
                         //loading.dismiss();
 
@@ -187,6 +176,7 @@ public class AcceptOrRejectBtSheet extends BottomSheetDialogFragment {
 
     //method to reject
     private void rejectRequest() {
+        progressBar.setVisibility(View.VISIBLE);
         Map<String, Object> rejectxx = new HashMap<>();
         rejectxx.put("response", rejected);
         //node for rejected leaves
@@ -203,6 +193,7 @@ public class AcceptOrRejectBtSheet extends BottomSheetDialogFragment {
                 //create and update the node
                 Rejected.child(Id).setValue(reject).addOnCompleteListener(task1 -> {
                     if (task1.isSuccessful()) {
+                        progressBar.setVisibility(View.GONE);
                         DisplayViewUI.displayToast(getActivity(), "Request successfully rejected ");
                         //loading.dismiss();
 
