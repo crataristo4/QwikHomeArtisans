@@ -24,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -73,6 +74,10 @@ public class AcceptOrRejectBtSheet extends BottomSheetDialogFragment {
             adapterPosition = getData.getString(MyConstants.ADAPTER_POSITION);
 
             layoutAcceptOrRejectBottomSheetBinding.txtUserName.setText(getUserName);
+            layoutAcceptOrRejectBottomSheetBinding.txtStyleName.setText(getItemName);
+            layoutAcceptOrRejectBottomSheetBinding.txtReason.setText(getReason);
+            layoutAcceptOrRejectBottomSheetBinding.txtPrice.setText(MessageFormat.format("GH {0}", getItemPrice));
+
             if (getUserPhoto == null) {
                 Glide.with(Objects.requireNonNull(getActivity())).load(getActivity().getResources().getDrawable(R.drawable.photoe))
                         .into(layoutAcceptOrRejectBottomSheetBinding.imgUserPhoto);

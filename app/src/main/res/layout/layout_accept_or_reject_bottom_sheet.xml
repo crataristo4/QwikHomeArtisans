@@ -2,128 +2,152 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imgUserPhoto"
-            android:layout_width="@dimen/fortyDp"
-            android:layout_height="@dimen/fortyDp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/photoe"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txtUserName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:gravity="center_horizontal"
-            android:textColor="@color/purple"
-            app:layout_constraintBottom_toBottomOf="@+id/imgUserPhoto"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imgUserPhoto"
-            app:layout_constraintTop_toTopOf="@+id/imgUserPhoto" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgUserPhoto"
+                android:layout_width="@dimen/fortyDp"
+                android:layout_height="@dimen/fortyDp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/photoe"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ScrollView
-            android:id="@+id/scrollView4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/txtUserName"
-            app:layout_constraintStart_toStartOf="@+id/imgUserPhoto"
-            app:layout_constraintTop_toBottomOf="@+id/imgUserPhoto">
-
-            <LinearLayout
-
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/txtUserName"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/purple"
+                app:layout_constraintBottom_toBottomOf="@+id/imgUserPhoto"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgUserPhoto"
+                app:layout_constraintTop_toTopOf="@+id/imgUserPhoto" />
 
-                <TextView
-                    android:id="@+id/txtReason"
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/scrollView4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/txtUserName"
+                app:layout_constraintStart_toStartOf="@+id/imgUserPhoto"
+                app:layout_constraintTop_toBottomOf="@+id/imgUserPhoto">
+
+                <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimens/eightDp" />
-            </LinearLayout>
-        </ScrollView>
+                    android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imgItemImage"
-            android:layout_width="0dp"
-            android:layout_height="300dp"
-            android:layout_marginTop="8dp"
-            android:contentDescription="@string/app_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView4"
-            app:srcCompat="@drawable/photoe" />
+                    <TextView
+                        android:id="@+id/txtReason"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimens/eightDp" />
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
 
-        <ImageView
-            android:id="@+id/imgShadow"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="8dp"
-            android:contentDescription="@string/app_name"
-            app:layout_constraintBottom_toBottomOf="@+id/imgItemImage"
-            app:layout_constraintEnd_toEndOf="@+id/imgItemImage"
-            app:layout_constraintStart_toStartOf="@+id/imgItemImage"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/bottom_shadow" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgItemImage"
+                android:layout_width="0dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/scrollView4"
+                app:srcCompat="@drawable/photoe" />
 
-        <TextView
-            android:id="@+id/txtStyleName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imgShadow"
-            app:layout_constraintEnd_toEndOf="@+id/imgShadow"
-            app:layout_constraintStart_toStartOf="@+id/imgShadow"
-            app:layout_constraintVertical_bias="1.0" />
+            <ImageView
+                android:id="@+id/imgShadow"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintBottom_toBottomOf="@+id/imgItemImage"
+                app:layout_constraintEnd_toEndOf="@+id/imgItemImage"
+                app:layout_constraintStart_toStartOf="@+id/imgItemImage"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/bottom_shadow" />
 
-        <Button
-            android:id="@+id/btnAccept"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@color/colorGreen"
-            android:text="@string/accept"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/btnDecline"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgItemImage" />
+            <TextView
+                android:id="@+id/txtStyleName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imgShadow"
+                app:layout_constraintEnd_toEndOf="@+id/imgShadow"
+                app:layout_constraintStart_toStartOf="@+id/imgShadow"
+                app:layout_constraintVertical_bias="1.0" />
 
-        <Button
-            android:id="@+id/btnDecline"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/red"
-            android:text="@string/decline"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnAccept" />
+            <TextView
+                android:id="@+id/txtPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/curvebotton"
+                android:gravity="center_horizontal"
+                android:includeFontPadding="true"
+                android:padding="@dimen/eightDp"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imgItemImage" />
+
+            <Button
+                android:id="@+id/btnAccept"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorGreen"
+                android:text="@string/accept"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/btnDecline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgItemImage" />
+
+            <Button
+                android:id="@+id/btnDecline"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/red"
+                android:text="@string/decline"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnAccept" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
 </layout>
