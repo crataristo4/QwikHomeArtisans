@@ -103,7 +103,7 @@ public class TestAcceptAdatapter extends FirebaseRecyclerAdapter<RequestModel, T
 
         //display the Name
         void showName(String s) {
-            TextView name = view.findViewById(R.id.txtServicePersonName);
+            TextView name = view.findViewById(R.id.txtName);
             name.setText(s);
         }
 

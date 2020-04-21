@@ -53,6 +53,8 @@
     <string name="accountType">Select your profession</string>
     <string name="searchForServices">Search for service</string>
     <string name="gh">GH %s</string>
+    <string name="requestDate">Requested on %s</string>
+    <string name="requestRc">Request received from %s</string>
 
 
     <string-array name="services">

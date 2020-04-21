@@ -74,7 +74,7 @@
                     app:srcCompat="@drawable/abc" />
 
                 <TextView
-                    android:id="@+id/txtServicePersonName"
+                    android:id="@+id/txtName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -100,7 +100,7 @@
                     android:textSize="12sp"
                     app:layout_constraintEnd_toStartOf="@+id/imgBtnRouteOnMap"
                     app:layout_constraintStart_toEndOf="@+id/imgItemPhoto"
-                    app:layout_constraintTop_toBottomOf="@+id/txtServicePersonName" />
+                    app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
                 <ImageButton
                     android:id="@+id/btnView"

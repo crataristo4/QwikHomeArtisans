@@ -6,11 +6,12 @@
     <data>
 
         <variable
-            name="requestItems"
+            name="request"
             type="com.artisans.qwikhomeservices.models.RequestModel" />
     </data>
 
     <FrameLayout
+        android:id="@+id/parentLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -72,15 +73,14 @@
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/imgItemPhoto"
-                        imageItemUrl="@{requestItems.itemImage}"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="@dimen/fourDp"
+                        app:imageItemUrl="@{request.senderPhoto}"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/abc" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/txtName"
@@ -91,7 +91,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:text="@{@string/requestSentTo(String.valueOf(requestItems.servicePersonName))}"
+                        android:text="@{@string/requestRc(String.valueOf(request.senderName))}"
                         android:textColor="@color/purple"
                         app:layout_constraintEnd_toStartOf="@+id/btnRateServicePerson"
                         app:layout_constraintStart_toEndOf="@+id/imgItemPhoto"
@@ -106,7 +106,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:text="@{@string/sentOn(String.valueOf(requestItems.dateRequested))}"
+                        android:text="@{request.dateRequested}"
                         android:textSize="12sp"
                         app:layout_constraintEnd_toStartOf="@+id/imgBtnRouteOnMap"
                         app:layout_constraintStart_toEndOf="@+id/imgItemPhoto"
@@ -130,13 +130,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
-                        android:text="@{requestItems.response}"
+                        android:layout_marginTop="8dp"
+                        android:text="@{request.response}"
                         android:textColor="#F44336"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView10"
                         app:layout_constraintEnd_toStartOf="@+id/ratedResults"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/textView10"
-                        app:layout_constraintTop_toTopOf="@+id/textView10" />
+                        app:layout_constraintTop_toBottomOf="@+id/txtNameOfCustomer" />
 
                     <RatingBar
                         android:id="@+id/ratedResults"
@@ -148,6 +148,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
+                        android:saveEnabled="true"
                         android:theme="@style/CustomRatingBar"
                         android:visibility="invisible"
                         app:layout_constraintBottom_toBottomOf="@+id/txtResponse"
@@ -156,6 +157,17 @@
                         app:layout_constraintStart_toEndOf="@+id/txtResponse"
                         app:layout_constraintTop_toBottomOf="@+id/btnChat" />
 
+
+                    <TextView
+                        android:id="@+id/txtNameOfCustomer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="@+id/imgItemPhoto"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imgItemPhoto" />
 
                     <TextView
                         android:id="@+id/txtReason"
@@ -167,14 +179,6 @@
                         app:layout_constraintStart_toStartOf="@+id/btnView"
                         app:layout_constraintTop_toBottomOf="@+id/btnView" />
 
-                    <TextView
-                        android:id="@+id/txtAccountType"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        app:layout_constraintEnd_toEndOf="@+id/btnView"
-                        app:layout_constraintStart_toStartOf="@+id/btnView"
-                        app:layout_constraintTop_toBottomOf="@+id/txtReason" />
 
                     <ImageButton
                         android:id="@+id/btnChat"
@@ -239,70 +243,28 @@
                         android:background="?android:attr/listDivider"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                        app:layout_constraintTop_toBottomOf="@+id/txtResponse" />
 
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:id="@+id/linearLayout"
+                    <TextView
+                        android:id="@+id/txtPaymentStatus"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:orientation="vertical"
-                        android:padding="@dimen/eightDp"
-                        android:visibility="gone"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:text="@string/payment_status"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/divider2"
-                        app:layout_constraintVertical_bias="0.0">
+                        app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
-
-                        <TextView
-                            android:id="@+id/txtPaymentStatus"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginRight="8dp"
-                            android:text="@string/payment_status"
-                            android:textStyle="bold" />
-
-                        <Button
-                            android:id="@+id/btnConfirmPayment"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginRight="16dp"
-                            android:background="@drawable/curvebotton"
-                            android:text="@string/confirm_payment"
-                            android:textColor="@color/white" />
-
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-                    <View
-                        android:id="@+id/divider6"
-                        android:layout_width="0dp"
-                        android:layout_height="2dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginBottom="8dp"
-                        android:background="?android:attr/listDivider"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-                        app:layout_constraintVertical_bias="0.0" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
-
 </layout>
