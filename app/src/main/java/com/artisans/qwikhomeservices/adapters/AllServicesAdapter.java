@@ -1,19 +1,22 @@
 package com.artisans.qwikhomeservices.adapters;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.artisans.qwikhomeservices.R;
 import com.artisans.qwikhomeservices.activities.home.serviceTypes.DetailsScrollingActivity;
-import com.artisans.qwikhomeservices.databinding.LayoutListServicePersonsBinding;
+import com.artisans.qwikhomeservices.databinding.LayoutListItemsBinding;
 import com.artisans.qwikhomeservices.models.ServicePerson;
 import com.artisans.qwikhomeservices.utils.DisplayViewUI;
 import com.bumptech.glide.Glide;
@@ -29,10 +32,12 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 public class AllServicesAdapter extends FirebaseRecyclerAdapter<ServicePerson,
         AllServicesAdapter.AllServiceViewHolder> {
+    private Context mContext;
 
 
-    public AllServicesAdapter(@NonNull FirebaseRecyclerOptions<ServicePerson> options) {
+    public AllServicesAdapter(@NonNull FirebaseRecyclerOptions<ServicePerson> options, Context context) {
         super(options);
+        mContext = context;
     }
 
     @Override
@@ -40,7 +45,9 @@ public class AllServicesAdapter extends FirebaseRecyclerAdapter<ServicePerson,
                                     int i,
                                     @NonNull ServicePerson singlePerson) {
 
-        allServiceViewHolder.layoutListServicePersonsBinding.setUser(singlePerson);
+        allServiceViewHolder.listItemsServicesBinding.setServiceType(singlePerson);
+        allServiceViewHolder.cardView.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.fade_scale_animation));
+
 
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.placeholder(DisplayViewUI.getRandomDrawableColor());
@@ -53,31 +60,31 @@ public class AllServicesAdapter extends FirebaseRecyclerAdapter<ServicePerson,
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        allServiceViewHolder.layoutListServicePersonsBinding.progressBar.setVisibility(View.VISIBLE);
+                        allServiceViewHolder.listItemsServicesBinding.pbLoading.setVisibility(View.VISIBLE);
 
                         return false;
                     }
 
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        allServiceViewHolder.layoutListServicePersonsBinding.progressBar.setVisibility(View.INVISIBLE);
+                        allServiceViewHolder.listItemsServicesBinding.pbLoading.setVisibility(View.INVISIBLE);
                         return false;
                     }
                 }).transition(DrawableTransitionOptions.withCrossFade())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(allServiceViewHolder.layoutListServicePersonsBinding.imgUserPhoto);
+                .into(allServiceViewHolder.listItemsServicesBinding.imgUserPhoto);
 
-        allServiceViewHolder.layoutListServicePersonsBinding.mCardViewItem.setOnClickListener(v -> {
+        allServiceViewHolder.listItemsServicesBinding.mMaterialCard.setOnClickListener(v -> {
 
             String position = getRef(i).getKey();
             Intent gotoDetailsIntent = new Intent(allServiceViewHolder.itemView.getContext(),
                     DetailsScrollingActivity.class);
             gotoDetailsIntent.putExtra("position", position);
-            gotoDetailsIntent.putExtra("name", singlePerson.getName());
+            gotoDetailsIntent.putExtra("fullName", singlePerson.getFullName());
             gotoDetailsIntent.putExtra("about", singlePerson.getAbout());
             gotoDetailsIntent.putExtra("image", singlePerson.getImage());
-            gotoDetailsIntent.putExtra("userId", singlePerson.getServicePersonId());
-
+            gotoDetailsIntent.putExtra("servicePersonId", singlePerson.getServicePersonId());
+            gotoDetailsIntent.putExtra("mobileNumber", singlePerson.getMobileNumber());
             allServiceViewHolder.itemView.getContext().startActivity(gotoDetailsIntent);
 
         });
@@ -88,21 +95,24 @@ public class AllServicesAdapter extends FirebaseRecyclerAdapter<ServicePerson,
     @NonNull
     @Override
     public AllServiceViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        LayoutListServicePersonsBinding layoutListServicePersonsBinding = DataBindingUtil
+        LayoutListItemsBinding listItemsServicesBinding = DataBindingUtil
                 .inflate(LayoutInflater.from(viewGroup.getContext()),
-                        R.layout.layout_list_service_persons, viewGroup, false);
+                        R.layout.layout_list_items, viewGroup, false);
 
-        return new AllServiceViewHolder(layoutListServicePersonsBinding);
+        return new AllServiceViewHolder(listItemsServicesBinding);
 
 
     }
 
     static class AllServiceViewHolder extends RecyclerView.ViewHolder {
-        LayoutListServicePersonsBinding layoutListServicePersonsBinding;
+        LayoutListItemsBinding listItemsServicesBinding;
+        CardView cardView;
 
-        AllServiceViewHolder(@NonNull LayoutListServicePersonsBinding itemView) {
-            super(itemView.getRoot());
-            layoutListServicePersonsBinding = itemView;
+        AllServiceViewHolder(@NonNull LayoutListItemsBinding listItemsServicesBinding) {
+            super(listItemsServicesBinding.getRoot());
+            this.listItemsServicesBinding = listItemsServicesBinding;
+            cardView = listItemsServicesBinding.mMaterialCard;
+
         }
 
 

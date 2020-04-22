@@ -41,9 +41,7 @@ public class DetailsScrollingActivity extends AppCompatActivity {
     private ActivityDetailsScrollingBinding activityDetailsScrollingBinding;
     private DatabaseReference databaseReference;
     private StylesAdapter adapter;
-    //FirebaseRecyclerPagingAdapter<StylesItemModel, StylesAdapter.StylesViewHolder> adapter;
     private String name, about, image, userId;
-    //BottomSheetBehavior mBottomSheetBehavior;
     private long mLastClickTime = 0;
 
 
@@ -60,16 +58,15 @@ public class DetailsScrollingActivity extends AppCompatActivity {
         setSupportActionBar(activityDetailsScrollingBinding.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        // mBottomSheetBehavior = BottomSheetBehavior.from(activityDetailsScrollingBinding.nestedScroll);
 
         Intent intent = getIntent();
         if (intent != null) {
             String position = intent.getStringExtra("position");
             assert position != null;
-            name = intent.getStringExtra("name");
+            name = intent.getStringExtra("fullName");
             about = intent.getStringExtra("about");
             image = intent.getStringExtra("image");
-            userId = intent.getStringExtra("userId");
+            userId = intent.getStringExtra("servicePersonId");
         }
 
         activityDetailsScrollingBinding.fabCall.setOnClickListener(view -> Snackbar.make(view,

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.artisans.qwikhomeservices.R;
-import com.artisans.qwikhomeservices.adapters.AllBarbersAdapter;
+import com.artisans.qwikhomeservices.adapters.AllServicesAdapter;
 import com.artisans.qwikhomeservices.databinding.ActivityAllServicesBinding;
 import com.artisans.qwikhomeservices.models.ServicePerson;
 import com.artisans.qwikhomeservices.utils.MyConstants;
@@ -24,7 +24,7 @@ import java.util.Objects;
 
 public class AllServicesActivity extends AppCompatActivity {
     private ActivityAllServicesBinding allServicesBinding;
-    private AllBarbersAdapter adapter;
+    private AllServicesAdapter adapter;
     private RecyclerView recyclerView;
     private String serviceType;
     private GridLayoutManager gridLayoutManager;
@@ -110,7 +110,7 @@ public class AllServicesActivity extends AppCompatActivity {
 
         }
 
-        adapter = new AllBarbersAdapter(options, AllServicesActivity.this);
+        adapter = new AllServicesAdapter(options, AllServicesActivity.this);
 
         recyclerView.setAdapter(adapter);
 
