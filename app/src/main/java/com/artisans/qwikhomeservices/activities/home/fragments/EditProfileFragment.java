@@ -41,9 +41,6 @@ import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class EditProfileFragment extends Fragment {
 
     private FragmentEditProfileBinding fragmentEditProfileBinding;
@@ -54,7 +51,7 @@ public class EditProfileFragment extends Fragment {
     private CircleImageView profileImage;
     private StorageReference mStorageReference;
     private DatabaseReference serviceAccountDbRef;
-    private String uid, getImageUri;
+    private String uid, getImageUri, name;
 
 
 
@@ -99,15 +96,19 @@ public class EditProfileFragment extends Fragment {
         });
 
         fragmentEditProfileBinding.fabUploadPhoto.setOnClickListener(v -> openGallery());
-        fragmentEditProfileBinding.txtUserName.setText(MainActivity.fullName);
+        fragmentEditProfileBinding.txtFirstName.setText(MainActivity.firstName);
+        fragmentEditProfileBinding.txtLastName.setText(MainActivity.lastName);
         fragmentEditProfileBinding.txtAboutUser.setText(MainActivity.about);
         Glide.with(view.getContext()).load(MainActivity.imageUrl)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(fragmentEditProfileBinding.imgUploadPhoto);
 
         fragmentEditProfileBinding.txtPhoneNumber.setText(MainActivity.firebaseUser.getPhoneNumber());
-        fragmentEditProfileBinding.nameLayout.setOnClickListener(//open bottom sheet to edit name
+        fragmentEditProfileBinding.firstNameLayout.setOnClickListener(//open bottom sheet to edit name
                 this::onClick);
+        fragmentEditProfileBinding.lastNameLayout.setOnClickListener(//open bottom sheet to edit name
+                this::onClick);
+
 
         fragmentEditProfileBinding.aboutLayout.setOnClickListener(
                 //open bottom sheet to edit about
@@ -134,15 +135,19 @@ public class EditProfileFragment extends Fragment {
 
         mLastClickTime = SystemClock.elapsedRealtime();
 
-        if (v.getId() == R.id.nameLayout) {
-            if (fragmentEditProfileBinding.nameLayout.isEnabled()) {
-                String getName = String.valueOf(fragmentEditProfileBinding.txtUserName.getText());
-                bundle.putString(MyConstants.FULL_NAME, getName);
+        if (v.getId() == R.id.firstNameLayout) {
+
+            name = String.valueOf(fragmentEditProfileBinding.txtFirstName.getText());
+            bundle.putString(MyConstants.FIRST_NAME, name);
                 editItemBottomSheet.setArguments(bundle);
-                editItemBottomSheet.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), MyConstants.NAME);
+            editItemBottomSheet.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), MyConstants.FIRST_NAME);
 
-            }
+        } else if (v.getId() == R.id.lastNameLayout) {
 
+            name = String.valueOf(fragmentEditProfileBinding.txtLastName.getText());
+            bundle.putString(MyConstants.LAST_NAME, name);
+            editItemBottomSheet.setArguments(bundle);
+            editItemBottomSheet.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), MyConstants.LAST_NAME);
 
         } else if (v.getId() == R.id.aboutLayout) {
 

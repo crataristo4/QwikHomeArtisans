@@ -97,6 +97,8 @@
     <string name="write_your_message">Write your message</string>
     <string name="rate">Rate</string>
     <string name="finish">finish</string>
+    <string name="firstName">First name</string>
+    <string name="lastName">Last name</string>
     <string name="reset_password">Reset password</string>
     <string name="home">Home</string>
     <string name="posts">Posts</string>
