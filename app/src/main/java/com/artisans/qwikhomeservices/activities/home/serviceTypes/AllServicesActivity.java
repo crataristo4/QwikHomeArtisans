@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -121,16 +122,11 @@ public class AllServicesActivity extends AppCompatActivity {
 
         }
 
+        Log.i("initRecyclerView: ", accountType);
 
-        DatabaseReference allServicesDbRef = FirebaseDatabase.getInstance()
-                .getReference()
-                .child(MyConstants.SERVICES)
-                .child(accountType);
-        allServicesDbRef.keepSynced(true);
-
-        // TODO: 19-Apr-20  change if crush
         DatabaseReference db = FirebaseDatabase.getInstance().getReference()
                 .child("Services").child("ServiceType");
+        db.keepSynced(true);
 
         recyclerView = allServicesBinding.rvAllBarbers;
         gridLayoutManager = new GridLayoutManager(this, 2);

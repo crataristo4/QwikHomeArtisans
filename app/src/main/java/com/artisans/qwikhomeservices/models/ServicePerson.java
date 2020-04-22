@@ -317,7 +317,7 @@ public class ServicePerson extends BaseObservable {
 
     @Bindable
     public String getFullName() {
-        return firstName.concat(" ").concat(lastName);
+        return fullName;
     }
 
     public void setFullName(String fullName) {
