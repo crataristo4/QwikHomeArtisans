@@ -50,7 +50,6 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="16dp"
                 android:ellipsize="end"
-                android:gravity="center_horizontal"
                 android:maxLength="20"
                 android:maxLines="1"
                 android:text="@{serviceType.firstName}"
@@ -61,6 +60,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:gravity="center_horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/imgUserPhoto" />
 
             <ProgressBar
