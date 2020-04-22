@@ -42,7 +42,6 @@ public class FinishAccountSetUpActivity extends AppCompatActivity {
             DisplayViewUI.displayToast(this, "Please complete account set up");
 
         }
-        // todo fix back pressed
 
     }
 }
