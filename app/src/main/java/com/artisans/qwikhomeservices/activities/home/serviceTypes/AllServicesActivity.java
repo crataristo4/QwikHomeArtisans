@@ -26,7 +26,7 @@ public class AllServicesActivity extends AppCompatActivity {
     private ActivityAllServicesBinding allServicesBinding;
     private AllServicesAdapter adapter;
     private RecyclerView recyclerView;
-    private String serviceType;
+    private String accountType;
     private GridLayoutManager gridLayoutManager;
     private Parcelable mParcelable;
     private Bundle mBundle;
@@ -50,23 +50,69 @@ public class AllServicesActivity extends AppCompatActivity {
 
             switch (Objects.requireNonNull(getIntent.getStringExtra(MyConstants.ACCOUNT_TYPE))) {
                 case MyConstants.BARBERS:
-                    serviceType = MyConstants.BARBERS;
-                    setTitle(serviceType);
+                    accountType = MyConstants.BARBERS;
+                    setTitle(accountType);
 
                     break;
                 case MyConstants.WOMEN_HAIR_STYLIST:
-                    serviceType = MyConstants.WOMEN_HAIR_STYLIST;
-                    setTitle(serviceType);
+                    accountType = MyConstants.WOMEN_HAIR_STYLIST;
+                    setTitle(accountType);
 
                     break;
                 case MyConstants.INTERIOR_DERCORATOR:
-                    serviceType = MyConstants.INTERIOR_DERCORATOR;
-                    setTitle(serviceType);
+                    accountType = MyConstants.INTERIOR_DERCORATOR;
+                    setTitle(accountType);
 
                     break;
+
                 case MyConstants.CARPENTERS:
-                    serviceType = MyConstants.CARPENTERS;
-                    setTitle(serviceType);
+                    accountType = MyConstants.CARPENTERS;
+                    setTitle(accountType);
+
+                    break;
+                case MyConstants.MECHANICS:
+                    accountType = MyConstants.MECHANICS;
+                    setTitle(accountType);
+
+                    break;
+                case MyConstants.PEST_CONTROLS:
+                    accountType = MyConstants.PEST_CONTROLS;
+                    setTitle(accountType);
+
+                    break;
+                case MyConstants.PLUMBERS:
+                    accountType = MyConstants.PLUMBERS;
+                    setTitle(accountType);
+
+                    break;
+                case MyConstants.TILERS:
+                    accountType = MyConstants.TILERS;
+                    setTitle(accountType);
+
+                    break;
+                case MyConstants.TV_INSTALLERS:
+                    accountType = MyConstants.TV_INSTALLERS;
+                    setTitle(accountType);
+
+                    break;
+                case MyConstants.WELDERS:
+                    accountType = MyConstants.WELDERS;
+                    setTitle(accountType);
+
+                    break;
+                case MyConstants.ROLLERS:
+                    accountType = MyConstants.ROLLERS;
+                    setTitle(accountType);
+
+                    break;
+                case MyConstants.GARDENERS:
+                    accountType = MyConstants.GARDENERS;
+                    setTitle(accountType);
+
+                    break;
+                case MyConstants.PAINTERS:
+                    accountType = MyConstants.PAINTERS;
+                    setTitle(accountType);
 
                     break;
                 default:
@@ -79,7 +125,7 @@ public class AllServicesActivity extends AppCompatActivity {
         DatabaseReference allServicesDbRef = FirebaseDatabase.getInstance()
                 .getReference()
                 .child(MyConstants.SERVICES)
-                .child(serviceType);
+                .child(accountType);
         allServicesDbRef.keepSynced(true);
 
         // TODO: 19-Apr-20  change if crush
@@ -91,7 +137,7 @@ public class AllServicesActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayoutManager);
 
         //querying the database BY NAME
-        Query query = db.orderByChild("accountType").equalTo(serviceType);
+        Query query = db.orderByChild("accountType").equalTo(accountType);
 
         FirebaseRecyclerOptions<ServicePerson> options =
                 new FirebaseRecyclerOptions.Builder<ServicePerson>().setQuery(query,
