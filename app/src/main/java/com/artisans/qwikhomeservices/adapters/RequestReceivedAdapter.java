@@ -95,19 +95,26 @@ public class RequestReceivedAdapter extends FirebaseRecyclerAdapter<RequestModel
 
         }
 
-        void showWorkDoneStatus(boolean isWorkDone) {
-            if (isWorkDone) {
+        void showWorkDoneStatus(String isWorkDone) {
+            if (isWorkDone.equals("YES")) {
 
+                txtWorkDone.setTextColor(layoutRequestReceivedBinding.getRoot().getResources().getColor(R.color.colorGreen));
                 txtWorkDone.setText(R.string.wkDone);
+                txtWorkDone.setVisibility(View.VISIBLE);
 
 
-            } else {
+            } else if (isWorkDone.equals("NO")) {
                 txtWorkDone.setText(R.string.wkNtDone);
+                txtWorkDone.setVisibility(View.VISIBLE);
+                txtWorkDone.setTextColor(layoutRequestReceivedBinding.getRoot().getResources().getColor(R.color.colorRed));
+
+
 
 
             }
 
         }
+
 
     }
 }

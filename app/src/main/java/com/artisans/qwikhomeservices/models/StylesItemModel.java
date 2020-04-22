@@ -7,7 +7,7 @@ import com.google.firebase.database.Exclude;
 
 public class StylesItemModel extends BaseObservable {
 
-    public int price;
+    public String price;
     public String styleItem;
     public String itemImage;
     public double rating;
@@ -20,7 +20,7 @@ public class StylesItemModel extends BaseObservable {
     public StylesItemModel() {
     }
 
-    public StylesItemModel(int price, String styleItem, String itemImage, String userImage, String userName,
+    public StylesItemModel(String price, String styleItem, String itemImage, String userImage, String userName,
                            Object timestamp, String accountType) {
         this.price = price;
         this.styleItem = styleItem;
@@ -32,14 +32,14 @@ public class StylesItemModel extends BaseObservable {
 
     }
 
-    public StylesItemModel(int price, String styleItem, String itemImage, double rating) {
+    public StylesItemModel(String price, String styleItem, String itemImage, double rating) {
         this.price = price;
         this.styleItem = styleItem;
         this.itemImage = itemImage;
         this.rating = rating;
     }
 
-    public StylesItemModel(int price, String styleItem, String itemImage,
+    public StylesItemModel(String price, String styleItem, String itemImage,
                            String userPhoto, String userName, Object timeStamp) {
         this.price = price;
         this.styleItem = styleItem;
@@ -60,11 +60,11 @@ public class StylesItemModel extends BaseObservable {
     }
 
     @Bindable
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

@@ -159,6 +159,7 @@ public class AcceptOrRejectBtSheet extends BottomSheetDialogFragment {
                 assert Id != null;
                 approveDbRef.child(Id).setValue(zzc).addOnCompleteListener(task1 -> {
                     if (task1.isSuccessful()) {
+                        dismiss();
                         progressBar.setVisibility(View.GONE);
                         DisplayViewUI.displayToast(getActivity(), "Request successfully accepted ");
                         //loading.dismiss();
@@ -193,6 +194,7 @@ public class AcceptOrRejectBtSheet extends BottomSheetDialogFragment {
                 //create and update the node
                 Rejected.child(Id).setValue(reject).addOnCompleteListener(task1 -> {
                     if (task1.isSuccessful()) {
+                        dismiss();
                         progressBar.setVisibility(View.GONE);
                         DisplayViewUI.displayToast(getActivity(), "Request successfully rejected ");
                         //loading.dismiss();

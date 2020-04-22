@@ -193,7 +193,7 @@ public class AddDesignOrStyleActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    StylesItemModel itemModel = new StylesItemModel(Integer.parseInt(price),
+                    StylesItemModel itemModel = new StylesItemModel(price,
                             style,
                             getImageUploadUri,
                             userImage,

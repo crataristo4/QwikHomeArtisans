@@ -35,7 +35,7 @@ public class RequestModel extends BaseObservable {
     public String dateRequested;
     public String paymentStatus;
     public String paymentAmount;
-    public boolean isWorkDone;
+    public String isWorkDone;
 
 
     public RequestModel() {
@@ -240,11 +240,11 @@ public class RequestModel extends BaseObservable {
         this.paymentAmount = paymentAmount;
     }
 
-    public boolean isWorkDone() {
+    public String isWorkDone() {
         return isWorkDone;
     }
 
-    public void setWorkDone(boolean workDone) {
+    public void setWorkDone(String workDone) {
         isWorkDone = workDone;
     }
 }
