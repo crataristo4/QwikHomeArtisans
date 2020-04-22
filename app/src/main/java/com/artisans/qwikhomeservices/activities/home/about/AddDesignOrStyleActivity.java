@@ -136,8 +136,7 @@ public class AddDesignOrStyleActivity extends AppCompatActivity {
 
 
         if (!style.trim().isEmpty() && uri != null
-                && Integer.parseInt(price) <= 10000 &&
-                !price.trim().isEmpty()) {
+                && !price.trim().isEmpty()) {
             uploadFile();
 
         }
@@ -145,7 +144,7 @@ public class AddDesignOrStyleActivity extends AppCompatActivity {
 
     private void uploadFile() {
         if (uri != null) {
-            ProgressDialog progressDialog = DisplayViewUI.displayProgress(this, "please wait...");
+            ProgressDialog progressDialog = DisplayViewUI.displayProgress(this, "adding item please wait...");
             progressDialog.show();
 
             final File thumb_imageFile = new File(Objects.requireNonNull(uri.getPath()));

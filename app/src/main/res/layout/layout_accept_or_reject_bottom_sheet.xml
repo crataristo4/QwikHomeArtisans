@@ -12,6 +12,7 @@
             android:layout_height="wrap_content">
 
             <ProgressBar
+                android:indeterminate="true"
                 android:id="@+id/pbLoading"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:visibility="gone"

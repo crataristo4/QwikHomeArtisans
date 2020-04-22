@@ -2,9 +2,11 @@ package com.artisans.qwikhomeservices.adapters;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -32,6 +34,7 @@ public class RequestReceivedAdapter extends FirebaseRecyclerAdapter<RequestModel
                                     int i, @NonNull RequestModel requestModel) {
 
         requestReceivedAdapterViewHolder.layoutRequestReceivedBinding.setRequest(requestModel);
+        requestReceivedAdapterViewHolder.showWorkDoneStatus(requestModel.isWorkDone());
 
         final String getAdapterPosition = getRef(i).getKey();
         requestReceivedAdapterViewHolder.btnView.setOnClickListener(v -> {
@@ -63,8 +66,9 @@ public class RequestReceivedAdapter extends FirebaseRecyclerAdapter<RequestModel
     //an inner class to hold the views to be inflated
     public static class RequestReceivedAdapterViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageButton btnView, btnChat;
+        private ImageButton btnView, btnChat, btnRate;
         private RatingBar ratingBar;
+        private TextView txtWorkDone;
 
         private LayoutRequestReceivedBinding layoutRequestReceivedBinding;
 
@@ -74,6 +78,35 @@ public class RequestReceivedAdapter extends FirebaseRecyclerAdapter<RequestModel
             btnView = layoutRequestReceivedBinding.btnView;
             btnChat = layoutRequestReceivedBinding.btnChat;
             ratingBar = layoutRequestReceivedBinding.ratedResults;
+            btnRate = layoutRequestReceivedBinding.btnRateServicePerson;
+            txtWorkDone = layoutRequestReceivedBinding.txtConfirmWorkDone;
+        }
+
+        //display the rating
+        void showRating(float rating) {
+            if (!String.valueOf(rating).isEmpty() && rating > 0) {
+                ratingBar.setVisibility(View.VISIBLE);
+                ratingBar.setRating(rating);
+                btnRate.setEnabled(false);
+
+            } else if (rating == 0) {
+                ratingBar.setVisibility(View.INVISIBLE);
+            }
+
+        }
+
+        void showWorkDoneStatus(boolean isWorkDone) {
+            if (isWorkDone) {
+
+                txtWorkDone.setText(R.string.wkDone);
+
+
+            } else {
+                txtWorkDone.setText(R.string.wkNtDone);
+
+
+            }
+
         }
 
     }

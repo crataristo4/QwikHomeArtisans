@@ -256,6 +256,8 @@
     <string name="agree_and_continue">Agree and continue</string>
     <string name="completeProfile">Complete profile</string>
     <string name="welcome">Welcome to Qwik Home Services</string>
+    <string name="wkDone">Work is done</string>
+    <string name="wkNtDone">Work is not done</string>
 
     <string name="termAndConditions">
         <![CDATA[
