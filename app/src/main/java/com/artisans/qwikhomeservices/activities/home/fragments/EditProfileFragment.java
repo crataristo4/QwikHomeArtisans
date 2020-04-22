@@ -2,6 +2,7 @@ package com.artisans.qwikhomeservices.activities.home.fragments;
 
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -27,9 +28,15 @@ import com.artisans.qwikhomeservices.utils.DisplayViewUI;
 import com.artisans.qwikhomeservices.utils.MyConstants;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -45,6 +52,10 @@ public class EditProfileFragment extends Fragment {
     private long mLastClickTime = 0;
     private OnFragmentInteractionListener mListener;
     private CircleImageView profileImage;
+    private StorageReference mStorageReference;
+    private DatabaseReference serviceAccountDbRef;
+    private String uid, getImageUri;
+
 
 
     public EditProfileFragment() {
@@ -65,6 +76,13 @@ public class EditProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mStorageReference = FirebaseStorage.getInstance().getReference("photos");
+        uid = MainActivity.uid;
+        serviceAccountDbRef = FirebaseDatabase.getInstance()
+                .getReference()
+                .child("Services")
+                .child("ServiceType")
+                .child(uid);
         fragmentEditProfileBinding
                 .fabUploadPhoto.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fadein));
         profileImage = fragmentEditProfileBinding.imgUploadPhoto;
@@ -81,9 +99,7 @@ public class EditProfileFragment extends Fragment {
         });
 
         fragmentEditProfileBinding.fabUploadPhoto.setOnClickListener(v -> openGallery());
-
         fragmentEditProfileBinding.txtUserName.setText(MainActivity.fullName);
-
         fragmentEditProfileBinding.txtAboutUser.setText(MainActivity.about);
         Glide.with(view.getContext()).load(MainActivity.imageUrl)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -155,14 +171,78 @@ public class EditProfileFragment extends Fragment {
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(profileImage);
 
-                // uploadFile();
+                uploadFile();
 
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                // progressDialog.dismiss();
                 assert result != null;
                 String error = result.getError().getMessage();
                 DisplayViewUI.displayToast(getActivity(), error);
             }
+        }
+    }
+
+
+    private void uploadFile() {
+        if (uri != null) {
+            ProgressDialog progressDialog = DisplayViewUI.displayProgress(getActivity(), "updating profile picture please wait...");
+            progressDialog.show();
+
+            // final File thumb_imageFile = new File(Objects.requireNonNull(uri.getPath()));
+
+          /*  try {
+                Bitmap thumb_imageBitmap = new Compressor(Objects.requireNonNull(getActivity()))
+                        .setMaxHeight(130)
+                        .setMaxWidth(13)
+                        .setQuality(100)
+                        .compressToBitmap(thumb_imageFile);
+
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                thumb_imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }*/
+
+            //  file path for the itemImage
+            final StorageReference fileReference = mStorageReference.child(uid + "." + uri.getLastPathSegment());
+
+            fileReference.putFile(uri).continueWithTask(task -> {
+                if (!task.isSuccessful()) {
+                    progressDialog.dismiss();
+                    DisplayViewUI.displayToast(getActivity(), Objects.requireNonNull(task.getException()).getMessage());
+
+                }
+                return fileReference.getDownloadUrl();
+
+            }).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+
+                    Uri downLoadUri = task.getResult();
+                    assert downLoadUri != null;
+                    getImageUri = downLoadUri.toString();
+
+                    Map<String, Object> updatePhoto = new HashMap<>();
+                    updatePhoto.put("image", getImageUri);
+
+                    serviceAccountDbRef.updateChildren(updatePhoto).addOnCompleteListener(task12 -> {
+                        if (task12.isSuccessful()) {
+                            progressDialog.dismiss();
+                            DisplayViewUI.displayToast(getActivity(), "Successful");
+                        } else {
+                            progressDialog.dismiss();
+                            DisplayViewUI.displayToast(getActivity(), Objects.requireNonNull(task12.getException()).getMessage());
+
+                        }
+                    });
+
+
+                } else {
+                    progressDialog.dismiss();
+                    DisplayViewUI.displayToast(getActivity(), Objects.requireNonNull(task.getException()).getMessage());
+
+                }
+
+            });
         }
     }
 

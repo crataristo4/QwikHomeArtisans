@@ -20,7 +20,6 @@ import com.artisans.qwikhomeservices.activities.home.MainActivity;
 import com.artisans.qwikhomeservices.databinding.ActivityDesignStyleBinding;
 import com.artisans.qwikhomeservices.models.StylesItemModel;
 import com.artisans.qwikhomeservices.utils.DisplayViewUI;
-import com.artisans.qwikhomeservices.utils.GetDateTime;
 import com.artisans.qwikhomeservices.utils.MyConstants;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -36,10 +35,6 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 import java.util.Objects;
 
 import id.zelory.compressor.Compressor;
@@ -56,7 +51,6 @@ public class AddDesignOrStyleActivity extends AppCompatActivity {
     private DatabaseReference serviceTypeDbRef, activityDbRef;
     private String price;
     private String uid, style, getImageUploadUri, accountType, userImage, userName;
-    private static int INTERVAL = 2000;
     private long mBackPressed;
 
     @Override
@@ -183,16 +177,6 @@ public class AddDesignOrStyleActivity extends AppCompatActivity {
                     getImageUploadUri = downLoadUri.toString();
 
 
-                    try {
-                        Calendar calendar = Calendar.getInstance();
-                        Date today = calendar.getTime();
-                        SimpleDateFormat sfd = new SimpleDateFormat("EEEE dd/MMMM/yyyy", Locale.ENGLISH);
-                        dateTime = GetDateTime.getFormattedDate(today);
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
                     StylesItemModel itemModel = new StylesItemModel(price,
                             style,
                             getImageUploadUri,
@@ -264,6 +248,7 @@ public class AddDesignOrStyleActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        int INTERVAL = 2000;
         if (mBackPressed + INTERVAL > System.currentTimeMillis()){
             super.onBackPressed();
 
@@ -307,8 +292,5 @@ public class AddDesignOrStyleActivity extends AppCompatActivity {
         userImage = MainActivity.imageUrl;
 
     }
-
-
-
 
 }

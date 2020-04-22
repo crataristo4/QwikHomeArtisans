@@ -79,15 +79,14 @@
         <item>Women Hairstylists</item>
         <item>Interior Decorators</item>
         <item>Carpenters</item>
-        <item>Mechanic</item>
-        <item>Pest Control</item>
-        <item>Plumber</item>
-        <item>Tv Installer</item>
-        <item>Tiler</item>
-        <item>Carpenter</item>
-        <item>Roller</item>
-        <item>Gardener</item>
-        <item>Painter</item>
+        <item>Mechanics</item>
+        <item>Pest Controls</item>
+        <item>Plumbers</item>
+        <item>Tv Installers</item>
+        <item>Tilers</item>
+        <item>Rollers</item>
+        <item>Gardeners</item>
+        <item>Painters</item>
 
     </string-array>
     <string name="adUnit" templateMergeStrategy="preserve" translatable="false">ca-app-pub-7358181102198543~9661993486</string>
