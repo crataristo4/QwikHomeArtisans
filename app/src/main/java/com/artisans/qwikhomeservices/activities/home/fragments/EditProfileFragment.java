@@ -192,21 +192,6 @@ public class EditProfileFragment extends Fragment {
             ProgressDialog progressDialog = DisplayViewUI.displayProgress(getActivity(), "updating profile picture please wait...");
             progressDialog.show();
 
-            // final File thumb_imageFile = new File(Objects.requireNonNull(uri.getPath()));
-
-          /*  try {
-                Bitmap thumb_imageBitmap = new Compressor(Objects.requireNonNull(getActivity()))
-                        .setMaxHeight(130)
-                        .setMaxWidth(13)
-                        .setQuality(100)
-                        .compressToBitmap(thumb_imageFile);
-
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                thumb_imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
 
             //  file path for the itemImage
             final StorageReference fileReference = mStorageReference.child(uid + "." + uri.getLastPathSegment());

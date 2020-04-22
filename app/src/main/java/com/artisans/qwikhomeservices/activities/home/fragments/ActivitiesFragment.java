@@ -32,7 +32,6 @@ public class ActivitiesFragment extends Fragment {
     private static final String TAG = "ActivityFragment";
     private FragmentActivitiesBinding fragmentActivitiesBinding;
     private RecyclerView rvBarbers, rvHairStylist, rvInteriorDeco, rvItems;
-    // private AllServicesAdapter allServicesAdapter, allServicesAdapter1, allServicesAdapter2;
     private DatabaseReference dbRef;
     private ActivityItemAdapter activityItemAdapter;
     private LinearLayoutManager layoutManager;
