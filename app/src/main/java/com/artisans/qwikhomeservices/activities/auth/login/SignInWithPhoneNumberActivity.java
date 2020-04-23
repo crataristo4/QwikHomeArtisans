@@ -38,7 +38,7 @@ public class SignInWithPhoneNumberActivity extends AppCompatActivity {
     private ProgressBar loading;
     private TextInputLayout txtPhoneNumber, txtVerifyCode;
     private int RESOLVE_HINT = 2;
-    String phoneNumber = "+16505554565";
+    String phoneNumber = "+16505554564";
     String smsCode = "123456";
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
