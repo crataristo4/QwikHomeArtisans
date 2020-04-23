@@ -31,7 +31,6 @@
                     android:id="@+id/userImage"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/ThreeHundredDp"
-                    android:adjustViewBounds="true"
                     android:fitsSystemWindows="true"
                     app:layout_collapseMode="parallax" />
 

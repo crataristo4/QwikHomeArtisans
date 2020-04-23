@@ -50,7 +50,6 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:adjustViewBounds="true"
                 android:contentDescription="@string/app_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -106,6 +105,7 @@
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/progressBar"
+                android:gravity="center_horizontal"
                 app:layout_constraintTop_toTopOf="@+id/imgItemPhoto" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -118,7 +118,6 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:hint="@string/state_reason_for_request"
-                android:importantForAutofill="no"
                 android:textColorHint="#7B1FA2"
                 app:boxBackgroundMode="outline"
                 app:boxCornerRadiusBottomEnd="@dimen/twentyFourDp"

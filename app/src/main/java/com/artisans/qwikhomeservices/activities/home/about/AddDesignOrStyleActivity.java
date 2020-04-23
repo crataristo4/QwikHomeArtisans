@@ -2,7 +2,6 @@ package com.artisans.qwikhomeservices.activities.home.about;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -32,12 +31,7 @@ import com.google.firebase.storage.StorageReference;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
 import java.util.Objects;
-
-import id.zelory.compressor.Compressor;
 
 public class AddDesignOrStyleActivity extends AppCompatActivity {
 
@@ -141,21 +135,6 @@ public class AddDesignOrStyleActivity extends AppCompatActivity {
             ProgressDialog progressDialog = DisplayViewUI.displayProgress(this, "adding item please wait...");
             progressDialog.show();
 
-            final File thumb_imageFile = new File(Objects.requireNonNull(uri.getPath()));
-
-            try {
-                Bitmap thumb_imageBitmap = new Compressor(this)
-                        .setMaxHeight(130)
-                        .setMaxWidth(13)
-                        .setQuality(100)
-                        .compressToBitmap(thumb_imageFile);
-
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                thumb_imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
             //                file path for the itemImage
             final StorageReference fileReference = mStorageReference.child(uid + "." + uri.getLastPathSegment());
@@ -175,7 +154,6 @@ public class AddDesignOrStyleActivity extends AppCompatActivity {
                     assert downLoadUri != null;
 
                     getImageUploadUri = downLoadUri.toString();
-
 
                     StylesItemModel itemModel = new StylesItemModel(price,
                             style,

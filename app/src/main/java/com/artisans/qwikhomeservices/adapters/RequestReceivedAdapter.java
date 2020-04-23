@@ -35,6 +35,8 @@ public class RequestReceivedAdapter extends FirebaseRecyclerAdapter<RequestModel
 
         requestReceivedAdapterViewHolder.layoutRequestReceivedBinding.setRequest(requestModel);
         requestReceivedAdapterViewHolder.showWorkDoneStatus(requestModel.isWorkDone());
+        requestReceivedAdapterViewHolder.showRating(requestModel.getRating());
+
 
         final String getAdapterPosition = getRef(i).getKey();
         requestReceivedAdapterViewHolder.btnView.setOnClickListener(v -> {

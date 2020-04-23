@@ -149,7 +149,7 @@
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:theme="@style/CustomRatingBar"
-                        android:visibility="invisible"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@+id/txtResponse"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"

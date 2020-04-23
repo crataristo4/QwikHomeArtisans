@@ -2,6 +2,8 @@ package com.artisans.qwikhomeservices.activities.home.serviceTypes;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -41,7 +43,7 @@ public class DetailsScrollingActivity extends AppCompatActivity {
     private ActivityDetailsScrollingBinding activityDetailsScrollingBinding;
     private DatabaseReference databaseReference;
     private StylesAdapter adapter;
-    private String name, about, image, userId;
+    private String name, about, image, userId, mobileNumber;
     private long mLastClickTime = 0;
 
 
@@ -67,12 +69,21 @@ public class DetailsScrollingActivity extends AppCompatActivity {
             about = intent.getStringExtra("about");
             image = intent.getStringExtra("image");
             userId = intent.getStringExtra("servicePersonId");
+            mobileNumber = intent.getStringExtra("mobileNumber");
         }
 
         activityDetailsScrollingBinding.fabCall.setOnClickListener(view -> Snackbar.make(view,
                 "Call ".concat(name),
                 Snackbar.LENGTH_LONG)
-                .setAction("Ok", v -> {
+                .setActionTextColor(Color.WHITE)
+                .setTextColor(Color.WHITE)
+                .setBackgroundTint(getColor(R.color.purple))
+                .setDuration(8000)
+                .setAction("CALL NOW", v -> {
+                    Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                    callIntent.setData(Uri.fromParts("tel", mobileNumber, null));
+                    callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(callIntent);
 
                 }).show());
 

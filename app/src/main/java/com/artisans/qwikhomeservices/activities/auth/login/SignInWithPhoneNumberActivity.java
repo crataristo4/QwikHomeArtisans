@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +29,6 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class SignInWithPhoneNumberActivity extends AppCompatActivity {
-    private static int INTERVAL = 3000;
     private long mBackPressed;
     private String mGetFirstName, mGetLatName, mGetAccountType, mGetAbout, mGetFullName;
     private ActivitySignInWithPhoneNumberBinding activitySignInWithPhoneNumberBinding;
@@ -40,6 +38,13 @@ public class SignInWithPhoneNumberActivity extends AppCompatActivity {
     private ProgressBar loading;
     private TextInputLayout txtPhoneNumber, txtVerifyCode;
     private int RESOLVE_HINT = 2;
+    String phoneNumber = "+16505554565";
+    String smsCode = "123456";
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser user;
+    private String uid;
+    private String getPhone, getPhoneNumber;
+
     private final PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
         public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
@@ -87,14 +92,7 @@ public class SignInWithPhoneNumberActivity extends AppCompatActivity {
             activitySignInWithPhoneNumberBinding.txtResendCode.setVisibility(View.VISIBLE);
         }
     };
-    String phoneNumber = "+16505554567";
-    String smsCode = "123456";
-    private FirebaseAuth firebaseAuth;
-    private FirebaseUser user;
-    private String uid;
-    private String getPhone, getPhoneNumber;
-    private TextView txtResend;
-    private String number;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -265,6 +263,7 @@ public class SignInWithPhoneNumberActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        int INTERVAL = 3000;
         if (mBackPressed + INTERVAL > System.currentTimeMillis()) {
 
             finish();

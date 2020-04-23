@@ -27,7 +27,6 @@
                 android:id="@+id/imgStylePhoto"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/TwoHundredDp"
-                android:adjustViewBounds="true"
                 android:contentDescription="@string/app_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
