@@ -133,7 +133,7 @@ public class DetailsScrollingActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         //querying the database BY NAME
-        Query query = databaseReference.orderByChild("price").limitToFirst(3);
+        Query query = databaseReference.orderByChild("price");
 
 
         // TODO: 09-Apr-20 load more items on refresh and on recycler view scrolled to bottom
